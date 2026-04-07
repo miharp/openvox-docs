@@ -4,7 +4,7 @@ markdown: kramdown
 kramdown:
   input: GFM
   hard_wrap: false
-url: "https://puppet.com/docs"
+url: "https://docs.voxpupuli.org"
 safe: false
 # YAML frontmatter defaults:
 defaults: [ {scope: {path: ""},
@@ -16,15 +16,7 @@ defaultnav:
   /security: /security/_security_toc.html
   /community: /_includes/community_nav.html
   /forge: /_includes/forge.html
-  /de: /_includes/de_pe.html
-  /es: /_includes/es_docs.html
-  /es/hiera: /_includes/es_hiera1.html
-  /es/learning: /_includes/es_learning_nav.html
-  /es/pe/3.8: /_includes/es_pe38.html
-  /es/puppet: /_includes/_es_fallback_nav.html
   /learning: /_includes/learning_nav.html
-  /mcollective: /_includes/mcollective_menu.html
-  /mcollective1.2: /_includes/mcollective_1.2.html
   /upgrade: /upgrade/_upgrade_toc.html
 
 # Anatomy of an external source:
@@ -33,27 +25,24 @@ defaultnav:
 #    commit: origin/2.2.x                           # A git treeish (in any form `git checkout` understands) that the external source should track. This should almost always be either a tag, which will never update, or an upstream tracking branch on the default "origin" remote (origin/<branch>), which will update every time someone builds the site.
 #    subdirectory: documentation                    # A subdirectory within the remote repository that contains the documentation files that we'll build and mount at the specified url.
 externalsources:
-  /mcollective:
-    repo: https://github.com/choria-legacy/marionette-collective.git
-    commit: origin/2.12.x
-    subdirectory: website
+  /puppetdb/8.12:
+    repo: https://github.com/openvoxproject/openvoxdb.git
+    commit: main
+    subdirectory: documentation
 
 
-# symlink_latest:
-#  - puppet
-#  - puppetdb
-#  - puppetserver
-#  - hiera
-#  - facter
+symlink_latest:
+  - puppet
+  - puppetdb
+  - puppetserver
+  - hiera
+  - facter
 #  - pdk
 #  - pe
-#  - ja/pe
-#  - es/puppet
 # lock_latest:
 
 
 document_names:
-  pe: Puppet Enterprise
   puppet: Puppet
   puppetserver: Puppet Server
   puppetdb: PuppetDB
@@ -92,54 +81,28 @@ documents:
     version: "latest"
     nav: ./_puppetdb_nav.html
     external_source:
-      repo: https://github.com/puppetlabs/puppetdb.git
-      commit: doc-latest
+      repo: https://github.com/OpenVoxProject/openvoxdb.git
+      commit: main
       subdirectory: documentation
     hide: true
-  /puppetdb/7:
+  /puppetdb/8.12:
     doc: puppetdb
-    version: "7"
+    version: 8.12
     nav: ./_puppetdb_nav.html
     external_source:
-      repo: https://github.com/puppetlabs/puppetdb.git
-      commit: doc-7.y
+      repo: https://github.com/OpenVoxProject/openvoxdb.git
+      commit: 8.12.1
       subdirectory: documentation
-    hide: true
-  /puppetdb/6:
-    doc: puppetdb
-    version: "6"
-    nav: ./_puppetdb_nav.html
-    external_source:
-      repo: https://github.com/puppetlabs/puppetdb.git
-      commit: doc-6.y
-      subdirectory: documentation
-    hide: true
-  /puppetdb/5.2:
-    doc: puppetdb
-    version: "5.2"
-    nav: ./_puppetdb_nav.html
-    external_source:
-      repo: https://github.com/puppetlabs/puppetdb.git
-      commit: doc-5.2
-      subdirectory: documentation
-    hide: true
 
   # Puppet latest
   /puppet/latest:
     doc: puppet
     version: "latest"
     nav: ./_puppet_toc.html
-
-  # Puppet 6.y
-  /puppet/6.y:
+  /puppet/8.25:
     doc: puppet
-    version: "6.y"
+    version: 8.25
     nav: ./_puppet_toc.html
 
-  # Delete once 6.20 goes live
-  /puppet/6.19:
-    doc: puppet
-    version: "6.19"
-    nav: ./_puppet_toc.html
 
 ---
