@@ -181,7 +181,7 @@ You can use [the `custom_trusted_oid_mapping.yaml` file][oid_map] to set short n
 
 #### Puppet-specific registered IDs
 
-{% partial ./_registered_oids.md %}
+{% include_relative _registered_oids.md %}
 
 ## AWS attributes and extensions population example
 

@@ -54,7 +54,7 @@ The most useful variables to interpolate into environment.conf settings are:
 Allowed Settings
 -----
 
-{% partial ./_environment_conf_settings.md %}
+{% include_relative _environment_conf_settings.md %}
 
 ### `modulepath`
 

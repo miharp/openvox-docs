@@ -125,7 +125,7 @@ Puppet limits the characters you can use when naming language constructs.
 
 ### Variables
 
-{% partial ./_naming_variables.md %}
+{% include_relative _naming_variables.md %}
 
 ### Classes and defined resource types
 

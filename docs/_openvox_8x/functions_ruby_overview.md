@@ -73,7 +73,7 @@ Function name         | File location
 
 ## Function names
 
-{% partial ./_naming_functions.md %}
+{% include_relative _naming_functions.md %}
 
 ### Pass names to `create_function` as symbols
 
@@ -98,7 +98,7 @@ When function arguments are passed to a Ruby method, they're converted to Ruby o
 
 Puppet converts data types between the Puppet language and Ruby as follows:
 
-{% partial ./_puppet_types_to_ruby_types.md %}
+{% include_relative _puppet_types_to_ruby_types.md %}
 
 
 ## Next pages

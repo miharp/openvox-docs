@@ -109,7 +109,7 @@ Roughly in order of importance. Most of these can go in either `[main]` or `[age
 * [`environment`][environment] --- The [environment][environments] to request when contacting the Puppet master. It's only a request, though; the master's [ENC][] can override this if it chooses. Defaults to `production`.
 * [`sourceaddress`][sourceaddress] --- The address on a multihomed host to use for the agent's communication with the master server.
 
-{% partial ./_nodename_certname.md %}
+{% include_relative _nodename_certname.md %}
 
 ### Run behavior
 

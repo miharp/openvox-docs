@@ -166,4 +166,4 @@ This is the main way in which the Puppet language fails to be fully declarative.
 ## Naming
 
 
-{% partial ./_naming_variables.md %}
+{% include_relative _naming_variables.md %}

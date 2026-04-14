@@ -72,7 +72,7 @@ Node definitions look like class definitions. The general form of a node definit
 
 Node statements match nodes by name. A node's name is its unique identifier; by default, this is its [certname][] setting, which in turn defaults to the node's fully qualified domain name.
 
-{% partial ./_nodename_certname.md %}
+{% include_relative _nodename_certname.md %}
 
 A node statement's **name** must be one of the following:
 

@@ -157,7 +157,7 @@ There is also another way to use the `scope` object: you can call its `lookupvar
 
 Puppet's data types are converted to Ruby classes as follows:
 
-{% partial ./_puppet_types_to_ruby_types.md %}
+{% include_relative _puppet_types_to_ruby_types.md %}
 
 ### Testing for undefined variables
 
