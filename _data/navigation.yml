@@ -1,0 +1,6 @@
+- title: OpenFact
+  url: /openfact/latest/
+  collections: [openfact_latest, openfact_5x]
+- title: OpenVox
+  url: /openvox/latest/
+  collections: [openvox_latest, openvox_8x]

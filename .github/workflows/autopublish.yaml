@@ -1,0 +1,30 @@
+---
+name: Automatically publish new content
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '_config.yml'
+      - 'index.md'
+      - '_data/**/*'
+      - '_includes/**/*'
+      - '_layouts/**/*'
+      - 'docs/**/*'
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+
+  build:
+    needs: test
+    uses: ./.github/workflows/build.yaml
+    with:
+      ref: '${{ github.sha }}'
+
+  deploy:
+    needs: build
+    uses: ./.github/workflows/deploy.yaml
+    with:
+      tag: '${{ needs.build.outputs.tag }}'

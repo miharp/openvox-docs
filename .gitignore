@@ -32,3 +32,4 @@ puppet-docs-build.log
 source/.jekyll-cache/
 .ruby-version
 Gemfile.lock
+_site
