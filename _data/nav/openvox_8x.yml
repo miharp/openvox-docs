@@ -155,7 +155,7 @@
     link: "services_agent_unix.html"
   - text: OpenVox agent on Windows
     link: "services_agent_windows.html"
-  - text: OpenVox apply
+  - text: Puppet apply
     link: "services_apply.html"
 - text: The Puppet language
   items:
@@ -163,7 +163,7 @@
     link: "lang_visual_index.html"
   - text: Basics
     link: "lang_summary.html"
-  - text: OpenVox language style guide
+  - text: Puppet language style guide
     link: "style_guide.html"
   - text: Handling file paths on Windows
     link: "lang_windows_file_paths.html"
@@ -197,8 +197,8 @@
     link: "lang_facts_and_builtin_vars.html"
   - text: Reserved words and acceptable names
     link: "lang_reserved.html"
-  - text: Writing functions (OpenVox language)
-    link: "lang_write_functions_in_openvox.html"
+  - text: Writing functions (Puppet language)
+    link: "lang_write_functions_in_puppet.html"
   - text: Custom types
     link: "custom_types.html"
   - text: Provider development
@@ -233,7 +233,7 @@
     link: "lang_data_abstract.html"
   - text: Using templates
     link: "lang_template.html"
-  - text: Embedded OpenVox (EPP) template syntax
+  - text: Embedded Puppet (EPP) template syntax
     link: "lang_template_epp.html"
   - text: Embedded Ruby (ERB) template syntax
     link: "lang_template_erb.html"
@@ -263,8 +263,8 @@
   items:
   - text: Introduction to writing functions
     link: "functions_basics.html"
-  - text: Writing functions (OpenVox language)
-    link: "lang_write_functions_in_openvox.html"
+  - text: Writing functions (Puppet language)
+    link: "lang_write_functions_in_puppet.html"
   - text: Overview and examples
     link: "functions_ruby_overview.html"
   - text: Defining signatures
