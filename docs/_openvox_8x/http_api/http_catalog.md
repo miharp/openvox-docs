@@ -1,8 +1,8 @@
 ---
 layout: default
 built_from_commit: 8c9dd1ff315b738818307cc895942164aba30730
-title: 'Puppet HTTP API: Catalog'
-canonical: "/puppet/latest/http_api/http_catalog.html"
+title: 'OpenVox HTTP API: Catalog'
+canonical: "/openvox/latest/http_api/http_catalog.html"
 ---
 
 Catalog
@@ -31,7 +31,7 @@ POST, GET
 The POST and GET methods are functionally equivalent. Both provide the 3 parameters specified below: the POST in the
 request body, the GET in the query string.
 
-Puppet originally used GET; POST was added because some web servers have a maximum URI length of
+OpenVox originally used GET; POST was added because some web servers have a maximum URI length of
 1024 bytes (which is easily exceeded with the `facts` parameter).
 
 The examples below use the POST method.

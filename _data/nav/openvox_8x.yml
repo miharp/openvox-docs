@@ -1,15 +1,15 @@
 ---
-- text: Puppet 5 Platform
+- text: OpenVox 8 Platform
   items:
-  - text: Puppet release notes
+  - text: OpenVox release notes
     link: "release_notes.html"
-  - text: Puppet known issues
+  - text: OpenVox known issues
     link: "known_issues.html"
   - text: System requirements
     link: "system_requirements.html"
-  - text: Component versions in `puppet-agent`
+  - text: Component versions in `openvox-agent`
     link: "about_agent.html"
-  - text: Puppet agent release notes
+  - text: OpenVox agent release notes
     link: "release_notes_agent.html"
 - text: Quick start guides
   items:
@@ -37,33 +37,33 @@
     link: "deprecated_settings.html"
 - text: Installing and upgrading
   items:
-  - text: Overview of Puppet's architecture
+  - text: Overview of OpenVox's architecture
     link: "architecture.html"
   - text: Pre-install tasks
     link: "install_pre.html"
-  - text: Puppet Platform repositories
-    link: "puppet_platform.html"
+  - text: OpenVox Platform repositories
+    link: "openvox_platform.html"
   - text: 'Install agent: Linux'
     link: "install_linux.html"
   - text: 'Install agent: Windows'
     link: "install_windows.html"
   - text: 'Install agent: macOS'
     link: "install_osx.html"
-  - text: File location changes since Puppet 3.8.x
+  - text: File location changes since OpenVox 3.8.x
     link: "whered_it_go.html"
   - text: Pre-upgrade tasks from 3.8
     link: "upgrade_major_pre.html"
-  - text: Upgrade agents from 3.8.x Puppet 5.x
+  - text: Upgrade agents from 3.8.x OpenVox 5.x
     link: "upgrade_major_agent.html"
   - text: Upgrade servers
     link: "upgrade_major_server.html"
   - text: Post-upgrade cleanup
     link: "upgrade_major_post.html"
-  - text: 'Minor upgrades: From Puppet 4 and within Puppet 5.x'
+  - text: 'Minor upgrades: From OpenVox 4 and within OpenVox 5.x'
     link: "upgrade_minor.html"
 - text: Configuration
   items:
-  - text: About Puppet's settings
+  - text: About OpenVox's settings
     link: "config_about_settings.html"
   - text: Short list of important settings
     link: "config_important_settings.html"
@@ -75,7 +75,7 @@
     link: "config_file_auth.html"
   - text: 'fileserver.conf: Custom fileserver mount points'
     link: "config_file_fileserver.html"
-  - text: 'puppetdb.conf: PuppetDB server locations'
+  - text: 'puppetdb.conf: OpenVoxDB server locations'
     link: "config_file_puppetdb.html"
   - text: 'hiera.yaml: Data lookup configuration'
     link: "hiera_config_yaml_5.html"
@@ -133,27 +133,27 @@
     link: "modules_metadata.html"
   - text: Documenting modules
     link: "modules_documentation.html"
-  - text: Puppet Strings
-    link: "puppet_strings.html"
-  - text: Puppet Strings style guide
-    link: "puppet_strings_style.html"
+  - text: OpenVox Strings
+    link: "openvox_strings.html"
+  - text: OpenVox Strings style guide
+    link: "openvox_strings_style.html"
   - text: Module cheat sheet
     link: "cheatsheet_module.html"
-- text: Puppet's services and tools
+- text: OpenVox's services and tools
   items:
-  - text: Puppet's commands
+  - text: OpenVox's commands
     link: "services_commands.html"
-  - text: Running Puppet commands on Windows
+  - text: Running OpenVox commands on Windows
     link: "services_commands_windows.html"
-  - text: The rack Puppet master
+  - text: The rack OpenVox master
     link: "services_master_rack.html"
   - text: Configuring a Server with Passenger and Apache
     link: "passenger.html"
-  - text: The WEBrick Puppet master
+  - text: The WEBrick OpenVox master
     link: "services_master_webrick.html"
-  - text: Puppet agent on *nix
+  - text: OpenVox agent on *nix
     link: "services_agent_unix.html"
-  - text: Puppet agent on Windows
+  - text: OpenVox agent on Windows
     link: "services_agent_windows.html"
   - text: Puppet apply
     link: "services_apply.html"
@@ -413,7 +413,7 @@
     link: "types/zone.html"
   - text: zpool
     link: "types/zpool.html"
-- text: 'Reports: Tracking Puppet''s activity'
+- text: 'Reports: Tracking OpenVox''s activity'
   items:
   - text: About reporting
     link: "reporting_about.html"
@@ -563,7 +563,7 @@
     link: "ssl_attributes_extensions.html"
   - text: Regenerating all certificates in a deployment
     link: "ssl_regenerate_certificates.html"
-- text: Details about Puppet's internals
+- text: Details about OpenVox's internals
   items:
   - text: Agent/master HTTPS communications
     link: "subsystem_agent_master_comm.html"

@@ -27,7 +27,7 @@ title: "Language: Resources"
 
 **Resources** are the fundamental unit for modeling system configurations. Each resource describes some aspect of a system, like a specific service or package.
 
-A **resource declaration** is an expression that describes the desired state for a resource and tells Puppet to add it to the [catalog][]. When Puppet applies that catalog to a target system, it manages every resource it contains, ensuring that the actual state matches the desired state.
+A **resource declaration** is an expression that describes the desired state for a resource and tells OpenVox to add it to the [catalog][]. When OpenVox applies that catalog to a target system, it manages every resource it contains, ensuring that the actual state matches the desired state.
 
 This page describes the basics of using resource declarations. For more advanced syntax, see [Resources (Advanced).][resource_advanced]
 
@@ -37,12 +37,12 @@ This page describes the basics of using resource declarations. For more advanced
 
 Every resource is associated with a **resource type,** which determines the kind of configuration it manages.
 
-Puppet has many built-in resource types, like [files][], [cron jobs][], [services][], etc. [See the resource type reference][types] for information about the built-in resource types.
+OpenVox has many built-in resource types, like [files][], [cron jobs][], [services][], etc. [See the resource type reference][types] for information about the built-in resource types.
 
-You can also add new resource types to Puppet:
+You can also add new resource types to OpenVox:
 
-* [Defined types][defined_type] are lightweight resource types written in the Puppet language.
-* [Custom resource types][custom_types] are written in Ruby, and have access to the same capabilities as Puppet's built-in types.
+* [Defined types][defined_type] are lightweight resource types written in the OpenVox language.
+* [Custom resource types][custom_types] are written in Ruby, and have access to the same capabilities as OpenVox's built-in types.
 
 ## Simplified syntax
 
@@ -82,11 +82,11 @@ The form of a resource declaration is:
     * A trailing comma.
 * A closing curly brace (`}`).
 
-Note that you can use any amount of whitespace in the Puppet language.
+Note that you can use any amount of whitespace in the OpenVox language.
 
 ### Title
 
-The title is a string that identifies a resource to Puppet's compiler.
+The title is a string that identifies a resource to OpenVox's compiler.
 
 A title doesn't have to match the name of what you're managing on the target system, but you'll often want it to: the value of the ["namevar" attribute][inpage_namevar] defaults to the title, so using the name in the title can save you some typing.
 
@@ -106,12 +106,12 @@ Every attribute you declare must have a value; the [data type][datatype] of the 
 >
 > When discussing resources and types, **parameter** is a synonym for attribute. You might also hear **property,** which has a slightly different meaning when discussing the Ruby implementation of a resource type or provider. (Properties always represent concrete state on the target system. A provider can check the current state of a property, and switch it to new states.)
 >
-> When talking about resource declarations in the Puppet language, you should use either "attribute" or "parameter." We suggest "attribute."
+> When talking about resource declarations in the OpenVox language, you should use either "attribute" or "parameter." We suggest "attribute."
 
 ## Behavior
 
 
-A resource declaration adds a resource to the catalog, and tells Puppet to manage that resource's state. When Puppet applies the compiled catalog, it will:
+A resource declaration adds a resource to the catalog, and tells OpenVox to manage that resource's state. When OpenVox applies the compiled catalog, it will:
 
 * Read the actual state of the resource on the target system
 * Compare the actual state to the desired state
@@ -119,15 +119,15 @@ A resource declaration adds a resource to the catalog, and tells Puppet to manag
 
 ### Unmanaged resources
 
-If the catalog doesn't contain a resource, Puppet will _do nothing_ with whatever that resource might have described.
+If the catalog doesn't contain a resource, OpenVox will _do nothing_ with whatever that resource might have described.
 
-This means that ceasing to manage something isn't the same as deleting it. If you remove a package resource from your manifests, this won't cause Puppet to _uninstall_ the package; it will just cause Puppet to _stop caring_ about the package. To make sure a package is removed, you would have to manage it as a resource and set `ensure => absent`.
+This means that ceasing to manage something isn't the same as deleting it. If you remove a package resource from your manifests, this won't cause OpenVox to _uninstall_ the package; it will just cause OpenVox to _stop caring_ about the package. To make sure a package is removed, you would have to manage it as a resource and set `ensure => absent`.
 
 ### Uniqueness
 
-Puppet does not allow you to declare the same resource twice. This is to prevent multiple conflicting values from being declared for the same attribute.
+OpenVox does not allow you to declare the same resource twice. This is to prevent multiple conflicting values from being declared for the same attribute.
 
-Puppet uses the [title](#title) and [name/namevar](#namenamevar) to identify duplicate resources --- if either of these is duplicated within a given resource type, the compilation will fail.
+OpenVox uses the [title](#title) and [name/namevar](#namenamevar) to identify duplicate resources --- if either of these is duplicated within a given resource type, the compilation will fail.
 
 If multiple classes require the same resource, you can use a [class][] or a [virtual resource][virtual] to add it to the catalog in multiple places without duplicating it.
 
@@ -135,13 +135,13 @@ If multiple classes require the same resource, you can use a [class][] or a [vir
 
 [ordering]: ./configuration.html#ordering
 
-By default, Puppet applies unrelated resources in the order in which they're written in the manifest. You can disable this with the [`ordering`][ordering] setting.
+By default, OpenVox applies unrelated resources in the order in which they're written in the manifest. You can disable this with the [`ordering`][ordering] setting.
 
 However, if a resource must be applied before or after some other resource, you should declare a relationship between them, to show that their order isn't coincidental. You can also make changes in one resource cause a refresh of some other resource. See [the Relationships and Ordering page][relationships] for more information.
 
 ### Changes, events, and reporting
 
-If Puppet makes any changes to a resource, it will log those changes as events. These events will appear in Puppet agent's log and in the run [report][], which is sent to the Puppet master and forwarded to any number of report processors.
+If OpenVox makes any changes to a resource, it will log those changes as events. These events will appear in OpenVox agent's log and in the run [report][], which is sent to the OpenVox server and forwarded to any number of report processors.
 
 ### Scope independence
 
@@ -153,7 +153,7 @@ Resources can be contained by [classes][class] and [defined types][defined_type]
 
 ### Delaying resource evaluation
 
-The Puppet language includes some constructs that let you describe a resource but delay adding it to the catalog. For example:
+The OpenVox language includes some constructs that let you describe a resource but delay adding it to the catalog. For example:
 
 * [Classes][class] and [defined types][defined_type] can contain groups of resources. These resources will only be managed if you add that class (or defined resource) to the catalog.
 * [Virtual resources][virtual] are only added to the catalog once they are [realized][realize].
@@ -168,7 +168,7 @@ The Puppet language includes some constructs that let you describe a resource bu
 
 Most resource types have an attribute which identifies a resource _on the target system._ This special attribute is called the "namevar," and the attribute itself is often (but not always) just `name`. For example, the `name` of a service or package is the name by which the system's service or package tools will recognize it. On the other hand, the `file` type's namevar is `path`, the file's location on disk.
 
-This is different from the **title**, which identifies a resource _to Puppet's compiler._ However, they often have the same value, since the namevar's value will usually default to the title if it isn't specified. Thus, the `path` of the file example [above][inpage_simplified] is `/etc/passwd`, even though we didn't include the `path` attribute in the resource declaration.
+This is different from the **title**, which identifies a resource _to OpenVox's compiler._ However, they often have the same value, since the namevar's value will usually default to the title if it isn't specified. Thus, the `path` of the file example [above][inpage_simplified] is `/etc/passwd`, even though we didn't include the `path` attribute in the resource declaration.
 
 The separation between title and namevar lets you use a consistently-titled resource to manage something whose name differs by platform. For example, the NTP service might be `ntpd` on Red Hat-derived systems, but `ntp` on Debian and Ubuntu; to accommodate that, you could title the service "ntp," but set its name according to the OS. Other resources could then form relationships to it without worrying that its title will change.
 
@@ -186,7 +186,7 @@ If a value for the namevar isn't specified, it will default to the resource's ti
 
 Sometimes, a single value isn't sufficient to identify a resource on the target system. For example, consider a system that has multiple package providers available: the `yum` provider has a package called `mysql`, and the `gem` provider _also_ has a package called `mysql` that installs completely different (and non-conflicting) software. In this case, the `name` of both packages would be `mysql`.
 
-Thus, some resource types have more than one namevar, and Puppet combines their values to determine whether a resource is uniquely identified. If two resources have the same values for _all_ of their namevars, Puppet will raise an error.
+Thus, some resource types have more than one namevar, and OpenVox combines their values to determine whether a resource is uniquely identified. If two resources have the same values for _all_ of their namevars, OpenVox will raise an error.
 
 A resource type can define its own behavior for how to map a title to its namevars, if one or more of them is unspecified. For example, the `package` type has two namevars (`name` and `provider`), but only `name` will default to the title. For info about other resource types, see that type's documentation.
 
@@ -198,7 +198,7 @@ Allowed values for `ensure` vary by resource type. Most accept `present` and `ab
 
 ### Metaparameters
 
-Some attributes in Puppet can be used with every resource type. These are called **metaparameters.** They don't map directly to system state; instead, they specify how Puppet should act toward the resource.
+Some attributes in OpenVox can be used with every resource type. These are called **metaparameters.** They don't map directly to system state; instead, they specify how OpenVox should act toward the resource.
 
 The most commonly used metaparameters are for specifying [order relationships][relationships] between resources.
 
