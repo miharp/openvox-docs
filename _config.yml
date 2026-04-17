@@ -90,4 +90,5 @@ exclude:
   - README.markdown
   - toolchain_walkthrough.markdown
   - util
+  - vendor
   - WORKFLOW.md
