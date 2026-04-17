@@ -88,7 +88,7 @@ exclude:
   - Rakefile
   - README_WRITING.markdown
   - README.markdown
-  - source
   - toolchain_walkthrough.markdown
   - util
+  - vendor
   - WORKFLOW.md
