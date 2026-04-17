@@ -31,8 +31,9 @@ module PuppetReferences
           puts "Encountered an error while building the facter cli docs, will abort: #{err}"
           return
         end
-        content = make_header(header_data) + PREAMBLE +
-                  raw_text.gsub(/SYNOPSIS\n--------\n\s\s(.*?)$/, "SYNOPSIS\n--------\n    \\1")
+        require 'pandoc-ruby'
+        markdown_text = PandocRuby.convert(raw_text, from: :mdoc, to: :commonmark)
+        content = make_header(header_data) + PREAMBLE + markdown_text
         filename = OUTPUT_DIR + 'cli.md'
         filename.open('w') { |f| f.write(content) }
         puts 'CLI documentation is done!'
