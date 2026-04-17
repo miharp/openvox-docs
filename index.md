@@ -20,6 +20,11 @@ features:
     title: OpenVox
     details: OpenVox is a community implementation of Puppet, an automated administrative engine for your Linux, Unix, and Windows systems.
     link: openvox/latest/
+
+  - icon: 📡
+    title: OpenVox Server
+    details: OpenVox Server implements OpenVox's server-side components for managing agents in a distributed, service-oriented architecture.
+    link: openvox-server/latest/
 ---
 
 {% include alert.html type="warning" title="Under Construction" content="The contents of this documentation site are currently being re-built from various upstream sources. Links may be broken and some version information may be out of date. Pardon the mess as we get things cleaned up!" %}
