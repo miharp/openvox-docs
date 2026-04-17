@@ -4,3 +4,6 @@
 - title: OpenVox
   url: /openvox/latest/
   collections: [openvox_latest, openvox_8x]
+- title: OpenVox Server
+  url: /openvox-server/latest/
+  collections: [openvox-server_latest, openvox-server_8x]
