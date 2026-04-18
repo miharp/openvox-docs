@@ -54,6 +54,13 @@ collections:
     output: true
     permalink: '/openvox-server/8.x/:path.html'
 
+  openvoxdb_latest:
+    output: true
+    permalink: '/openvoxdb/latest/:path.html'
+  openvoxdb_8x:
+    output: true
+    permalink: '/openvoxdb/8.x/:path.html'
+
 defaults:
   - scope:
       path: ''
@@ -87,6 +94,17 @@ defaults:
       type: openvox-server_8x
     values:
       nav: openvox-server_8x
+
+  - scope:
+      path: ''
+      type: openvoxdb_latest
+    values:
+      nav: openvoxdb_8x
+  - scope:
+      path: ''
+      type: openvoxdb_8x
+    values:
+      nav: openvoxdb_8x
 
 
 # Ignores all legacy files present in the root directory as of

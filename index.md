@@ -25,6 +25,11 @@ features:
     title: OpenVox Server
     details: OpenVox Server implements OpenVox's server-side components for managing agents in a distributed, service-oriented architecture.
     link: openvox-server/latest/
+
+  - icon: 💾
+    title: OpenVox DB
+    details: OpenVoxDB is the fast, scalable, and reliable data warehouse for OpenVox.
+    link: openvoxdb/latest/
 ---
 
 {% include alert.html type="warning" title="Under Construction" content="The contents of this documentation site are currently being re-built from various upstream sources. Links may be broken and some version information may be out of date. Pardon the mess as we get things cleaned up!" %}
