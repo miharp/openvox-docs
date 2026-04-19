@@ -4,7 +4,7 @@ require 'puppet_references'
 module PuppetReferences
   module Facter
     class FacterCli < PuppetReferences::Reference
-      OUTPUT_DIR = PuppetReferences::OUTPUT_DIR + 'facter'
+      OUTPUT_DIR = PuppetReferences::OUTPUT_DIR + 'openfact'
       PREAMBLE_FILE = Pathname.new(__FILE__).dirname + 'facter_cli_preamble.md'
       PREAMBLE = PREAMBLE_FILE.read
 
