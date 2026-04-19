@@ -4,7 +4,7 @@ require 'pathname'
 
 module PuppetReferences
   BASE_DIR = Pathname.new(File.expand_path(__FILE__)).parent.parent
-  PUPPET_DIR = BASE_DIR + 'vendor/poenvox'
+  PUPPET_DIR = BASE_DIR + 'vendor/openvox'
   FACTER_DIR = BASE_DIR + 'vendor/openfact'
   AGENT_DIR = BASE_DIR + 'vendor/openvox-agent'
   OUTPUT_DIR = BASE_DIR + 'references_output'
