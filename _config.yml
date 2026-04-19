@@ -35,31 +35,31 @@ collections_dir: docs
 collections:
   openfact_latest:
     output: true
-    permalink: '/openfact/latest/:path.html'
+    permalink: '/openfact/latest/:path:output_ext'
   openfact_5x:
     output: true
-    permalink: '/openfact/5.x/:path.html'
+    permalink: '/openfact/5.x/:path:output_ext'
 
   openvox_latest:
     output: true
-    permalink: '/openvox/latest/:path.html'
+    permalink: '/openvox/latest/:path:output_ext'
   openvox_8x:
     output: true
-    permalink: '/openvox/8.x/:path.html'
+    permalink: '/openvox/8.x/:path:output_ext'
 
   openvox-server_latest:
     output: true
-    permalink: '/openvox-server/latest/:path.html'
+    permalink: '/openvox-server/latest/:path:output_ext'
   openvox-server_8x:
     output: true
-    permalink: '/openvox-server/8.x/:path.html'
+    permalink: '/openvox-server/8.x/:path:output_ext'
 
   openvoxdb_latest:
     output: true
-    permalink: '/openvoxdb/latest/:path.html'
+    permalink: '/openvoxdb/latest/:path:output_ext'
   openvoxdb_8x:
     output: true
-    permalink: '/openvoxdb/8.x/:path.html'
+    permalink: '/openvoxdb/8.x/:path:output_ext'
 
 defaults:
   - scope:
