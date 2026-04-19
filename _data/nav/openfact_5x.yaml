@@ -13,5 +13,5 @@
     link: custom_facts.html
   - text: Overview of custom facts with examples
     link: fact_overview.html
-  - text: Configuring Facter with facter.conf
-    link: configuring_facter.html
+  - text: Configuring OpenFact with facter.conf
+    link: configuring_openfact.html

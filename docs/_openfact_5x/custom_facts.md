@@ -11,17 +11,17 @@ You can add custom facts by writing snippets of Ruby code on the Puppet master. 
 
 For information on how to add custom facts to modules, see [Adding plug-ins to a module][].
 
-## Adding custom facts to Facter
+## Adding custom facts to OpenFact
 
-Sometimes you need to be able to write conditional expressions based on site-specific data that just isn't available via Facter, or perhaps you'd like to include it in a template.
+Sometimes you need to be able to write conditional expressions based on site-specific data that just isn't available via OpenFact, or perhaps you'd like to include it in a template.
 
-Because you can't include arbitrary Ruby code in your manifests, the best solution is to add a new fact to Facter. These additional facts can then be distributed to Puppet clients and are available for use in manifests and templates, just like any other fact is.
+Because you can't include arbitrary Ruby code in your manifests, the best solution is to add a new fact to OpenFact. These additional facts can then be distributed to Puppet clients and are available for use in manifests and templates, just like any other fact is.
 
 > **Note:** Facter 3.0 removed the Ruby implementations of some features and replaced them with a [custom facts API](https://github.com/puppetlabs/facter/blob/master/Extensibility.md#custom-facts-compatibility). Any custom fact that requires one of the Ruby files previously stored in `lib/facter/util` fails with an error. For more information, see the [Facter 3.0 release notes](../3.0/release_notes.html).
 
 ## Loading custom facts
 
-Facter offers multiple methods of loading facts:
+OpenFact offers multiple methods of loading facts:
 
 -   `$LOAD\_PATH`, or the Ruby library load path
 -   The `--custom-dir` command line option
@@ -31,7 +31,7 @@ You can use these methods to do things like test files locally before distributi
 
 ### Using the Ruby load path
 
-Facter searches all directories in the Ruby `$LOAD_PATH` variable for
+OpenFact searches all directories in the Ruby `$LOAD_PATH` variable for
 subdirectories named `facter`, and loads all Ruby files in those directories.
 If you had a directory in your `$LOAD_PATH` like `~/lib/ruby`, set up like
 this:
@@ -42,13 +42,13 @@ this:
         ├── system_load.rb
         └── users.rb
 
-Facter loads `facter/system_load.rb`, `facter/users.rb`, and
+OpenFact loads `facter/system_load.rb`, `facter/users.rb`, and
 `facter/rackspace.rb`.
 
 ### Using the `--custom-dir` command line option
 
-Facter can take multiple `--custom-dir` options on the command line that specifies a single directory
-to search for custom facts. Facter attempts to load all Ruby files in the specified directories.
+OpenFact can take multiple `--custom-dir` options on the command line that specifies a single directory
+to search for custom facts. OpenFact attempts to load all Ruby files in the specified directories.
 This allows you to do something like this:
 
     $ ls my_facts
@@ -61,7 +61,7 @@ This allows you to do something like this:
 
 ### Using the `FACTERLIB` environment variable
 
-Facter also checks the environment variable `FACTERLIB` for a delimited (semicolon for Windows and colon for all
+OpenFact also checks the environment variable `FACTERLIB` for a delimited (semicolon for Windows and colon for all
 other platforms) set of directories, and tries to load all Ruby files in those directories.
 This allows you to do something like this:
 
@@ -92,9 +92,9 @@ Facts *can* get a lot more complicated than that, but those two together are the
 
 ## Executing shell commands in facts
 
-Puppet gets information about a system from Facter, and the most common way for Facter to
+Puppet gets information about a system from OpenFact, and the most common way for OpenFact to
 get that information is by executing shell commands. You can then parse and manipulate the
-output from those commands using standard Ruby code. The Facter API gives you a few ways to
+output from those commands using standard Ruby code. The OpenFact API gives you a few ways to
 execute shell commands:
 
 -   To run a command and use the output verbatim, as your fact's value, you can pass the command into `setcode` directly. For example: `setcode 'uname --hardware-platform'`
@@ -126,7 +126,7 @@ To get the output of `uname --hardware-platform` to single out a specific type o
 ## Using other facts
 
 You can write a fact that uses other facts by accessing `Facter.value(:somefact)`.
-If the fact fails to resolve or is not present, Facter returns `nil`.
+If the fact fails to resolve or is not present, OpenFact returns `nil`.
 
 For example:
 
@@ -184,10 +184,10 @@ a new resolution to a fact, you simply add the fact again, only with a different
 `setcode` statement.
 
 When a fact has more than one resolution, the first resolution that returns a value other
-than `nil` sets the fact's value. The way that Facter decides the issue of resolution precedence is the
-weight property. Once Facter rules out any resolutions that are excluded because of `confine` statements,
+than `nil` sets the fact's value. The way that OpenFact decides the issue of resolution precedence is the
+weight property. Once OpenFact rules out any resolutions that are excluded because of `confine` statements,
 the resolution with the highest weight is evaluated first. If that resolution returns `nil`,
-Facter moves on to the next resolution (by descending weight) until it gets a value for the fact.
+OpenFact moves on to the next resolution (by descending weight) until it gets a value for the fact.
 
 By default, the weight of a fact is the number of confines for that resolution, so
 that more specific resolutions take priority over less specific resolutions.
@@ -223,7 +223,7 @@ end
 
 ### Execution timeouts
 
-Although this version of Facter does not support overall timeouts on resolutions, you can pass a timeout
+Although this version of OpenFact does not support overall timeouts on resolutions, you can pass a timeout
 to `Facter::Core::Execution#execute`:
 
 ``` ruby
@@ -285,7 +285,7 @@ aggregate do |chunks|
 end
 ```
 
-If the `chunk` blocks all return arrays or hashes, you can omit the `aggregate` block. If you do, Facter automatically merges all of your data into one array or hash and uses that as the fact's value.
+If the `chunk` blocks all return arrays or hashes, you can omit the `aggregate` block. If you do, OpenFact automatically merges all of your data into one array or hash and uses that as the fact's value.
 
 For more examples of aggregate resolutions, see the [aggregate resolutions](./fact_overview.html#writing-facts-with-aggregate-resolutions) section of the [Fact Overview](./fact_overview.html) page.
 
@@ -320,7 +320,7 @@ You must ensure that the script has its execute bit set:
 
     chmod +x /etc/facter/facts.d/my_fact_script.py
 
-For Facter to parse the output, the script must return key/value pairs on
+For OpenFact to parse the output, the script must return key/value pairs on
 STDOUT in the format:
 
     key1=value1
@@ -400,9 +400,9 @@ You should be able to save and execute this PowerShell script on the command lin
 
 ### Structured data facts
 
-Facter can parse structured data files stored in the external facts directory and set facts based on their contents.
+OpenFact can parse structured data files stored in the external facts directory and set facts based on their contents.
 
-Structured data files must use one of the supported data types and must have the correct file extension. Facter supports the following extensions and data types:
+Structured data files must use one of the supported data types and must have the correct file extension. OpenFact supports the following extensions and data types:
 
 `.yaml`: YAML data, in the following format:
 
@@ -458,8 +458,8 @@ All of the above types are supported on Windows with the following caveats:
 
 ### Troubleshooting
 
-If your external fact is not appearing in Facter's output, running
-Facter in debug mode should give you a meaningful reason and tell you which file is causing the problem:
+If your external fact is not appearing in OpenFact's output, running
+OpenFact in debug mode should give you a meaningful reason and tell you which file is causing the problem:
 
     # puppet facts --debug
 

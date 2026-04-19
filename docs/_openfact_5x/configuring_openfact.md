@@ -1,12 +1,12 @@
 ---
 layout: default
 toc_levels: 1
-title: "Configuring Facter with facter.conf"
+title: "Configuring OpenFact with facter.conf"
 ---
 
-The `facter.conf` file is a configuration file that allows you to cache and block fact groups, and manage how Facter interacts with your system. There are three sections: `facts`, `global` and `cli`. All sections are optional and can be listed in any order within the file.
+The `facter.conf` file is a configuration file that allows you to cache and block fact groups, and manage how OpenFact interacts with your system. There are three sections: `facts`, `global` and `cli`. All sections are optional and can be listed in any order within the file.
 
-When you run Facter from the Ruby API, only the `facts` section and limited `global` settings are loaded.
+When you run OpenFact from the Ruby API, only the `facts` section and limited `global` settings are loaded.
 
 Example facter.conf file:
 
@@ -35,7 +35,7 @@ cli : {
 
 ### Location
 
-Facter does not create the `facter.conf` file automatically, so you must create it manually, or use a module to manage it. Facter loads the file by default from `/etc/puppetlabs/facter/facter.conf` on *nix systems and `C:\ProgramData\PuppetLabs\facter\etc\facter.conf` on Windows. Or, you can specify a different default with the `--config` command line option:
+OpenFact does not create the `facter.conf` file automatically, so you must create it manually, or use a module to manage it. OpenFact loads the file by default from `/etc/puppetlabs/facter/facter.conf` on *nix systems and `C:\ProgramData\PuppetLabs\facter\etc\facter.conf` on Windows. Or, you can specify a different default with the `--config` command line option:
 
 `facter --config path/to/my/config/file/facter.conf`
 
@@ -45,7 +45,7 @@ This section of `facter.conf` contains settings that affect fact groups. A fact 
 
 Settings:
 
-* `blocklist` --- Prevents all facts within the listed groups from being resolved when Facter runs.
+* `blocklist` --- Prevents all facts within the listed groups from being resolved when OpenFact runs.
   Use the `--list-block-group` command line option to list valid groups.
 
 * `ttls` --- Caches the key-value pairs of groups and their duration to be cached.
@@ -53,7 +53,7 @@ Settings:
 
   * Cached facts are stored as JSON in `/opt/puppetlabs/facter/cache/cached_facts` on *nix and `C:\ProgramData\PuppetLabs\facter\cache\cached_facts` on Windows.
 
-Caching and blocking facts is useful when Facter is taking a long time and slowing down your code. When a system has a lot of something --- for example, mount points or disks --- Facter can take a long time to collect the facts from each one. When this is a problem, you can speed up Facter’s collection by either blocking facts you’re uninterested in (`blocklist`), or caching ones you don’t need retrieved frequently (`ttls`).
+Caching and blocking facts is useful when OpenFact is taking a long time and slowing down your code. When a system has a lot of something --- for example, mount points or disks --- OpenFact can take a long time to collect the facts from each one. When this is a problem, you can speed up OpenFact’s collection by either blocking facts you’re uninterested in (`blocklist`), or caching ones you don’t need retrieved frequently (`ttls`).
 
 #### Example
 
@@ -84,28 +84,28 @@ Here, the "file system" group has been added, so the `mountpoints`, `filesystems
 
 ### `global`
 
-The `global` section of `facter.conf` contains settings to control how Facter interacts with its external elements on your system.
+The `global` section of `facter.conf` contains settings to control how OpenFact interacts with its external elements on your system.
 
 Setting        | Effect                                                        | Default
 ---------------|---------------------------------------------------------------|--------
 `external-dir` | A list of directories to search for external facts.           |
 `custom-dir`   | A list of directories to search for custom facts.             |
-`no-external`* | If true, prevents Facter from searching for external facts.   | `false`
-`no-custom`*   | If true, prevents Facter from searching for custom facts.     | `false`
-`no-ruby`*     | If true, prevents Facter from loading its Ruby functionality. | `false`
+`no-external`* | If true, prevents OpenFact from searching for external facts.   | `false`
+`no-custom`*   | If true, prevents OpenFact from searching for custom facts.     | `false`
+`no-ruby`*     | If true, prevents OpenFact from loading its Ruby functionality. | `false`
 
-\*Not available when you run Facter from the Ruby API.
+\*Not available when you run OpenFact from the Ruby API.
 
 ### `cli`
 
-The `cli` section of `facter.conf` contains settings that affect Facter’s command line output. All of these settings are ignored when you run Facter from the Ruby API.
+The `cli` section of `facter.conf` contains settings that affect OpenFact’s command line output. All of these settings are ignored when you run OpenFact from the Ruby API.
 
 
 Setting         | Effect                                           | Default
 ----------------|--------------------------------------------------|-------
-`debug`         | If true, Facter outputs debug messages.                                      | `false`
-`trace`         | If true, Facter prints stacktraces from errors arising in your custom facts. | `false`
-`verbose`       | If true, Facter outputs its most detailed messages.                          | `false`
+`debug`         | If true, OpenFact outputs debug messages.                                      | `false`
+`trace`         | If true, OpenFact prints stacktraces from errors arising in your custom facts. | `false`
+`verbose`       | If true, OpenFact outputs its most detailed messages.                          | `false`
 `log-level`     | Sets the minimum level of message severity that gets logged. Valid options: “none”, “fatal”, “error”, “warn”, “info”, “debug”, “trace”. | “warn”
 
 

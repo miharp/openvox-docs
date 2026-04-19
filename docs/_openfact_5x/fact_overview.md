@@ -4,7 +4,7 @@ title: "Overview of custom facts with examples"
 ---
 
 
-A typical fact in Facter is a fairly simple assemblage of just a few different elements.
+A typical fact in OpenFact is a fairly simple assemblage of just a few different elements.
 This page is an example-driven tour of those elements, and is intended as a quick primer or reference
 for authors of custom facts. You need some familiarity with Ruby to understand most of these examples.
 For a gentler introduction, check out the [Custom Facts Walkthrough](./custom_facts.html).
@@ -78,14 +78,14 @@ Simple facts are typically made up of the following parts:
     * Defaults to the number of `confine` statements for the resolution.
 4. A `setcode` statement that determines the value of the fact:
     * Can take either a string or a block.
-    * If given a string, Facter executes it as a shell command. If the command succeeds, the output of the command is the value of the fact. If the command fails, the next suitable resolution is evaluated.
+    * If given a string, OpenFact executes it as a shell command. If the command succeeds, the output of the command is the value of the fact. If the command fails, the next suitable resolution is evaluated.
     * If given a block, the block's return value is the value of the fact unless the block returns `nil`. If `nil` is returned, the next suitable resolution is evalutated.
     * Can execute shell commands within a `setcode` block, using the `Facter::Core::Execution.exec` function.
     * If multiple `setcode` statements are evaluated for a single resolution, only the last `setcode` block is used.
 
 ## Writing structured facts
 
-Structured facts can take the form of hashes or arrays. You don't have to do anything special to mark the fact as structured --- if your fact returns a hash or array, Facter recognizes it as a structured fact. Structured facts can have [simple](#main-components-of-simple-resolutions) or [aggregate resolutions](#main-components-of-aggregate-resolutions).
+Structured facts can take the form of hashes or arrays. You don't have to do anything special to mark the fact as structured --- if your fact returns a hash or array, OpenFact recognizes it as a structured fact. Structured facts can have [simple](#main-components-of-simple-resolutions) or [aggregate resolutions](#main-components-of-aggregate-resolutions).
 
 ### Example: Returning an array of network interfaces
 
@@ -121,11 +121,11 @@ end
 
 ## Writing facts with aggregate resolutions
 
-Aggregate resolutions allow you to split up the resolution of a fact into separate chunks. By default, Facter merges hashes with hashes or arrays with arrays, resulting in a [structured fact](#writing-structured-facts), but you can also aggregate the chunks into a flat fact using concatenation, addition, or any other function that you can express in Ruby code.
+Aggregate resolutions allow you to split up the resolution of a fact into separate chunks. By default, OpenFact merges hashes with hashes or arrays with arrays, resulting in a [structured fact](#writing-structured-facts), but you can also aggregate the chunks into a flat fact using concatenation, addition, or any other function that you can express in Ruby code.
 
 ### Main components of aggregate resolutions
 
-Aggregate resolutions have two key differences compared to simple resolutions: the presence of `chunk` statements and the lack of a `setcode` statement. The `aggregate` block is optional, and without it Facter merges hashes with hashes or arrays with arrays.
+Aggregate resolutions have two key differences compared to simple resolutions: the presence of `chunk` statements and the lack of a `setcode` statement. The `aggregate` block is optional, and without it OpenFact merges hashes with hashes or arrays with arrays.
 
 1. A call to `Facter.add(:fact_name, :type => :aggregate)`:
     * Introduces a new fact *or* a new resolution for an existing fact with the same name.
@@ -146,7 +146,7 @@ Aggregate resolutions have two key differences compared to simple resolutions: t
     * A name (as the argument to `chunk`).
     * A block of code, which is responsible for resolving the chunk to a value. The block's return value is the value of the chunk; it can be any type, but is typically a hash or array.
 5. An optional `aggregate` block:
-    * If absent, Facter automatically merges hashes with hashes or arrays with arrays.
+    * If absent, OpenFact automatically merges hashes with hashes or arrays with arrays.
     * To merge the chunks in any other way, you need to make a call to `aggregate`, which takes a block of code.
     * The block is passed one argument (`chunks`, in the example), which is a hash of chunk name to chunk value for all the chunks in the resolution.
 
@@ -183,7 +183,7 @@ Facter.add(:networking_primary_sha, :type => :aggregate) do
 
     interfaces
   end
-  # Facter merges the return values for the two chunks
+  # OpenFact merges the return values for the two chunks
   # automatically, so there's no aggregate statement.
 end
 ```
