@@ -18,6 +18,14 @@ Puppet Open Source is no longer actively developed.
 
 You can either upgrade to Puppet 7 and then switch to OpenVox 7 and then upgrade to OpenVox 8, or you can upgrade to Puppet 8 and then migrate to OpenVox 8.
 
+## OpenVox 8.26.2
+
+Released April 18, 2026.
+
+This is a bug-fix and security release of OpenVox.
+
+All bug fixes, new features and other changes are provided on the [project's github release page](https://github.com/OpenVoxProject/openvox/releases/tag/8.26.2).
+
 ## OpenVox 8.26.1
 
 Released April 16, 2026.
