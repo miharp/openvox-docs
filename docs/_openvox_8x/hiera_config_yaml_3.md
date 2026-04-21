@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "Hiera: Legacy config file syntax (hiera.yaml v3)"
 ---
 
