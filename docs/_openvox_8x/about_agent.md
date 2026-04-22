@@ -3,25 +3,32 @@ layout: default
 title: "Component versions in OpenVox-agent"
 ---
 
-[Facter]: {{facter}}/
-[Hiera]: {{hiera}}/
+[OpenFact]: /openfact/latest/
+[Hiera]: ./hiera_intro.html
 [agent]: ./services_agent_unix.html
 [apply]: ./services_apply.html
-[Puppet Server]: {{puppetserver}}/
-[release notes]: ./release_notes_agent.html
+[OpenVox Server]: /openvox-server/latest/
+[release notes]: ./release_notes.html
 
-### Release contents of `OpenVox-agent` 8.x
+## Release contents of `OpenVox-agent` 8.x
 
 See the table for details about which components shipped in which `openvox-agent` release, and the [package-specific release notes][release notes] for more information about packaging and installation fixes and features.
 
-### What `openvox-agent` and OpenVox Server are
+| OpenVox release | OpenFact | Ruby   | OpenSSL |
+|-----------------|----------|--------|---------|
+| 8.26.2          | 5.6.0    | 3.2.11 | 3.0.20  |
+| 8.26.1          | 5.6.0    | 3.2.11 | 3.0.20  |
+| 8.26.0          | 5.6.0    | 3.2.11 | 3.0.20  |
+| 8.25.0          | 5.4.0    | 3.2.10 | 3.0.19  |
+
+## What `openvox-agent` and OpenVox Server are
 
 We distribute OpenVox as two core packages.
 
-- `openvox-agent` --- This package contains OpenVox's main code and all of the dependencies needed to run it, including [Facter][], [Hiera][], and bundled versions of Ruby and OpenSSL. Once it's installed, you have everything you need to run [the OpenVox agent service][agent] and the [`puppet apply` command][apply].
+- `openvox-agent` --- This package contains OpenVox's main code and all of the dependencies needed to run it, including [OpenFact][], [Hiera][], and bundled versions of Ruby and OpenSSL. Once it's installed, you have everything you need to run [the OpenVox agent service][agent] and the [`puppet apply` command][apply].
 - `openvox-server` --- This package depends on `openvox-agent`, and adds the JVM-based [OpenVox Server][] application. Once it's installed, OpenVox Server can serve catalogs to nodes running the OpenVox agent service.
 
-### How version numbers work
+## How version numbers work
 
 OpenVox Server is a separate application that, among other things, runs instances of the OpenVox server application. It has its own version number separate from the version of OpenVox it runs and may be compatible with more than one existing OpenVox version.
 

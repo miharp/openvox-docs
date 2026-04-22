@@ -9,8 +9,6 @@
     link: "system_requirements.html"
   - text: Component versions in `openvox-agent`
     link: "about_agent.html"
-  - text: OpenVox agent release notes
-    link: "release_notes_agent.html"
 - text: Quick start guides
   items:
   - text: NTP quick start guide
@@ -49,6 +47,8 @@
     link: "install_windows.html"
   - text: 'Install agent: macOS'
     link: "install_osx.html"
+  - text: What gets installed and where (agent)
+    link: "install_what_and_where.html"
   - text: File location changes since OpenVox 3.8.x
     link: "whered_it_go.html"
   - text: Pre-upgrade tasks from 3.8
