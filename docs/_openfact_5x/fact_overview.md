@@ -37,7 +37,7 @@ Facter.add(:rubypath) do
 end
 
 Facter.add(:rubypath) do
-  confine :osfamily => "Windows"
+  confine :os['family'] => "Windows"
   # Windows uses 'where' instead of 'which'
   setcode 'where ruby'
 end

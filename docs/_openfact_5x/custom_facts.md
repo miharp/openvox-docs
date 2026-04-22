@@ -23,7 +23,7 @@ Because you can't include arbitrary Ruby code in your manifests, the best soluti
 
 OpenFact offers multiple methods of loading facts:
 
--   `$LOAD\_PATH`, or the Ruby library load path
+-   `$LOAD_PATH`, or the Ruby library load path
 -   The `--custom-dir` command line option
 -   The environment variable 'FACTERLIB'
 
