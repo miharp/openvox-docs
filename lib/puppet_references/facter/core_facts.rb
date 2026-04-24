@@ -9,7 +9,7 @@ module PuppetReferences
       PREAMBLE = PREAMBLE_FILE.read
 
       def initialize(*)
-        @latest = '/puppet/latest'
+        @latest = '/openvox/latest'
         super
       end
 
