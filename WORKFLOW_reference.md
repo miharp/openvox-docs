@@ -1,9 +1,9 @@
-# Workflow for genrating reference
+# Workflow for generating reference
 
-There are two generated refefences:
+There are two generated references:
 
 1. from openfact
-1. from opnvox-agent
+1. from openvox-agent
 
 ## OpenFact
 
@@ -21,11 +21,12 @@ From OpenVox agent we fetch
 
 ## Changing content
 
-### OpenFact
+### OpenFact Content
 
 #### CLI
+
 CLI is rendered from man pages to markdown.
-Content is in the openvox repositoriy.
+Content is in the openfact repository.
 
 Additional content is added via a preamble: `lib/puppet_references/facter/facter_cli_preamble.md`
 
@@ -33,7 +34,7 @@ Additional content is added via a preamble: `lib/puppet_references/facter/facter
 
 Core Facts are rendered using a script, which is part of the openfact repo (`lib/docs/generate.rb`)
 
-Additional contnet is added via a preamble file: `lib/puppet_references/facter/core_facts_preamble.md`
+Additional content is added via a preamble file: `lib/puppet_references/facter/core_facts_preamble.md`
 
 ### OpenVox
 
@@ -49,26 +50,40 @@ Completely rendered using `puppet doc` command from openvox repo documentation
 
 #### Type
 
-Type uses a preamble and a template: `lib/puppet_references/puppet/type_preamble.md` and `lib/puppet_references/puppet/type_template.erb`
+Type uses a preamble and a template:
+
+- `lib/puppet_references/puppet/type_preamble.md` and
+- `lib/puppet_references/puppet/type_template.erb`
 
 #### TypeStrings
 
-TypeStrings is inhertited from Type.
+TypeStrings is inherited from Type.
 
 Content is rendered by running `puppet strings generate`.
 Additional content is added in `lib/puppet_references/puppet/type_strings.rb`
 
 #### Functions
 
-Functions use a preamble and a template: `lib/puppet_references/puppet/functions_preamble.md` and `lib/puppet_references/puppet/functions_template.erb`
+Functions use a preamble and a template:
+
+- `lib/puppet_references/puppet/functions_preamble.md` and
+- `lib/puppet_references/puppet/functions_template.erb`
 
 ## Workflow
 
-1. Rakefile
+This is a summarized analysis of the references generation process.
 
 ### Rakefile
 
-#### OpenFact
+The rakefile has three rake tasks:
+
+- references - Prints out usage of the other ones
+- references:openfact
+- references:openvox
+
+Each reference source is clonde into `vendor/` directory.
+
+#### OpenFact Workflow
 
 `PuppetReferences.build_facter_references(ENV.fetch('VERSION', nil))`
 
@@ -96,25 +111,24 @@ repo.update_bundle
 1. update all tags (fetch)
 1. runs bundle install
 
-
 ```ruby
 build_from_list_of_classes(references, real_commit)
 ```
 
-###### Core Facts
+###### Core Facts Workflow
 
-1. executes ruby <openfact>/lib/docs/generate.rb
+1. executes ruby `<openfact>/lib/docs/generate.rb`
 1. adds header data + preamble + data
 1. writes core_facts.md file
 
-###### CLI
+###### CLI Workflow
 
 1. runs bundle update in openfact
 1. runs bundle exec facter man
-1. uses PandDoc Ruby to convert man to markdown
-1. writs cli.md
+1. uses Pandoc Ruby to convert man to markdown
+1. writes cli.md
 
-#### OpenVox
+#### OpenVox Workflow
 
 `PuppetReferences.build_puppet_references(ENV.fetch('VERSION', nil))`
 
@@ -136,44 +150,46 @@ references = [
 1. run bundle install
 1. build_from_list_of_classes (build_all)
 
-##### Man
+##### Man Workflow
 
 1. reads all files in openvox-agent/lib/puppet/application/*.rb
 1. deletes face_base, indirection_base, cert applications
-1.build index for all applications
-  1. has data with categories: core, occasional and weird
+1. build index for all applications
+    1. has data with categories: core, occasional and weird
 1. select from applications where data match
 1. 2 variables: header data and index_text
-  1. within index_text, add the markdown files mentioned in data, first core, then occasional, then weird)
+    1. within index_text, add the markdown files mentioned in data
+    first core, then occasional, then weird
 1. write content to overview.md file
 
 1. for each command run build_manpage
 1. define a header
 1. read command from openvox-agent/man/man/command.8
-1. calls PandDoc.ruby to convert from man to markdown, adding gsub methods on converted content
+1. calls PandDoc.ruby to convert from man to markdown,
+  adding gsub methods on converted content
 1. write command file
 
-##### PuppetDoc
+##### PuppetDoc Workflow
 
 1. calls build_reference
 1. calls `puppet doc` command
 1. calls clean_configuration_reference
-  1. replaces fqdn with fixed string
+    1. replaces fqdn with fixed string
 1. sets header data
 1. writes each reference.md file
 
-##### Type
+##### Type Workflow
 
-typedoc script: <openvox repo>/lib/puppet_references/quarantine/get_typedocs.rb
-typedoc template: <openvox-docs repo>/lib/puppet_references/puppet/type_template.erb
-typedoc preamble: <openvox-docsrepo>lib/puppet_references/puppet/type_preamble.md
+typedoc script: `<openvox-docs repo>/lib/puppet_references/quarantine/get_typedocs.rb`
+typedoc template: `<openvox-docs repo>/lib/puppet_references/puppet/type_template.erb`
+typedoc preamble: `<openvox-docs repo>lib/puppet_references/puppet/type_preamble.md`
 
 build_all:
 
-get_type_json: execute typedoc script
-save json file
+1. get_type_json: execute typedoc script
+1. save json file
 
-build_index (type_data.keys.sort):
+1. build_index (type_data.keys.sort):
 
 - header_data (title & canonical)
 - skip component and wiki
@@ -181,40 +197,41 @@ build_index (type_data.keys.sort):
 - add header (autogenerated) see lib/puppet_references/util.rb
 - write file (puppet/types/overview.md)
 
-build_unified_page:
+1. build_unified_page:
 
-set header (title, canonical, toc_levels, toc)
-sort attributes (namenvar first, ensure second)
-write type individual files
+- set header (title, canonical, toc_levels, toc)
+- sort attributes (namenvar first, ensure second)
+- write type individual files
 
-build page:
+1. build page:
 
-set header (title, canonical)
-sort attributes
-write type file
+- set header (title, canonical)
+- sort attributes
+- write type file
 
-##### TypeStrings
+##### TypeStrings Workflow
 
 output dir: puppet/types_strings
 
 same as type, but different get_type_json
 
-PuppetReferences::Puppet::Strings.new
-read all filenames in lib/puppet/**/*.rb
-run bundle exec puppet strings generate --format json --out string.json filenames.join(' ')
-read strings.json file
+- PuppetReferences::Puppet::Strings.new
+- read all filenames in lib/puppet/**/*.rb
+- run bundle exec puppet strings generate
+    --format json --out string.json filenames.join(' ')
+- read strings.json file
 
-iterate over content['resource_type']
-build new structure and content lib/puppet_references/puppet/type_strings.rb
-THIS IS THE IMPORTANT file
-This has the knowledge on the output and renders the new md
+- iterate over content['resource_type']
+- build new structure and content `lib/puppet_references/puppet/type_strings.rb`
+  THIS IS THE IMPORTANT file
+- This has the knowledge on the output and renders the new md
 
-##### Functions
+##### Functions Workflow
 
 template: functions_template.erb
 preamble: functions_preamble.md
 
-uses PuppetReferences::Puppet::Strings.new
-sets header
-render template, add header
-write file
+- uses PuppetReferences::Puppet::Strings.new
+- sets header
+- render template, add header
+- write file
