@@ -76,6 +76,8 @@ jobs:
       - name: Build website
         run: |
           bundle exec jekyll build
+          bundle exec references:openvox
+          bundle exec references:openfact
       - name: Archive website
         run: |
           root_dir="${ARCHIVE%%.tar.xz}"
