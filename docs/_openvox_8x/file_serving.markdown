@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "Adding file server mount points"
 ---
 

@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "Resource tips and examples: Augeas"
 ---
 

@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "Writing external node classifiers"
 ---
 

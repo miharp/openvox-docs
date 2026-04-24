@@ -1,5 +1,6 @@
 ---
-title: The LDAP Node Classifier
+layout: default
+title: "The LDAP Node Classifier"
 ---
 
 [class parameters]: ./lang_classes.html#class-parameters-and-variables

@@ -1,4 +1,5 @@
 ---
+layout: default
 title: "Writing custom functions: Introduction"
 ---
 
