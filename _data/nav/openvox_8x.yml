@@ -19,20 +19,6 @@
     link: "quick_start_sudo.html"
   - text: Firewall quick start guide
     link: "quick_start_firewall.html"
-- text: Deprecated features
-  items:
-  - text: About deprecations in this version
-    link: "deprecated_summary.html"
-  - text: Web servers
-    link: "deprecated_servers.html"
-  - text: Upcoming operating system deprecations
-    link: "deprecated_operating_systems.html"
-  - text: Language features
-    link: "deprecated_language.html"
-  - text: Extension points and APIs
-    link: "deprecated_api.html"
-  - text: Settings
-    link: "deprecated_settings.html"
 - text: Installing and upgrading
   items:
   - text: Overview of OpenVox's architecture
