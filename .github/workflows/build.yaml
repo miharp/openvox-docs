@@ -75,6 +75,7 @@ jobs:
 
       - name: Build website
         run: |
+          sudo apt install -y pandoc
           bundle exec rake references:openfact INSTALLPATH=docs
           bundle exec rake references:openvox INSTALLPATH=docs
           bundle exec jekyll build
