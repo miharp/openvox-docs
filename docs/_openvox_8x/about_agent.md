@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "About `openvox-agent`"
+title: "About openvox-agent"
 ---
 
 [release_notes]: ./release_notes.html

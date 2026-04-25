@@ -7,7 +7,7 @@
     link: "known_issues.html"
   - text: System requirements
     link: "system_requirements.html"
-  - text: About `openvox-agent`
+  - text: About openvox-agent
     link: "about_agent.html"
 - text: Quick start guides
   items:
