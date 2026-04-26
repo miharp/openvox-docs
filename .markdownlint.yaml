@@ -12,3 +12,7 @@ no-inline-html:
     - br
 
 descriptive-link-text: false
+
+table:
+  style: 'compact'
+  aligned_delimiter: true
