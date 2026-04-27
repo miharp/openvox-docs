@@ -4,15 +4,16 @@ title: "Puppet Server Configuration Files: web-routes.conf"
 canonical: "/puppetserver/latest/config_file_web-routes.html"
 ---
 
-The `web-routes.conf` file configures the Puppet Server `web-router-service`, which sets mount points for Puppet Server's web applications. You should not modify these mount points, as Puppet 4 agents rely on Puppet Server mounting them to specific URLs.
+The `web-routes.conf` file configures the Puppet Server `web-router-service`, which sets mount points for Puppet Server's web applications. You should not modify these mount points, as Puppet 4 agents rely on
+Puppet Server mounting them to specific URLs.
 
-For an overview, see [Puppet Server Configuration](./configuration.markdown). To configure the `webserver` service, see the [`webserver.conf` documentation](./config_file_webserver.markdown).
+For an overview, see [Puppet Server Configuration](./configuration.html). To configure the `webserver` service, see the [`webserver.conf` documentation](./config_file_webserver.html).
 
 ## Example
 
 The `web-routes.conf` file looks like this:
 
-~~~
+```text
 # Configure the mount points for the web apps.
 web-router-service: {
     # These two should not be modified because the Puppet 4 agent expects them to
@@ -24,4 +25,4 @@ web-router-service: {
     # This controls the mount point for the Puppet administration API.
     "puppetlabs.services.puppet-admin.puppet-admin-service/puppet-admin-service": "/puppet-admin-api"
 }
-~~~
+```

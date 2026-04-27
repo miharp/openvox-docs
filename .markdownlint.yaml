@@ -4,6 +4,12 @@ default: true
 line-length:
   line_length: 210
 
+no-duplicate-heading:
+  siblings_only: true
+
+single-title:
+  front_matter_title: ""
+
 no-inline-html:
   allowed_elements:
     - br

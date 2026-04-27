@@ -3,11 +3,13 @@ title: "Debugging with remote REPL"
 layout: default
 canonical: "/puppetdb/latest/repl.html"
 ---
+
 # Debugging with remote REPL
 
 PuppetDB includes a remote REPL interface, which is disabled by default.
 
-This interface is mostly of use to developers who know Clojure and are familiar with PuppetDB's codebase. It allows you to modify PuppetDB's code on the fly. Most users will never need to use the REPL, and for security reasons, it should generally be left disabled.
+This interface is mostly of use to developers who know Clojure and are familiar with PuppetDB's codebase. It allows you to modify PuppetDB's code on the fly. Most users will never need to use the REPL, and for
+security reasons, it should generally be left disabled.
 
 ## Enabling the REPL
 
@@ -56,7 +58,8 @@ Within the REPL, you can interactively execute PuppetDB's functions. For example
 
 ## Redefining functions
 
-You can also manipulate the running PuppetDB instance by redefining functions on the fly. Let's say that for debugging purposes, you'd like to log every time a catalog is deleted. You can just redefine the existing `delete-catalog!` function dynamically:
+You can also manipulate the running PuppetDB instance by redefining functions on the fly. Let's say that for debugging purposes, you'd like to log every time a catalog is deleted. You can just redefine the
+existing `delete-catalog!` function dynamically:
 
     user=> (ns puppetlabs.puppetdb.scf.storage)
     nil
@@ -72,4 +75,5 @@ You can also manipulate the running PuppetDB instance by redefining functions on
 
 Now any time that function is called, you'll see a message logged.
 
-Note that any changes you make to the running system are transient; they don't persist between restarts of the service. If you wish to make longer-lived changes to the code, consider [running PuppetDB directly from source](./install_from_source.markdown).
+Note that any changes you make to the running system are transient; they don't persist between restarts of the service. If you wish to make longer-lived changes to the code, consider
+[running PuppetDB directly from source](./install_from_source.html).
