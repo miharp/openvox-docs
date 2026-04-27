@@ -11,7 +11,7 @@ gem 'versionomy', '~> 0.5.0'
 
 group(:build_site) do
   gem 'jekyll', '~> 4.4'
-  gem 'jekyll-vitepress-theme', '~> 1.2'
+  gem 'jekyll-vitepress-theme', '~> 1.4'
 end
 
 group(:generate_references) do
