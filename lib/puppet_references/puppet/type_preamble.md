@@ -126,7 +126,7 @@ See each module's README for detailed information about that type.
 
 ### Type modules available on the Forge
 
-The following types are contained in modules that are maintained, but are not repackaged into Puppet agent. If you need to use them, you must install the modules separately. 
+The following types are contained in modules that are maintained, but are not repackaged into Puppet agent. If you need to use them, you must install the modules separately.
 
 - [`k5login`](https://forge.puppet.com/puppetlabs/k5login_core)
 - [`mailalias`](https://forge.puppet.com/puppetlabs/mailalias_core)
@@ -146,4 +146,4 @@ The following types were deprecated with Puppet 6.0.0. They are available in mod
 
 ## OpenVox core types
 
-For a list of core OpenVox types, see the [core types cheat sheet][core-types-cheatsheet].
+For a list of core OpenVox types, see the [core types cheat sheet](cheatsheet_core_types.html).
