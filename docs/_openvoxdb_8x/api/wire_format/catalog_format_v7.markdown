@@ -54,7 +54,8 @@ String. The name of the node for which the catalog was compiled.
 
 #### `version`
 
-String. An arbitrary string that uniquely identifies this specific catalog across time for a single node. This is controlled by Puppet's [`config_version` setting](https://puppet.com/docs/puppet/latest/configuration.html#configversion) and is usually the seconds elapsed since the epoch.
+String. An arbitrary string that uniquely identifies this specific catalog across time for a single node. This is controlled by Puppet's
+[`config_version` setting](https://puppet.com/docs/puppet/latest/configuration.html#configversion) and is usually the seconds elapsed since the epoch.
 
 #### `environment`
 
@@ -62,12 +63,13 @@ String. The environment associated to the node when the catalog was compiled.
 
 #### `edges`
 
-List of [`<edge>` objects](#data-type-edge). **Every** [relationship][] between any two resources in the catalog, which may have been made with [chaining arrows][chain], [metaparameters][], or [the `require` function][require].
+List of [`<edge>` objects](#data-type-edge). **Every** [relationship][] between any two resources in the catalog, which may have been made with [chaining arrows][chain], [metaparameters][], or [the `require`
+function][require].
 
-  > **Notes:**
-  >
-  > * "Autorequire" relationships are not currently encoded in the catalog.
-  > * This key is significantly different from its equivalent in Puppet's internal catalog format, which only encodes containment edges.
+> **Notes:**
+>
+> - "Autorequire" relationships are not currently encoded in the catalog.
+> - This key is significantly different from its equivalent in Puppet's internal catalog format, which only encodes containment edges.
 
 #### `resources`
 
@@ -83,8 +85,7 @@ String. A string used to match the catalog with the Puppet code which generated 
 
 #### `producer_timestamp`
 
-DateTime. The time of catalog submission from the Puppet Server to PuppetDB.  This
-field is currently populated by the Puppet Server.
+DateTime. The time of catalog submission from the Puppet Server to PuppetDB. This field is currently populated by the Puppet Server.
 
 ### Data type: `<string>`
 
@@ -99,10 +100,9 @@ A JSON integer.
 A JSON Boolean.
 
 ### Data type: `<datetime>`
-A JSON string representing a date and time (with time zone), formatted based on
-the recommendations in ISO 8601. For example, for a UTC time, the string would be
-formatted as `YYYY-MM-DDThh:mm:ss.sssZ`. For non-UTC time, the `Z` may be replaced
-with `±hh:mm` to represent the specific timezone.
+
+A JSON string representing a date and time (with time zone), formatted based on the recommendations in ISO 8601. For example, for a UTC time, the string would be formatted as `YYYY-MM-DDThh:mm:ss.sssZ`. For
+non-UTC time, the `Z` may be replaced with `±hh:mm` to represent the specific timezone.
 
 ### Data type: `<edge>`
 
@@ -112,7 +112,8 @@ A JSON object of the following form, which represents a [relationship][] between
      "target": <resource-spec>,
      "relationship": <relationship>}
 
-All edges are normalized so that the "source" resource is managed **before** the "target" resource. To do this, the Puppet language's "require" and "subscribe" [relationship types][relationship] are munged into "required-by" and "subscription-of" when they are converted into edges.
+All edges are normalized so that the "source" resource is managed **before** the "target" resource. To do this, the Puppet language's "require" and "subscribe" [relationship types][relationship] are munged into
+"required-by" and "subscription-of" when they are converted into edges.
 
 The keys of an edge are `source`, `target`, and `relationship`, all of which are required.
 
@@ -143,23 +144,22 @@ The resource named by a resource-spec **must** exist in the catalog's `"resource
 
 One of the following exact strings, when used in the `relationship` key of an [`<edge>` object](#data-type-edge):
 
-* `contains`
-* `before`
-* `required-by`
-* `notifies`
-* `subscription-of`
+- `contains`
+- `before`
+- `required-by`
+- `notifies`
+- `subscription-of`
 
-**Note:** Regardless of the relationship type, the "source" resource is always managed **before** the "target" resource. This means that, functionally speaking, `required-by` is a synonym of `before` and `subscription-of` is a synonym of `notifies`. In this catalog format, the different relationship types preserve information about the _origin_ of the relationship.
+**Note:** Regardless of the relationship type, the "source" resource is always managed **before** the "target" resource. This means that, functionally speaking, `required-by` is a synonym of `before` and
+`subscription-of` is a synonym of `notifies`. In this catalog format, the different relationship types preserve information about the _origin_ of the relationship.
 
-
-String            | Relationship Type        | Origin of Relationship
-------------------|--------------------------|-----------------------
-`contains`        | [containment][]          | Class or defined type [containment][]
-`before`          | ordering                 | `before` metaparam on source, or `->` chaining arrow
-`required-by`     | ordering                 | `require` metaparam on target, or `require` function
-`notifies`        | ordering w/ notification | `notify` metaparam on source, or `~>` chaining arrow
-`subscription-of` | ordering w/ notification | `subscribe` metaparam on target
-
+| String | Relationship Type | Origin of Relationship |
+| ------ | ----------------- | ---------------------- |
+| `contains` | [containment][] | Class or defined type [containment][] |
+| `before` | ordering | `before` metaparam on source, or `->` chaining arrow |
+| `required-by` | ordering | `require` metaparam on target, or `require` function |
+| `notifies` | ordering w/ notification | `notify` metaparam on source, or `~>` chaining arrow |
+| `subscription-of` | ordering w/ notification | `subscribe` metaparam on target |
 
 ### Data type: `<resource>`
 
@@ -209,4 +209,5 @@ List of strings. Includes every tag the resource has. This is a normalized super
 
 #### `parameters`
 
-JSON object. Includes all of the resource's [attributes][] and their associated values. The value of an attribute may be any JSON data type, but Puppet will only provide Booleans, strings, arrays, and hashes. [Resource references][resource_ref] and [numbers][] in attributes are converted to strings before being inserted into the catalog. Attributes with [undef][] values are not added to the catalog.
+JSON object. Includes all of the resource's [attributes][] and their associated values. The value of an attribute may be any JSON data type, but Puppet will only provide Booleans, strings, arrays, and hashes.
+[Resource references][resource_ref] and [numbers][] in attributes are converted to strings before being inserted into the catalog. Attributes with [undef][] values are not added to the catalog.

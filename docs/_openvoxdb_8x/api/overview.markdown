@@ -17,24 +17,25 @@ Because PuppetDB collects lots of data from Puppet, it's an ideal platform for n
 
 PuppetDB's API uses a Command/Query Responsibility Separation (CQRS) pattern. This means:
 
-* Data can be **queried** using a standard REST-style API. Queries are processed immediately.
-* When **making changes** to data (facts, catalogs, etc.), you must send an explicit **command** (as opposed to submitting data without comment and letting the receiver determine intent). Commands are processed asynchronously in FIFO order.
+- Data can be **queried** using a standard REST-style API. Queries are processed immediately.
+- When **making changes** to data (facts, catalogs, etc.), you must send an explicit **command** (as opposed to submitting data without comment and letting the receiver determine intent). Commands are processed
+  asynchronously in FIFO order.
 
 The PuppetDB API consists of the following parts:
 
-* [The REST interface for queries](#queries)
-* [The HTTP command submission interface](#commands)
-* [The wire formats that PuppetDB requires for incoming data](#wire-formats)
+- [The REST interface for queries](#queries)
+- [The HTTP command submission interface](#commands)
+- [The wire formats that PuppetDB requires for incoming data](#wire-formats)
 
 ## Queries
 
 PuppetDB's data can be queried with a REST API.
 
-* [Specification of the general query structure](./query/v4/query.html)
-* [AST query language][ast]
-* [Puppet query language][pql]
-* [Query tutorial](./query/tutorial.html)
-* [Curl tips](./query/curl.html)
+- [Specification of the general query structure](./query/v4/query.html)
+- [AST query language][ast]
+- [Puppet query language][pql]
+- [Query tutorial](./query/tutorial.html)
+- [Curl tips](./query/curl.html)
 
 The available query endpoints are documented in the pages linked below.
 
@@ -44,11 +45,11 @@ The available query endpoints are documented in the pages linked below.
 
 This is the current stable API.
 
-* [Root Endpoint](./query/v4/overview.html)
-* [Entity Endpoints](./query/v4/entities.html)
-* [Metrics Endpoint](./metrics/v2/jolokia.html)
-* [Server Time Endpoint](./meta/v1/server-time.html)
-* [Version Endpoint](./meta/v1/version.html)
+- [Root Endpoint](./query/v4/overview.html)
+- [Entity Endpoints](./query/v4/entities.html)
+- [Metrics Endpoint](./metrics/v2/jolokia.html)
+- [Server Time Endpoint](./meta/v1/server-time.html)
+- [Version Endpoint](./meta/v1/version.html)
 
 #### Version 3 (Retired)
 
@@ -72,6 +73,6 @@ The "replace" commands all require data in one of the wire formats described bel
 
 All of PuppetDB's "replace" commands contain payload data, which must be in one of the following formats. These formats are also linked from the [commands](#commands) that use them.
 
-* [Facts wire format version 4](./wire_format/facts_format_v4.html)
-* [Catalog wire format version 6](./wire_format/catalog_format_v6.html)
-* [Report wire format version 5](./wire_format/report_format_v5.html)
+- [Facts wire format version 4](./wire_format/facts_format_v4.html)
+- [Catalog wire format version 6](./wire_format/catalog_format_v6.html)
+- [Report wire format version 5](./wire_format/report_format_v5.html)

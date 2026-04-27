@@ -4,30 +4,30 @@ title: "Puppet Server: Metrics API v2"
 canonical: "/puppetserver/latest/metrics-api/v2/metrics_api.html"
 ---
 
-By default, Puppet Server enables two optional web APIs for
-[Java Management Extension (JMX)](https://docs.oracle.com/javase/tutorial/jmx/index.html)
-metrics, namely
+By default, Puppet Server enables two optional web APIs for [Java Management Extension (JMX)](https://docs.oracle.com/javase/tutorial/jmx/index.html) metrics, namely
 [managed beans (MBeans)](https://docs.oracle.com/javase/tutorial/jmx/mbeans/). For the older metrics API, see [the `/metrics/v1` documentation](../v1/metrics_api.html).
 
 ## Jolokia endpoints
 
 The v2 metrics endpoint uses the [Jolokia](https://jolokia.org) library, an extensive open-source metrics library with its own documentation.
 
-The documentation below provides only the information you need to use the metrics as configured by default for Puppet Server, but Jolokia offers more features than are described below. Consult the [Jolokia documentation](https://jolokia.org/documentation.html) for more information.
+The documentation below provides only the information you need to use the metrics as configured by default for Puppet Server, but Jolokia offers more features than are described below. Consult the
+[Jolokia documentation](https://jolokia.org/documentation.html) for more information.
 
 For security reasons, we enable only the read-access Jolokia interface by default:
 
--   `read`
--   `list`
--   `version`
--   `search`
+- `read`
+- `list`
+- `version`
+- `search`
 
 ### Configuring Jolokia
 
-To change the security access policy, create the `/etc/puppetlabs/puppetserver/jolokia-access.xml` file with contents that follow the [Jolokia access policy](https://jolokia.org/reference/html/security.html) and uncomment the `metrics.metrics-webservice.jolokia.servlet-init-params.policyLocation` parameter before restarting puppetserver.
+To change the security access policy, create the `/etc/puppetlabs/puppetserver/jolokia-access.xml` file with contents that follow the [Jolokia access policy](https://jolokia.org/reference/html/security.html)
+and uncomment the `metrics.metrics-webservice.jolokia.servlet-init-params.policyLocation` parameter before restarting puppetserver.
 
-The `metrics.metrics-webservice.jolokia.servlet-init-params` table
-within the [`/etc/puppetlabs/puppetserver/conf.d/metrics.conf`](../../config_file_metrics.html) file provides more configuration options. See Jolokia's [agent initialization documentation](https://jolokia.org/reference/html/agents.html#agent-war-init-params) for all of the available options.
+The `metrics.metrics-webservice.jolokia.servlet-init-params` table within the [`/etc/puppetlabs/puppetserver/conf.d/metrics.conf`](../../config_file_metrics.html) file provides more configuration options. See
+Jolokia's [agent initialization documentation](https://jolokia.org/reference/html/agents.html#agent-war-init-params) for all of the available options.
 
 ### Disabling the endpoints
 
@@ -43,7 +43,7 @@ You can query the metrics v2 API using `GET` or `POST` requests.
 
 This endpoint requires an operation, and depending on the operation can accept or might require an additional query:
 
-```
+```text
 GET /metrics/v2/<OPERATION>/<QUERY>
 ```
 
@@ -55,11 +55,13 @@ A successful request returns a JSON document.
 
 To list all valid mbeans querying the metrics endpoint
 
-    GET /metrics/v2/list
+```http
+GET /metrics/v2/list
+```
 
 Which should return a response similar to
 
-``` json
+```json
 {
   "request": {
     "type": "list"
@@ -93,14 +95,15 @@ Which should return a response similar to
 }
 ```
 
-So, from the example above we could query for the registered logger names with
-this HTTP call:
+So, from the example above we could query for the registered logger names with this HTTP call:
 
-    GET /metrics/v2/read/java.util.logging:type=Logging/LoggerNames
+```http
+GET /metrics/v2/read/java.util.logging:type=Logging/LoggerNames
+```
 
 Which would return the JSON document
 
-``` json
+```json
 {
   "request": {
     "mbean": "java.util.logging:type=Logging",
@@ -127,12 +130,12 @@ Which would return the JSON document
 }
 ```
 
-The MBean names can then be created by joining the the first two keys of the
-value table with a colon (the `domain` and `prop list` in Jolokia parlance).
-Querying the MBeans is achieved via the `read` operation. The `read` operation
-has as its GET signature:
+The MBean names can then be created by joining the the first two keys of the value table with a colon (the `domain` and `prop list` in Jolokia parlance). Querying the MBeans is achieved via the `read`
+operation. The `read` operation has as its GET signature:
 
-    GET /metrics/v2/read/<MBEAN NAMES>/<ATTRIBUTES>/<OPTIONAL INNER PATH FILTER>
+```http
+GET /metrics/v2/read/<MBEAN NAMES>/<ATTRIBUTES>/<OPTIONAL INNER PATH FILTER>
+```
 
 ### `POST /metrics/v2/<OPERATION>`
 
@@ -146,20 +149,17 @@ The new Jolokia-based metrics API also provides globbing (wildcard selection) an
 
 You can combine both of these features to query garbage collection data, but return only the collection counts and times.
 
-```
+```text
 GET metrics/v2/read/java.lang:name=*,type=GarbageCollector/CollectionCount,CollectionTime
 ```
 
 This returns a JSON response:
 
-``` json
+```json
 {
   "request": {
     "mbean": "java.lang:name=*,type=GarbageCollector",
-    "attribute": [
-      "CollectionCount",
-      "CollectionTime"
-    ],
+    "attribute": ["CollectionCount", "CollectionTime"],
     "type": "read"
   },
   "value": {
@@ -177,6 +177,4 @@ This returns a JSON response:
 }
 ```
 
-Refer to the
-[Jolokia protocol documentation](https://jolokia.org/reference/html/protocol.html)
-for more advanced usage.
+Refer to the [Jolokia protocol documentation](https://jolokia.org/reference/html/protocol.html) for more advanced usage.

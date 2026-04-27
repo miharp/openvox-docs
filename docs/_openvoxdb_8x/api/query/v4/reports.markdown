@@ -16,37 +16,28 @@ canonical: "/puppetdb/latest/api/query/v4/reports.html"
 [subqueries]: ./ast.markdown#subquery-operators
 [environments]: ./environments.markdown
 [producers]: ./producers.markdown
-[events]: ./events.markdown
-[nodes]: ./nodes.markdown
 [rich_data]: query.markdown#rich-data
 
-Puppet agent nodes submit reports after their runs, and the Puppet Server
-forwards these to PuppetDB. Each report includes:
+Puppet agent nodes submit reports after their runs, and the Puppet Server forwards these to PuppetDB. Each report includes:
 
-* Data about the entire run
-* Metadata about the report
-* Many _events,_ describing what happened during the run
+- Data about the entire run
+- Metadata about the report
+- Many _events,_ describing what happened during the run
 
 After this information is stored in PuppetDB, it can be queried in various ways.
 
-* You can query **data about the run** and **report metadata** by making an HTTP
-  request to the `/reports` endpoint.
+- You can query **data about the run** and **report metadata** by making an HTTP request to the `/reports` endpoint.
 
-* You can query **data about individual events** by making an HTTP request to
-  the [`/events`][events] endpoint.
+- You can query **data about individual events** by making an HTTP request to the [`/events`][events] endpoint.
 
-* You can query **summaries of event data** by making an HTTP request to the
-  [`/event-counts`](./event-counts.html) or
-  [`aggregate-event-counts`](./aggregate-event-counts.html) endpoints.
+- You can query **summaries of event data** by making an HTTP request to the [`/event-counts`](./event-counts.html) or [`aggregate-event-counts`](./aggregate-event-counts.html) endpoints.
 
 ## `/pdb/query/v4/reports`
 
 ### URL parameters
 
-* `query`: optional. A JSON array of query predicates, in prefix notation
-  (`["<OPERATOR>", "<FIELD>", "<VALUE>"]`). See the sections below for the
-  supported operators and fields. For general info about queries, see [our guide
-  to query structure.][query]
+- `query`: optional. A JSON array of query predicates, in prefix notation (`["<OPERATOR>", "<FIELD>", "<VALUE>"]`). See the sections below for the supported operators and fields. For general info about queries,
+  see [our guide to query structure.][query]
 
 If the `query` parameter is absent, PuppetDB will return all reports.
 
@@ -56,94 +47,65 @@ See [the AST query language page][ast].
 
 ### Query fields
 
-The following fields are allowed as filter criteria and are returned in all
-responses.
+The following fields are allowed as filter criteria and are returned in all responses.
 
-* `certname` (string): the name of the node that the report was received from.
+- `certname` (string): the name of the node that the report was received from.
 
-* `hash` (string): the ID of the report; these IDs can be acquired via event
-  queries (see the [`/events`][events] endpoint).
+- `hash` (string): the ID of the report; these IDs can be acquired via event queries (see the [`/events`][events] endpoint).
 
-* `environment` (string): the environment assigned to the node that submitted
-  the report.
+- `environment` (string): the environment assigned to the node that submitted the report.
 
-* `status` (string): the status associated to report's node. Possible values for
-  this field come from Puppet's report status, which can be found
-  [here][statuses].
-  
-*  `job_id` (string): the job id associated with the report (not present if the run wasn't part of a job)
+- `status` (string): the status associated to report's node. Possible values for this field come from Puppet's report status, which can be found [here][statuses].
+- `job_id` (string): the job id associated with the report (not present if the run wasn't part of a job)
 
-* `noop` (Boolean): a flag indicating whether the report was produced by a noop
-  run.
+- `noop` (Boolean): a flag indicating whether the report was produced by a noop run.
 
-* `noop_pending` (Boolean): a flag indicating whether the report contains noop
-  events (these can arise from use of `--noop` or from resources with the
-  `noop` parameter set to true). This field will only be present when the agent originating the report is version 4.6.0 or higher.
+- `noop_pending` (Boolean): a flag indicating whether the report contains noop events (these can arise from use of `--noop` or from resources with the `noop` parameter set to true). This field will only be
+  present when the agent originating the report is version 4.6.0 or higher.
 
-* `puppet_version` (string): the version of Puppet that generated the report.
+- `puppet_version` (string): the version of Puppet that generated the report.
 
-* `report_format` (number): the version number of the report format that Puppet
-  used to generate the original report data.
+- `report_format` (number): the version number of the report format that Puppet used to generate the original report data.
 
-* `configuration_version` (string): an identifier string that Puppet uses to
-  match a specific catalog for a node to a specific Puppet run.
+- `configuration_version` (string): an identifier string that Puppet uses to match a specific catalog for a node to a specific Puppet run.
 
-* `start_time` (timestamp): the time on the agent at which the Puppet run began.
-  Timestamps are always [ISO-8601][8601] compatible date/time strings.
+- `start_time` (timestamp): the time on the agent at which the Puppet run began. Timestamps are always [ISO-8601][8601] compatible date/time strings.
 
-* `end_time` (timestamp): the time on the agent at which the Puppet run ended.
-  Timestamps are always [ISO-8601][8601] compatible date/time strings.
+- `end_time` (timestamp): the time on the agent at which the Puppet run ended. Timestamps are always [ISO-8601][8601] compatible date/time strings.
 
-* `producer_timestamp` (timestamp): the time of catalog submission from the
-  Puppet Server to PuppetDB, according to the clock on the Puppet Server.
-  Timestamps are always [ISO-8601][8601] compatible date/time strings.
+- `producer_timestamp` (timestamp): the time of catalog submission from the Puppet Server to PuppetDB, according to the clock on the Puppet Server. Timestamps are always [ISO-8601][8601] compatible date/time
+  strings.
 
-* `receive_time` (timestamp): the time at which PuppetDB received the report.
-  Timestamps are always [ISO-8601][8601] compatible date/time strings.
+- `receive_time` (timestamp): the time at which PuppetDB received the report. Timestamps are always [ISO-8601][8601] compatible date/time strings.
 
-* `producer` (string): the certname of the Puppet Server that sent the report
-  to PuppetDB.
+- `producer` (string): the certname of the Puppet Server that sent the report to PuppetDB.
 
-* `transaction_uuid` (string): a string used to identify a Puppet run.
+- `transaction_uuid` (string): a string used to identify a Puppet run.
 
-* `catalog_uuid` (string): a string used to tie a catalog to a report to the
-  catalog used from that Puppet run.
+- `catalog_uuid` (string): a string used to tie a catalog to a report to the catalog used from that Puppet run.
 
-* `code_id` (string): a string used to tie a catalog to the Puppet code which
-  generated the catalog.
+- `code_id` (string): a string used to tie a catalog to the Puppet code which generated the catalog.
 
-* `cached_catalog_status` (string): a string used to identify whether the Puppet
-run used a cached catalogs and whether or not the cached catalog was used due to
-an error or not. Possible values include `explicitly_requested`, `on_failure`,
-`not_used` or `null`.
+- `cached_catalog_status` (string): a string used to identify whether the Puppet run used a cached catalogs and whether or not the cached catalog was used due to an error or not. Possible values include
+  `explicitly_requested`, `on_failure`, `not_used` or `null`.
 
-* `type`: (string): either `"agent"`, `"plan"`, or `"any"` to restrict
-  the results to reports submitteed from that source. If no `type`
-  filter is provided, it will only return reports from puppet agent
-  runs.
+- `type`: (string): either `"agent"`, `"plan"`, or `"any"` to restrict the results to reports submitteed from that source. If no `type` filter is provided, it will only return reports from puppet agent runs.
 
-* `corrective_change`: (Boolean): a flag indicating whether any of the report's
-  events remediated configuration drift. This field is only populated in PE.
+- `corrective_change`: (Boolean): a flag indicating whether any of the report's events remediated configuration drift. This field is only populated in PE.
 
-* `latest_report?` (Boolean): return only reports associated with the most
-  recent Puppet run for each node. **Note:** this field does not appear in the
-  response.
+- `latest_report?` (Boolean): return only reports associated with the most recent Puppet run for each node. **Note:** this field does not appear in the response.
 
 ### Subquery relationships
 
-The following list contains related entities that can be used to constrain the
-result set using implicit subqueries. For more information, consult the
-documentation for [subqueries][subqueries].
+The following list contains related entities that can be used to constrain the result set using implicit subqueries. For more information, consult the documentation for [subqueries][subqueries].
 
-* [`environments`][environments]: environment from where a report was received.
-* [`events`][events]: events received in a report.
-* [`producers`][producers]: the Puppet Server that sent the report to PuppetDB.
+- [`environments`][environments]: environment from where a report was received.
+- [`events`][events]: events received in a report.
+- [`producers`][producers]: the Puppet Server that sent the report to PuppetDB.
 
 ### Response format
 
-The response is a JSON array of report summaries for all event reports
-that matched the input parameters. The array is unsorted. The top-level response
-is of the form:
+The response is a JSON array of report summaries for all event reports that matched the input parameters. The array is unsorted. The top-level response is of the form:
 
     {
       "hash": <sha1 of stored report command payload>,
@@ -172,12 +134,9 @@ is of the form:
 
 > **Note: The `resources` field is only offered in Puppet Enterprise (PE)**
 >
-> The response format in PE contains an additional field, `resources`, which
-> contains all the resource statuses for the Puppet run corresponding to the
-> `report`, both changed and unchanged resources.
+> The response format in PE contains an additional field, `resources`, which contains all the resource statuses for the Puppet run corresponding to the `report`, both changed and unchanged resources.
 
-Below, in `old_value` and `new_value`, any [rich data][rich_data]
-values will appear as readable strings.
+Below, in `old_value` and `new_value`, any [rich data][rich_data] values will appear as readable strings.
 
 The `<expanded resource events>` object is of the following form:
 
@@ -227,8 +186,7 @@ Where an `<event>` object is of the form:
 
 > **Note: On `resources` versus `resource_events`**
 >
-> Unchanged resources are accessed through the `resources` field. The
-> `resource_events` field does not contain this information.
+> Unchanged resources are accessed through the `resources` field. The `resource_events` field does not contain this information.
 
 The `<expanded metrics>` object is as follows:
 
@@ -254,17 +212,21 @@ The `<expanded logs>` object returns a single log line per data entry as follows
         "tags" : [<resource tag>],
         "time" : <log line timestamp>
      } ... ]
-   }
+
+}
 
 File and line may each be null if the log does not concern a resource.
 
->**Note: Fields that allow `NULL` values**
+> **Note: Fields that allow `NULL` values**
 >
->In the resource_event schema above, `containment_path`, `new_value`, `old_value`, `property`, `file`, `line`, `status`, and `message` may all be null.
+> In the resource_event schema above, `containment_path`, `new_value`, `old_value`, `property`, `file`, `line`, `status`, and `message` may all be null.
 
->**Note: On querying resource events, metrics, and logs**
+<!-- -->
+
+> **Note: On querying resource events, metrics, and logs**
 >
->The `reports` endpoint does not support querying on the value of `resource_events`, `logs`, or `metrics`. For `resource_events`, the same information can be accessed by querying the `events` endpoint for events with field `report` equal to a given report's `hash`. Making metrics and logs queryable may be the target of future work.
+> The `reports` endpoint does not support querying on the value of `resource_events`, `logs`, or `metrics`. For `resource_events`, the same information can be accessed by querying the `events` endpoint for
+> events with field `report` equal to a given report's `hash`. Making metrics and logs queryable may be the target of future work.
 
 ### Examples
 
@@ -366,14 +328,11 @@ Query for all reports:
       }
     } ]
 
-You can retrieve the `resources` field as part of the data from the `reports`
-endpoint or using the child data endpoint.
+You can retrieve the `resources` field as part of the data from the `reports` endpoint or using the child data endpoint.
 
-For example, the following query finds for all resources (changed and unchanged)
-for a report with hash `32c821673e647b0650717db467abc51d9949fd9a`:
+For example, the following query finds for all resources (changed and unchanged) for a report with hash `32c821673e647b0650717db467abc51d9949fd9a`:
 
-**Note: The following is for PE only**
-    curl -G http://localhost:8080/pdb/query/v4/reports/32c821673e647b0650717db467abc51d9949fd9a/resources
+**Note: The following is for PE only** curl -G <http://localhost:8080/pdb/query/v4/reports/32c821673e647b0650717db467abc51d9949fd9a/resources>
 
     [
        {
@@ -443,30 +402,22 @@ Get counts of reports grouped by status and day of the week received:
 
 Returns all events for a particular report, designated by its unique hash.
 
-This is a shortcut to the [`/events`][events] endpoint. It behaves the same as a
-call to [`/events`][events] with a query string of `["=", "report", "<HASH>"]`.
+This is a shortcut to the [`/events`][events] endpoint. It behaves the same as a call to [`/events`][events] with a query string of `["=", "report", "<HASH>"]`.
 
 ## `/pdb/query/v4/reports/<HASH>/metrics`
 
-Returns all metrics for a particular report, designated by its unique hash. This
-endpoint does not currently support querying or paging.
+Returns all metrics for a particular report, designated by its unique hash. This endpoint does not currently support querying or paging.
 
 ## `/pdb/query/v4/reports/<HASH>/logs`
 
-Returns all logs for a particular report, designated by its unique hash. This
-endpoint does not currently support querying or paging.
+Returns all logs for a particular report, designated by its unique hash. This endpoint does not currently support querying or paging.
 
 ### URL parameters / query operators / query fields / response format
 
-This route is an extension of the [`events`][events] endpoint. It uses the exact
-same parameters, operators, fields, and response format.
+This route is an extension of the [`events`][events] endpoint. It uses the exact same parameters, operators, fields, and response format.
 
-If you provide a `query` parameter, it will specify additional criteria, which
-will be used to return a subset of the information normally returned by this
-route.
+If you provide a `query` parameter, it will specify additional criteria, which will be used to return a subset of the information normally returned by this route.
 
 ## Paging
 
-This query endpoint supports paged results via the common PuppetDB paging URL
-parameters. For more information, please see the documentation on
-[paging][paging].
+This query endpoint supports paged results via the common PuppetDB paging URL parameters. For more information, please see the documentation on [paging][paging].
