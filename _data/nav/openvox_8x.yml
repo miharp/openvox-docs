@@ -350,15 +350,11 @@
 - text: Man pages
   items:
   - text: Index
-    link: "man/index.html"
+    link: "man/overview.html"
   - text: puppet agent
     link: "man/agent.html"
   - text: puppet apply
     link: "man/apply.html"
-  - text: puppet cert
-    link: "man/cert.html"
-  - text: legacy server command
-    link: "man/master.html"
   - text: puppet module
     link: "man/module.html"
   - text: puppet resource
@@ -375,30 +371,18 @@
     link: "man/doc.html"
   - text: puppet help
     link: "man/help.html"
-  - text: puppet man
-    link: "man/man.html"
   - text: puppet node
     link: "man/node.html"
   - text: puppet parser
     link: "man/parser.html"
   - text: puppet plugin
     link: "man/plugin.html"
-  - text: puppet ca
-    link: "man/ca.html"
   - text: puppet catalog
     link: "man/catalog.html"
-  - text: puppet certificate
-    link: "man/certificate.html"
-  - text: puppet certificate_request
-    link: "man/certificate_request.html"
-  - text: puppet certificate_revocation_list
-    link: "man/certificate_revocation_list.html"
   - text: puppet facts
     link: "man/facts.html"
   - text: puppet filebucket
     link: "man/filebucket.html"
-  - text: puppet key
-    link: "man/key.html"
   - text: puppet report
     link: "man/report.html"
   - text: puppet status
