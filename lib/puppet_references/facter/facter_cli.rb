@@ -5,8 +5,6 @@ module PuppetReferences
   module Facter
     class FacterCli < PuppetReferences::Reference
       OUTPUT_DIR = PuppetReferences::OUTPUT_DIR + '_openfact_latest'
-      PREAMBLE_FILE = Pathname.new(__FILE__).dirname + 'facter_cli_preamble.md'
-      PREAMBLE = PREAMBLE_FILE.read
 
       def initialize(*)
         @latest = '/openvox/latest'
@@ -34,7 +32,7 @@ module PuppetReferences
         markdown_text, = Open3.capture3('mandoc -T markdown', stdin_data: raw_text)
         # Strip the "TITLE - Manual" header line and the dated footer line mandoc adds
         markdown_text = markdown_text.lines[1...-1].join
-        content = make_header(header_data) + PREAMBLE + markdown_text
+        content = make_header(header_data) + markdown_text
         filename = OUTPUT_DIR + 'cli.md'
         filename.open('w') { |f| f.write(content) }
         puts 'CLI documentation is done!'
