@@ -1,16 +1,18 @@
-## About resource types
+# About resource types
 
-### Built-in types and custom types
+## Built-in types and custom types
 
-This is the documentation for Puppet's built-in resource types and providers. Additional resource types are distributed in Puppet modules.
+This is the documentation for OpenVox's built-in resource types and providers. Additional resource types are distributed in Puppet modules.
 
 You can find and install modules by browsing the
 [Puppet Forge](http://forge.puppet.com). See each module's documentation for
 information on how to use its custom resource types. For more information about creating custom types, see [Custom resources](/openvox/latest/custom_resources.html).
 
-> As of Puppet 6.0, some resource types were removed from Puppet and repackaged as individual modules. These supported type modules are still included in the `puppet-agent` package, so you don't have to download them from the Forge. See the complete list of affected types in the [supported type modules](#supported-type-modules-in-puppet-agent) section.
+> As of Puppet 6.0, some resource types were removed from Puppet and repackaged as individual modules.
+> These supported type modules are still included in the `puppet-agent` package, so you don't have to download them from the Forge.
+> See the complete list of affected types in the [supported type modules](#supported-type-modules-in-puppet-agent) section.
 
-### Declaring resources
+## Declaring resources
 
 To manage resources on a target system, declare them in Puppet
 manifests. For more details, see
@@ -19,7 +21,7 @@ manifests. For more details, see
 You can also browse and manage resources interactively using the
 `puppet resource` subcommand; run `puppet resource --help` for more information.
 
-### Namevars and titles
+## Namevars and titles
 
 All types have a special attribute called the _namevar_. This is the attribute
 used to uniquely identify a resource on the target system.
@@ -60,7 +62,7 @@ its name is still `/etc/passwd`.
 Other Puppet code can refer to this resource as `File['/etc/passwd']` to
 declare relationships.
 
-### Attributes, parameters, properties
+## Attributes, parameters, properties
 
 The _attributes_ (sometimes called _parameters_) of a resource determine its
 desired state. They either directly modify the system (internally, these are
@@ -68,12 +70,12 @@ called "properties") or they affect how the resource behaves (for instance,
 adding a search path for `exec` resources or controlling directory recursion
 on `file` resources).
 
-### Providers
+## Providers
 
 _Providers_ implement the same resource type on different kinds of systems.
 They usually do this by calling out to external commands.
 
-Although Puppet automatically selects an appropriate default provider, you
+Although OpenVox automatically selects an appropriate default provider, you
 can override the default with the `provider` attribute. (For example, `package`
 resources on Red Hat systems default to the `yum` provider, but you can specify
 `provider => gem` to install Ruby libraries with the `gem` command.)
@@ -83,12 +85,12 @@ paths indicate that the binary must exist at that specific path, and
 unqualified paths indicate that Puppet searches for the binary using the
 shell path.
 
-### Features
+## Features
 
 _Features_ are abilities that some providers might not support. Generally, a
 feature corresponds to some allowed values for a resource attribute.
 
-This is often the case with the `ensure` attribute. In most types, Puppet
+This is often the case with the `ensure` attribute. In most types, OpenVox
 doesn't create new resources when omitting `ensure` but still modifies existing
 resources to match specifications in the manifest. However, in some types this
 isn't always the case, or additional values provide more granular control. For
@@ -101,11 +103,12 @@ declare which features they provide.
 
 ## Puppet 6.0 type changes
 
-In Puppet 6.0, we removed some of Puppet's built-in types and moved them into individual modules.
+In Puppet 6.0, some of Puppet's built-in types were removed and moved into individual modules.
 
 ### Supported type modules in `puppet-agent`
 
-The following types are included in supported modules on the Forge. However, they are also included in the `puppet-agent` package, so you do not have to install them separately. See each module's README for detailed information about that type.
+The following types are included in supported modules on the Forge. However, they are also included in the `puppet-agent` package, so you do not have to install them separately.
+See each module's README for detailed information about that type.
 
 - [`augeas`](https://forge.puppet.com/puppetlabs/augeas_core)
 - [`cron`](https://forge.puppet.com/puppetlabs/cron_core)
@@ -123,7 +126,7 @@ The following types are included in supported modules on the Forge. However, the
 
 ### Type modules available on the Forge
 
-The following types are contained in modules that are maintained, but are not repackaged into Puppet agent. If you need to use them, you must install the modules separately. 
+The following types are contained in modules that are maintained, but are not repackaged into Puppet agent. If you need to use them, you must install the modules separately.
 
 - [`k5login`](https://forge.puppet.com/puppetlabs/k5login_core)
 - [`mailalias`](https://forge.puppet.com/puppetlabs/mailalias_core)
@@ -141,6 +144,6 @@ The following types were deprecated with Puppet 6.0.0. They are available in mod
 - [`router`](https://github.com/puppetlabs/puppetlabs-network_device_core) (Use the updated [`cisco_ios module`](https://forge.puppet.com/puppetlabs/cisco_ios/readme) instead.
 - [`vlan`](https://github.com/puppetlabs/puppetlabs-network_device_core) (Use the updated [`cisco_ios module`](https://forge.puppet.com/puppetlabs/cisco_ios/readme) instead.
 
-## Puppet core types
+## OpenVox core types
 
-For a list of core Puppet types, see the [core types cheat sheet][core-types-cheatsheet].
+For a list of core OpenVox types, see the [core types cheat sheet](cheatsheet_core_types.html).
