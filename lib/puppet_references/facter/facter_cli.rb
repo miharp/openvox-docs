@@ -31,8 +31,9 @@ module PuppetReferences
           puts "Encountered an error while building the facter cli docs, will abort: #{err}"
           return
         end
-        require 'pandoc-ruby'
-        markdown_text = PandocRuby.new(raw_text, from: 'man').to_markdown
+        markdown_text, = Open3.capture3('mandoc -T markdown', stdin_data: raw_text)
+        # Strip the "TITLE - Manual" header line and the dated footer line mandoc adds
+        markdown_text = markdown_text.lines[1...-1].join
         content = make_header(header_data) + PREAMBLE + markdown_text
         filename = OUTPUT_DIR + 'cli.md'
         filename.open('w') { |f| f.write(content) }

@@ -72,9 +72,9 @@ jobs:
         with:
           ruby-version: '3.2'
           bundler-cache: true
-      - name: Install pandoc
+      - name: Install pandoc and mandoc
         run: |
-          sudo apt install -y pandoc
+          sudo apt install -y pandoc mandoc
       - name: Build website
         run: |
           bundle exec rake references:openfact INSTALLPATH=docs
