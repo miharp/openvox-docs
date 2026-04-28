@@ -269,20 +269,16 @@
     link: "hiera_migrate.html"
 - text: Resource types
   items:
+  - text: Overview
+    link: "types/overview.html"
   - text: All resource types (single-page reference)
     link: "type.html"
   - text: Core types cheat sheet
     link: "cheatsheet_core_types.html"
   - text: Optional resource types for Windows
     link: "resources_windows_optional.html"
-  - text: augeas
-    link: "types/augeas.html"
   - text: Augeas tips and examples
     link: "resources_augeas.html"
-  - text: computer
-    link: "types/computer.html"
-  - text: cron
-    link: "types/cron.html"
   - text: exec
     link: "types/exec.html"
   - text: Exec tips and examples for Windows
@@ -297,52 +293,6 @@
     link: "types/group.html"
   - text: User and group tips and examples for Windows
     link: "resources_user_group_windows.html"
-  - text: host
-    link: "types/host.html"
-  - text: index
-    link: "types/index.html"
-  - text: interface
-    link: "types/interface.html"
-  - text: k5login
-    link: "types/k5login.html"
-  - text: macauthorization
-    link: "types/macauthorization.html"
-  - text: mailalias
-    link: "types/mailalias.html"
-  - text: maillist
-    link: "types/maillist.html"
-  - text: mcx
-    link: "types/mcx.html"
-  - text: mount
-    link: "types/mount.html"
-  - text: nagios_command
-    link: "types/nagios_command.html"
-  - text: nagios_contact
-    link: "types/nagios_contact.html"
-  - text: nagios_contactgroup
-    link: "types/nagios_contactgroup.html"
-  - text: nagios_host
-    link: "types/nagios_host.html"
-  - text: nagios_hostdependency
-    link: "types/nagios_hostdependency.html"
-  - text: nagios_hostescalation
-    link: "types/nagios_hostescalation.html"
-  - text: nagios_hostextinfo
-    link: "types/nagios_hostextinfo.html"
-  - text: nagios_hostgroup
-    link: "types/nagios_hostgroup.html"
-  - text: nagios_service
-    link: "types/nagios_service.html"
-  - text: nagios_servicedependency
-    link: "types/nagios_servicedependency.html"
-  - text: nagios_serviceescalation
-    link: "types/nagios_serviceescalation.html"
-  - text: nagios_serviceextinfo
-    link: "types/nagios_serviceextinfo.html"
-  - text: nagios_servicegroup
-    link: "types/nagios_servicegroup.html"
-  - text: nagios_timeperiod
-    link: "types/nagios_timeperiod.html"
   - text: notify
     link: "types/notify.html"
   - text: package
@@ -351,26 +301,14 @@
     link: "resources_package_windows.html"
   - text: resources
     link: "types/resources.html"
-  - text: router
-    link: "types/router.html"
   - text: schedule
     link: "types/schedule.html"
-  - text: scheduled_task
-    link: "types/scheduled_task.html"
   - text: Scheduled task tips and examples
     link: "resources_scheduled_task_windows.html"
-  - text: selboolean
-    link: "types/selboolean.html"
-  - text: selmodule
-    link: "types/selmodule.html"
   - text: service
     link: "types/service.html"
   - text: Service tips and examples
     link: "resources_service.html"
-  - text: ssh_authorized_key
-    link: "types/ssh_authorized_key.html"
-  - text: sshkey
-    link: "types/sshkey.html"
   - text: stage
     link: "types/stage.html"
   - text: tidy
@@ -379,16 +317,6 @@
     link: "types/user.html"
   - text: User and group tips and examples for Windows
     link: "resources_user_group_windows.html"
-  - text: vlan
-    link: "types/vlan.html"
-  - text: yumrepo
-    link: "types/yumrepo.html"
-  - text: zfs
-    link: "types/zfs.html"
-  - text: zone
-    link: "types/zone.html"
-  - text: zpool
-    link: "types/zpool.html"
 - text: 'Reports: Tracking OpenVox''s activity'
   items:
   - text: About reporting
@@ -422,15 +350,11 @@
 - text: Man pages
   items:
   - text: Index
-    link: "man/index.html"
+    link: "man/overview.html"
   - text: puppet agent
     link: "man/agent.html"
   - text: puppet apply
     link: "man/apply.html"
-  - text: puppet cert
-    link: "man/cert.html"
-  - text: legacy server command
-    link: "man/master.html"
   - text: puppet module
     link: "man/module.html"
   - text: puppet resource
@@ -447,30 +371,18 @@
     link: "man/doc.html"
   - text: puppet help
     link: "man/help.html"
-  - text: puppet man
-    link: "man/man.html"
   - text: puppet node
     link: "man/node.html"
   - text: puppet parser
     link: "man/parser.html"
   - text: puppet plugin
     link: "man/plugin.html"
-  - text: puppet ca
-    link: "man/ca.html"
   - text: puppet catalog
     link: "man/catalog.html"
-  - text: puppet certificate
-    link: "man/certificate.html"
-  - text: puppet certificate_request
-    link: "man/certificate_request.html"
-  - text: puppet certificate_revocation_list
-    link: "man/certificate_revocation_list.html"
   - text: puppet facts
     link: "man/facts.html"
   - text: puppet filebucket
     link: "man/filebucket.html"
-  - text: puppet key
-    link: "man/key.html"
   - text: puppet report
     link: "man/report.html"
   - text: puppet status
