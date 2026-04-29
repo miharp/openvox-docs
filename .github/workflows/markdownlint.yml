@@ -43,22 +43,44 @@ jobs:
             base_sha="$(git rev-list --max-parents=0 "${head_sha}")"
           fi
 
-          git diff --name-only --diff-filter=ACMRT "${base_sha}" "${head_sha}" -- '*.md' '*.markdown' > changed-markdown-files.txt
+          git diff --name-only --diff-filter=A    "${base_sha}" "${head_sha}" -- '*.md' '*.markdown' > added-markdown-files.txt
+          git diff --name-only --diff-filter=CMRT "${base_sha}" "${head_sha}" -- '*.md' '*.markdown' > modified-markdown-files.txt
 
-          if [[ -s changed-markdown-files.txt ]]; then
-            echo "has_files=true" >> "${GITHUB_OUTPUT}"
+          if [[ -s added-markdown-files.txt ]]; then
+            echo "has_added=true" >> "${GITHUB_OUTPUT}"
             {
-              echo 'files<<EOF'
-              cat changed-markdown-files.txt
+              echo 'added_files<<EOF'
+              cat added-markdown-files.txt
               echo 'EOF'
             } >> "${GITHUB_OUTPUT}"
           else
-            echo "has_files=false" >> "${GITHUB_OUTPUT}"
+            echo "has_added=false" >> "${GITHUB_OUTPUT}"
           fi
+
+          if [[ -s modified-markdown-files.txt ]]; then
+            echo "has_modified=true" >> "${GITHUB_OUTPUT}"
+            {
+              echo 'modified_files<<EOF'
+              cat modified-markdown-files.txt
+              echo 'EOF'
+            } >> "${GITHUB_OUTPUT}"
+          else
+            echo "has_modified=false" >> "${GITHUB_OUTPUT}"
+          fi
+
       - name: No changed Markdown files
-        if: steps.changed-markdown.outputs.has_files != 'true'
+        if: steps.changed-markdown.outputs.has_added != 'true' && steps.changed-markdown.outputs.has_modified != 'true'
         run: echo "No changed Markdown files to lint."
-      - uses: DavidAnson/markdownlint-cli2-action@v22
-        if: steps.changed-markdown.outputs.has_files == 'true'
+
+      - name: Lint new Markdown files (enforced)
+        uses: DavidAnson/markdownlint-cli2-action@v22
+        if: steps.changed-markdown.outputs.has_added == 'true'
         with:
-          globs: ${{ steps.changed-markdown.outputs.files }}
+          globs: ${{ steps.changed-markdown.outputs.added_files }}
+
+      - name: Lint modified Markdown files (advisory)
+        uses: DavidAnson/markdownlint-cli2-action@v22
+        if: steps.changed-markdown.outputs.has_modified == 'true'
+        continue-on-error: true
+        with:
+          globs: ${{ steps.changed-markdown.outputs.modified_files }}
