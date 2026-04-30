@@ -5,7 +5,6 @@ title: "The LDAP Node Classifier"
 
 [class parameters]: ./lang_classes.html#class-parameters-and-variables
 [hiera]: ./hiera_intro.html
-[rp]: {{pe}}/r_n_p_intro.html
 [custom hiera backend]: ./hiera_custom_backends.html
 [environment]: ./environments.html
 [node definitions]: ./lang_node_definitions.html
@@ -29,11 +28,11 @@ There are some benefits to storing node data in LDAP instead of using [node defi
 -   All attributes on the LDAP nodes are assigned as variables in the Puppet configuration, just like facts.
 -   It is straightforward for other applications to modify LDAP data to configure nodes (for example, as part of a deployment process), which is easier to support than generating Puppet code.
 
-**However.** This LDAP integration was written for a very different world, before Puppet had [class parameters][] or [data lookup with Hiera][hiera], and before modern best practices like [the roles and profiles method][RP] were developed. Dinosaurs walked the earth, and you configured your Puppet classes by setting top-scope variables in the node definition.
+**However.** This LDAP integration was written for a very different world, before Puppet had [class parameters][] or [data lookup with Hiera][hiera], and before modern best practices like the roles and profiles method were developed. Dinosaurs walked the earth, and you configured your Puppet classes by setting top-scope variables in the node definition.
 
 You can probably still use this effectively, but please consider the following:
 
-* With an antique interface like this, [the roles and profiles method][RP] is even more of a best practice than it is elsewhere. Since LDAP attributes can't configure class parameters, they're not suited for building full configurations out of component modules, so you should be hiding most of your complexity with wrapper classes, doing data lookup via Hiera, and only using LDAP to assign role classes.
+* With an antique interface like this, the roles and profiles method is even more of a best practice than it is elsewhere. Since LDAP attributes can't configure class parameters, they're not suited for building full configurations out of component modules, so you should be hiding most of your complexity with wrapper classes, doing data lookup via Hiera, and only using LDAP to assign role classes.
 * Depending on where that LDAP data is coming from, it might make more sense to go right to the source and write a [custom Hiera backend][] that can access your business's configuration data. In fact, writing an LDAP-based Hiera backend might make more sense than using this rigid 0.2x-era interface.
 
 ## Prerequisites

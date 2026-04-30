@@ -4,9 +4,9 @@ title: "Language: Embedded Puppet (EPP) template syntax"
 ---
 
 [erb]: ./lang_template_erb.html
-[epp]: /puppet/latest/function.html#epp
+[epp]: /openvox/latest/function.html#epp
+[inline_epp]: /openvox/latest/function.html#inline_epp
 [ntp]: https://forge.puppetlabs.com/puppetlabs/ntp
-[inline_epp]: /puppet/latest/function.html#inlineepp
 [functions]: ./lang_functions.html
 [hash]: ./lang_data_hash.html
 [local scope]: ./lang_scope.html
@@ -16,7 +16,7 @@ title: "Language: Embedded Puppet (EPP) template syntax"
 [variable_names]: ./lang_variables.html#naming
 [typed]: ./lang_data_type.html
 
-Embedded Puppet (EPP) is a templating language based on the [Puppet language](./lang_summary.html). You can use EPP in Puppet 4 and higher, as well as Puppet 3.5 through 3.8 with the [future parser](/puppet/3.8/experiments_future.html) enabled.
+Embedded Puppet (EPP) is a templating language based on the [Puppet language](./lang_summary.html). You can use EPP in Puppet 4 and higher, as well as Puppet 3.5 through 3.8 with the future parser enabled.
 
 Puppet can evaluate EPP templates with the [`epp`][epp] and [`inline_epp`][inline_epp] functions.
 
@@ -187,7 +187,7 @@ A template works like a [defined type][]:
 * When you call the template (with the [`epp`][epp] or [`inline_epp`][inline_epp] functions), you can use parameters to set variables in its local scope.
 * Unlike erb templates, epp templates cannot directly access variables in the calling class without namespacing. Fully qualify variables or pass them in as parameters.
 
-This means templates can use short names to access global variables (like `$os` or `$trusted`) and their own local variables, but must use qualified names (like `$ntp::tinker`) to access variables from any class. (With one exception for `inline_epp`; [see below](#special-scope-rule-for-inlineepp).)
+This means templates can use short names to access global variables (like `$os` or `$trusted`) and their own local variables, but must use qualified names (like `$ntp::tinker`) to access variables from any class. (With one exception for `inline_epp`; [see below](#special-scope-rule-for-inline_epp).)
 
 ### Parameters
 

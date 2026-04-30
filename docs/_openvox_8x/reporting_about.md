@@ -3,9 +3,9 @@ layout: default
 title: "About reporting"
 ---
 
-[report]: /puppet/latest/configuration.html#report
-[reports]: /puppet/latest/configuration.html#reports
-[reportdir]: /puppet/latest/configuration.html#reportdir
+[report]: /openvox/latest/configuration.html#report
+[reports]: /openvox/latest/configuration.html#reports
+[reportdir]: /openvox/latest/configuration.html#reportdir
 [puppet.conf]: ./config_file_main.html
 
 Puppet creates a report about its actions and your infrastructure each time it applies a catalog during a Puppet run. You can create and use report processors to generate insightful information or alerts from
@@ -33,11 +33,11 @@ which stores them in the configured [`reportdir`][reportdir]. You can also turn 
 
 ## Practical reporting for beginners
 
-Puppet's reporting features are powerful, but there are simple ways to work with them. Puppet Enterprise includes [helpful reporting tools]({{pe}}/CM_reports.html) in the console. [PuppetDB](/openvoxdb/latest/),
+Puppet's reporting features are powerful, but there are simple ways to work with them. [PuppetDB](/openvoxdb/latest/),
 with [its report processor enabled](/openvoxdb/latest/connect_puppet_master.html#enabling-report-storage), can interface with third-party tools such as [Puppetboard](https://github.com/puppet-community/puppetboard)
 or [PuppetExplorer](https://github.com/spotify/puppetexplorer).
 
-Puppet has several basic built-in [report processors](/puppet/latest/report.html). For example, the `http` processor sends YAML dumps of reports via POST requests to a designated URL, while `log` saves received
+Puppet has several basic built-in [report processors](/openvox/latest/report.html). For example, the `http` processor sends YAML dumps of reports via POST requests to a designated URL, while `log` saves received
 logs to a local log file.
 
 Certain Puppet modules --- for instance, [`tagmail`](https://forge.puppetlabs.com/puppetlabs/tagmail) --- add additional report processors. Each module has its own requirements, such as Ruby gems, operating

@@ -302,6 +302,5 @@ Multiple tags can be specified as an array:
     }
 
 Tags are useful for things like applying a subset of a host's configuration
-with [the `tags` setting](/puppet/latest/configuration.html#tags)
+with [the `tags` setting](/openvox/latest/configuration.html#tags)
 (e.g. `puppet agent --test --tags bootstrap`).
-

@@ -25,9 +25,6 @@ title: "Static catalogs"
 
 [Puppet Server]: /openvox-server/latest/
 [`puppetserver.conf`]: /openvox-server/latest/config_file_puppetserver.html
-[Application Orchestration]: {{pe}}/app_orchestration_overview.html
-[file sync]: {{pe}}/cmgmt_filesync.html
-[Code Manager]: {{pe}}/code_mgr.html
 [`code_content`]: /openvox-server/latest/
 Puppet 4.4 and Puppet Server 2.3 introduced a new feature for [catalog compilation][catalogs]: **static catalogs**.
 
