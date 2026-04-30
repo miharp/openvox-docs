@@ -30,7 +30,7 @@ module PuppetReferences
         header_data = { title: "#{reference.capitalize} Reference",
                         toc: 'columns',
                         canonical: "#{@latest}/#{reference}.html", }
-        content = make_header(header_data, 'OpenVox', $version_commit) + raw_content # rubocop:disable Style/GlobalVars
+        content = make_header(header_data, 'OpenVox', PuppetReferences.version_commit) + raw_content
         filename = OUTPUT_DIR + "#{reference}.md"
         filename.open('w') { |f| f.write(content) }
       end
