@@ -76,7 +76,7 @@ module PuppetReferences
         header_data = { title: 'Puppet Man Pages',
                         canonical: "#{@latest}/overview.html", }
         index_text = <<~MSG
-          #{make_header(header_data)}
+          #{make_header(header_data, 'OpenVox', $version_commit)} # rubocop:disable Style/GlobalVars
 
           Puppet's command line tools consist of a single `puppet` binary with many subcommands. The following subcommands are available in this version of Puppet:
 
@@ -124,7 +124,7 @@ module PuppetReferences
                         canonical: "#{@latest}/#{subcommand}.html", }
         # raw_text = PuppetReferences::ManCommand.new(subcommand).get
         man_filepath = PuppetReferences::PUPPET_DIR.to_s + "/man/man8/puppet-#{subcommand}.8"
-        content = make_header(header_data) + PuppetReferences::Util.convert_man(man_filepath)
+        content = make_header(header_data, 'OpenVox', $version_commit) + PuppetReferences::Util.convert_man(man_filepath) # rubocop:disable Style/GlobalVars
         filename = OUTPUT_DIR + "#{subcommand}.md"
         filename.open('w') { |f| f.write(content) }
       end

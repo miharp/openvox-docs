@@ -10,10 +10,10 @@ module PuppetReferences
       @commit = commit
     end
 
-    def make_header(header_data)
+    def make_header(header_data, source, commit)
       default_header_data = { layout: 'default',
                               built_from_commit: @commit, }
-      PuppetReferences::Util.make_header(default_header_data.merge(header_data))
+      PuppetReferences::Util.make_header(default_header_data.merge(header_data), source, commit)
     end
   end
 end
