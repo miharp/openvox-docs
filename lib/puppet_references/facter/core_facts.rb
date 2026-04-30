@@ -20,7 +20,7 @@ module PuppetReferences
         header_data = { title: 'Facter: Core Facts',
                         toc: 'columns',
                         canonical: "#{@latest}/core_facts.html", }
-        content = make_header(header_data) + PREAMBLE + raw_text
+        content = make_header(header_data, 'OpenFact', $version_commit) + PREAMBLE + raw_text # rubocop:disable Style/GlobalVars
         filename = OUTPUT_DIR + 'core_facts.md'
         filename.open('w') { |f| f.write(content) }
         puts 'Core facts: done!'

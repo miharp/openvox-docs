@@ -46,7 +46,7 @@ module PuppetReferences
         # This substitution could potentially make things a bit brittle, but it has to be done because the jump
         # From H2s to H4s is causing issues with the DITA-OT, which sees this as a rule violation. If it
         # Does become an issue, we should return to this and figure out a better way to generate the functions doc.
-        content = make_header(header_data) + "\n\n" + PREAMBLE + "\n\n" + body.gsub(/#####\s(.*?:)/, '**\1**').gsub(
+        content = make_header(header_data, 'OpenVox', $version_commit) + "\n\n" + PREAMBLE + "\n\n" + body.gsub(/#####\s(.*?:)/, '**\1**').gsub( # rubocop:disable Style/GlobalVars
           /####\s/, '###\s'
         )
         output_path = OUTPUT_DIR + filename
