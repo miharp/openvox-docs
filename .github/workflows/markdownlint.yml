@@ -73,13 +73,13 @@ jobs:
         run: echo "No changed Markdown files to lint."
 
       - name: Lint new Markdown files (enforced)
-        uses: DavidAnson/markdownlint-cli2-action@v22
+        uses: DavidAnson/markdownlint-cli2-action@v23
         if: steps.changed-markdown.outputs.has_added == 'true'
         with:
           globs: ${{ steps.changed-markdown.outputs.added_files }}
 
       - name: Lint modified Markdown files (advisory)
-        uses: DavidAnson/markdownlint-cli2-action@v22
+        uses: DavidAnson/markdownlint-cli2-action@v23
         if: steps.changed-markdown.outputs.has_modified == 'true'
         continue-on-error: true
         with:
