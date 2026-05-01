@@ -10,6 +10,7 @@ gem 'rake', '~> 13.0', '>= 13.0.1'
 gem 'versionomy', '~> 0.5.0'
 
 group(:build_site) do
+  gem 'html-proofer', '~> 5.0'
   gem 'jekyll', '~> 4.4'
   gem 'jekyll-vitepress-theme', '~> 1.4'
 end
