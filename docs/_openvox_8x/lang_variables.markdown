@@ -17,7 +17,7 @@ title: "Language: Variables"
 [puppet.conf]: ./config_file_main.html
 
 
- <a id="facts"><a id="trusted-node-data"><a id="agent-set-variables"><a id="master-set-variables"><a id="parser-set-variables">
+<span id="facts"></span><span id="trusted-node-data"></span><span id="agent-set-variables"></span><span id="master-set-variables"></span><span id="parser-set-variables"></span>
 
 Variables store values so they can be accessed later.
 
