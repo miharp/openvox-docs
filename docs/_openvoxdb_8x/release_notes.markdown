@@ -308,8 +308,8 @@ Released April 25 2023
   ([PDB-5557](https://tickets.puppetlabs.com/browse/PDB-5557))
 * PuppetDB now supports query timeouts for queries to the `query/` endpoint via
   an [optional query parameter][query-timeout-parameter]. A
-  [default](./configure.markdown#query-timeout-default) and a
-  [maximum](./configure.markdown#query-timeout-max) can also be specified in
+  [default](./configure.html#query-timeout-default) and a
+  [maximum](./configure.html#query-timeout-max) can also be specified in
   the configuration. The current default is ten minutes.
   ([PDB-4937](https://tickets.puppetlabs.com/browse/PDB-4937))
 

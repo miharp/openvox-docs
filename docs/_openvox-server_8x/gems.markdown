@@ -90,7 +90,7 @@ As an example, the following command installs `pry` locally in the project. Note
     Successfully installed pry-0.10.1-java
     5 gems installed
 
-With the gem installed into the project tree `pry` can be invoked from inside Ruby code. For more detailed information on `pry` see [Puppet Server: Debugging](./dev_debugging.markdown#pry).
+With the gem installed into the project tree `pry` can be invoked from inside Ruby code. For more detailed information on `pry` see [Puppet Server: Debugging](./dev_debugging.html#pry).
 
 ## Gems with Native (C) Extensions
 
