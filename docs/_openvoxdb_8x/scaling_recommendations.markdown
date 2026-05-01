@@ -58,7 +58,7 @@ The more frequently your Puppet nodes check in, the heavier the load on your Pup
 
 You can reduce the need for higher performance by changing the [`runinterval`][runinterval] setting in every Puppet node's puppet.conf file. (Or, if running Puppet agent from cron, by changing the frequency of the cron task.)
 
-The frequency with which nodes should check in will depend on your site's policies and expectations --- this is as much a cultural decision as it is a technical one. A possible compromise is to use a wider default check-in interval, but implement MCollective's `puppetd` plugin to trigger immediate runs when needed.
+The frequency with which nodes should check in will depend on your site's policies and expectations --- this is as much a cultural decision as it is a technical one. A possible compromise is to use a wider default check-in interval, but use an orchestration tool such as [Choria](https://choria.io) to trigger immediate runs when needed.
 
 ## Bottleneck: CPU cores and number of worker threads
 

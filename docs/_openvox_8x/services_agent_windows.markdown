@@ -6,7 +6,7 @@ title: "Puppet's services: Puppet agent on Windows systems"
 [catalogs]: ./subsystem_catalog_compilation.html
 [unix_agent]: ./services_agent_unix.html
 [resource type reference]: ./type.html
-[mcollective]: /mcollective
+[Choria]: https://choria.io
 [puppet.conf]: ./config_file_main.html
 [runinterval]: ./configuration.html#runinterval
 [short_settings]: ./config_important_settings.html#settings-for-agents-all-nodes
@@ -48,7 +48,7 @@ In a normal Puppet configuration, every node periodically does configuration run
 On Windows nodes, there are two main ways to do this:
 
 * **Run Puppet agent as a service.** The easiest method. The Puppet agent service does configuration runs at a set interval, which can be configured.
-* **Only run Puppet agent on demand.** You can also deploy [MCollective][] to run on demand on many nodes.
+* **Only run Puppet agent on demand.** You can use an orchestration tool such as [Choria][] to trigger runs on demand across many nodes.
 
 Since the Windows version of the Puppet agent service is much simpler than the \*nix version, there's no real performance to be gained by running Puppet as a scheduled task, but if you do want scheduled configuration runs, use the Windows service.
 
@@ -97,7 +97,7 @@ To change the arguments used when triggering a Puppet agent run (this example ch
 
 Some sites prefer to only run Puppet agent on demand; others occasionally need to do an on-demand run.
 
-Puppet agent runs can be started locally while logged in to the target system, or remotely with MCollective.
+Puppet agent runs can be started locally while logged in to the target system, or remotely via an orchestration tool.
 
 #### While logged in to the target system
 
@@ -121,7 +121,7 @@ This prompts it to ask for UAC confirmation:
 
 #### Remotely
 
-Open source Puppet users can install [MCollective][] and [the puppet agent plugin](https://github.com/puppetlabs/mcollective-puppet-agent) to get similar capabilities, but Puppet doesn't provide standalone MCollective packages for Windows.
+[Choria][] is the community-supported successor to MCollective and supports triggering Puppet agent runs across a fleet of nodes, including Windows.
 
 ## Disabling and re-enabling Puppet runs
 

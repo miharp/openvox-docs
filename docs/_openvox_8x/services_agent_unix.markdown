@@ -4,7 +4,7 @@ title: "Puppet's services: Puppet agent on *nix systems"
 ---
 
 [resource type reference]: ./type.html
-[MCollective]: /mcollective
+[Choria]: https://choria.io
 [puppet.conf]: ./config_file_main.html
 [runinterval]: ./configuration.html#runinterval
 [onetime]: ./configuration.html#onetime
@@ -69,7 +69,7 @@ On \*nix nodes, there are three main ways to do this:
 
 * **Run Puppet agent as a service.** The easiest method. The Puppet agent daemon does configuration runs at a set interval, which can be configured.
 * **Make a cron job that runs Puppet agent.** Requires more manual configuration, but a good choice if you want to reduce the number of persistent processes on your systems.
-* **Only run Puppet agent on demand.** You can also deploy [MCollective][] to run on demand on many nodes.
+* **Only run Puppet agent on demand.** You can use an orchestration tool such as [Choria][] to trigger runs on demand across many nodes.
 
 Choose whichever one works best for your infrastructure and culture. 
 
@@ -129,7 +129,7 @@ This behavior is good for building a cron job that does configuration runs. You 
 
 Some sites prefer to only run Puppet agent on demand; others use scheduled runs, but occasionally need to do an on-demand run.
 
-Puppet agent runs can be started while logged in to the target system, or remotely with MCollective.
+Puppet agent runs can be started while logged in to the target system, or remotely via an orchestration tool.
 
 1. Run Puppet agent on one machine, using ssh:
 
@@ -137,7 +137,7 @@ Puppet agent runs can be started while logged in to the target system, or remote
    ssh ops@magpie.example.com sudo puppet agent --test
    ```
 
-To run remotely on _many_ machines, you need some form of orchestration or parallel execution tool, such as MCollective. MCollective ships as a part of the `puppet-agent` package, but you need to [deploy it](/mcollective/deploy/standard.html) and [the puppet agent plugin](https://github.com/puppetlabs/mcollective-puppet-agent). Once everything is ready, see the instructions in [the puppet agent plugin's README](https://github.com/puppetlabs/mcollective-puppet-agent#readme) for usage details.
+To run remotely on _many_ machines, you need an orchestration tool. [Choria][] is the community-supported successor to MCollective and supports triggering Puppet agent runs across a fleet of nodes.
 
 ## Disable and re-enable Puppet runs
 
