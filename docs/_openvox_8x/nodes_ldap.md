@@ -140,7 +140,7 @@ Restart your server, making sure it comes back up, and you're all set.
 
 ## Loading nodes into LDAP
 
-Loading data into LDAP is up to you; presumably, if you're deciding to use this feature in the first place, you already have plenty of LDAP tooling appropriate for your site. We don't have any particular recomendations.
+Loading data into LDAP is up to you; presumably, if you're deciding to use this feature in the first place, you already have plenty of LDAP tooling appropriate for your site. We don't have any particular recommendations.
 
 However you decide to load the data, you need to create host entries (usually device entries, probably with ipHost as an auxiliary class) and then add the Puppet data. This is what an example workstation definition looks like in LDAP:
 
