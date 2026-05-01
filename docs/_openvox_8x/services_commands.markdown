@@ -11,8 +11,6 @@ title: "Puppet's commands"
 [agent_unix]: ./services_agent_unix.html
 [agent_windows]: ./services_agent_windows.html
 [agent_man]: ./man/agent.html
-[master_rack]: ./services_master_rack.html
-[master_webrick]: ./services_master_webrick.html
 [master_man]: ./man/master.html
 [apply]: ./services_apply.html
 [apply_man]: ./man/apply.html
@@ -67,21 +65,6 @@ For more information, see:
 * [Puppet Server][about_server]
 * [Puppet Server vs. Apache/Passenger master][server_vs_passenger]
 * [Puppet Server Subcommands][subcommands]
-* [Puppet Master's Man Page][master_man]
-
-### Classic Rack-based Puppet master
-
-Before Puppet Server was released, most users ran a Rack-based Puppet master using the Apache + Passenger stack. This still works, but it's deprecated and will be removed in Puppet 5.
-
-A Rack-based Puppet master compiles and serves configuration catalogs for any number of Puppet agents, using Puppet modules and various other data sources.
-
-It's also possible to run a standalone WEBrick-based Puppet master, but we don't encourage anyone to do this in production.
-
-For more information, see:
-
-* [Overview of Puppet's Architecture][arch]
-* [The Rack Puppet Master][master_rack]
-* [The WEBrick Puppet Master][master_webrick]
 * [Puppet Master's Man Page][master_man]
 
 ### Puppet apply

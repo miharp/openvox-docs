@@ -121,12 +121,6 @@
     link: "services_commands.html"
   - text: Running OpenVox commands on Windows
     link: "services_commands_windows.html"
-  - text: The rack OpenVox server
-    link: "services_master_rack.html"
-  - text: Configuring a Server with Passenger and Apache
-    link: "passenger.html"
-  - text: The WEBrick OpenVox server
-    link: "services_master_webrick.html"
   - text: OpenVox agent on *nix
     link: "services_agent_unix.html"
   - text: OpenVox agent on Windows
