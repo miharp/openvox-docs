@@ -50,11 +50,11 @@ This endpoint builds on top of the [`event-counts`][event-counts] endpoint, and 
 
 ### Query operators
 
-This endpoint builds on top of the [`event-counts`][event-counts] and [`events`][events] endpoints, and supports all of the [same operators.](./events.markdown#query-operators)
+This endpoint builds on top of the [`event-counts`][event-counts] and [`events`][events] endpoints, and supports all of the [same operators.](./events.html#query-operators)
 
 ### Query fields
 
-This endpoint builds on top of the [`event-counts`][event-counts] and [`events`][events] endpoints, and supports all of the [same fields.](./events.markdown#query-fields)
+This endpoint builds on top of the [`event-counts`][event-counts] and [`events`][events] endpoints, and supports all of the [same fields.](./events.html#query-fields)
 
 ### Response format
 

@@ -23,7 +23,7 @@ title: "Installing modules"
 [approved]: https://forge.puppet.com/approved
 [supported]: https://forge.puppet.com/supported
 [score]: /forge/assessingmodulequality.html
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 [pdk]: {{pdk}}/pdk.html
 
 

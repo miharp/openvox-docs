@@ -4,13 +4,13 @@ title: "Directories: The modulepath (default config)"
 ---
 
 [module_fundamentals]: ./modules_fundamentals.html
-[environments]: ./environments.html
-[env_modules]: ./environments.html#setting-up-environments-on-a-puppet-master
+[environments]: ./environments_about.html
+[env_modules]: ./environments_creating.html
 [confdir]: ./dirs_confdir.html
 [basemodulepath_setting]: ./configuration.html#basemodulepath
 [modulepath_setting]: ./configuration.html#modulepath
 [config_print]: ./config_print.html
-[enable_dir_envs]: ./environments.html#enabling-directory-environments
+[enable_dir_envs]: ./environments_creating.html
 [puppet.conf]: ./config_file_main.html
 [environment.conf]: ./config_file_environment.html
 

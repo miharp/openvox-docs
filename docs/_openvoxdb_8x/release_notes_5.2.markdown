@@ -107,7 +107,7 @@ Austin Blatt, Claire Cadman, and Zak Kent
 
 - **New `delete` command.** Use the `delete` command to immediately delete the
   data associated with a certname. For more information, see
-  [Commands endpoint](api/admin/v1/cmd.markdown#delete-version-1).
+  [Commands endpoint](api/admin/v1/cmd.html#delete-version-1).
   [PDB-3300](https://tickets.puppetlabs.com/browse/PDB-3300)
 
 ### Bug fixes

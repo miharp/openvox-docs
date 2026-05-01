@@ -3,7 +3,7 @@ layout: default
 title: "Directories: The main manifest"
 ---
 
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 [catalog_compilation]: ./subsystem_catalog_compilation.html
 [confdir]: ./dirs_confdir.html
 [manifest_setting]: ./configuration.html#manifest

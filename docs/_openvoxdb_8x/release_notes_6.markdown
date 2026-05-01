@@ -499,7 +499,7 @@ Austin Blatt, Claire Cadman, and Morgan Rhodes
 
   > **Note:** As of this release, running PostgreSQL without the `pg_trgm` extension is deprecated.
 
-- **Improved queries.** PuppetDB now has an [experimental query optimizer](./api/query/v4/query.markdown#experimental_query_optimization) that may be able to substantially decrease the cost and response time of
+- **Improved queries.** PuppetDB now has an [experimental query optimizer](./api/query/v4/query.html#experimental_query_optimization) that may be able to substantially decrease the cost and response time of
   some queries. [PDB-4512](https://tickets.puppetlabs.com/browse/PDB-4512)
 
 ### Bug fixes
@@ -527,9 +527,9 @@ Austin Blatt, Heston Hoffman, Reinhard Vicinus, Robert Roland, and Zak Kent
 ### New features and improvements
 
 - **New `resource-events-ttl` configuration parameter.** Use the `resource-events-ttl` configuration parameter to automatically delete report events older than the specified time. The parameter rounds up to the
-  nearest day. For example, `14h` rounds up to `1d`. For more information, see [Configuring PuppetDB](./configure.markdown#resource-events-ttl). [PDB-2487](https://tickets.puppetlabs.com/browse/PDB-2487)
+  nearest day. For example, `14h` rounds up to `1d`. For more information, see [Configuring PuppetDB](./configure.html#resource-events-ttl). [PDB-2487](https://tickets.puppetlabs.com/browse/PDB-2487)
 
-- **New `delete` command.** Use the `delete` command to immediately delete the data associated with a certname. For more information, see [Commands endpoint](./api/admin/v1/cmd.markdown#delete-version-1).
+- **New `delete` command.** Use the `delete` command to immediately delete the data associated with a certname. For more information, see [Commands endpoint](./api/admin/v1/cmd.html#delete-version-1).
   [PDB-3300](https://tickets.puppetlabs.com/browse/PDB-3300)
 
 ### Bug fixes

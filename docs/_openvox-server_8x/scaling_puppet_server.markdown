@@ -116,7 +116,7 @@ Before running `puppet agent` or `puppet master` on the new server:
     - ssl-ca-cert
     - ssl-crl-path
 
-1. [Disable Puppet Server's certificate authority services](./configuration.markdown#service-bootstrapping).
+1. [Disable Puppet Server's certificate authority services](./configuration.html#service-bootstrapping).
 
     If you're using the [individual agent configuration method of CA centralization](#directing-individual-agents-to-a-central-ca), set `ca_server` in `puppet.conf` to the hostname of your CA server in the
     `[main]` config block. If an `ssldir` is configured, make sure it's configured in the `[main]` block only.

@@ -11,7 +11,7 @@ title: "Static catalogs"
 [resource_declaration]: ./lang_resources.html
 [file resources]: ./types/file.html
 [puppet catalog]: ./man/catalog.html
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 [facts]: ./lang_facts_and_builtin_vars.html
 [exported resources]: ./lang_exported.html
 [main manifest]: ./dirs_manifest.html

@@ -116,7 +116,7 @@ catalog vs. the many database rows required to store its resources). This
 facilitates simple, deterministic conflict resolution.
 
 
-Q: <a name="exportedResources"></a>*What's the deal with exported resources?*
+Q: <span id="exportedResources"></span>*What's the deal with exported resources?*
 
 A: Exported resources are a great feature, but you need to be careful when using
 them. In particular: because PuppetDB is *eventually* consistent, changes to

@@ -11,7 +11,7 @@ title: "Config files: The main config file (puppet.conf)"
 [reports]: ./configuration.html#reports
 [modulepath]: ./configuration.html#modulepath
 [ssldir]: ./configuration.html#ssldir
-[dir_environments]: ./environments.html
+[dir_environments]: ./environments_about.html
 [environmentpath]: ./configuration.html#environmentpath
 [puppetserver_diff]: /openvox-server/latest/puppet_conf_setting_diffs.html
 

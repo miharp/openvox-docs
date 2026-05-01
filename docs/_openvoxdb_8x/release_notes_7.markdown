@@ -194,7 +194,7 @@ Released December 6 2022
 ### New features and improvements
 
 - The timing of garbage collection operations can be controlled more selectively. The `gc-interval` controls the timing of a set of operations, and now the timing of each of those operations can be
-  [specified individually](./configure.markdown#database-settings). ([PDB-5547](https://tickets.puppetlabs.com/browse/PDB-5547))
+  [specified individually](./configure.html#database-settings). ([PDB-5547](https://tickets.puppetlabs.com/browse/PDB-5547))
 
 ### Bug fixes
 
@@ -205,7 +205,7 @@ Released December 6 2022
   updated to include a suitable `grant puppetdb_read to puppetdb`. ([PDB-5559](https://tickets.puppetlabs.com/browse/PDB-5559))
 
 - The coordination of database migrations will now disallow `[read-database]` user connections as intended. If you do not use the PostgreSQL module, have the recommended, separate `[read-database]` `username`,
-  and have enabled migration coordination via a [`migrator-username`](./configure.markdown#migrator-username) then you may need to make adjustments.
+  and have enabled migration coordination via a [`migrator-username`](./configure.html#migrator-username) then you may need to make adjustments.
 
   Specifically, the the normal `migrator-username` must have the ability to terminate the `[read-database]` `username`'s connections, which the [recommended configuration](./configure_postgres.html)
   accomplishes by granting the write user's role to the migrator via the `grant puppetdb to puppetdb_migrator`, allowing the migrator to terminate the read user's connections indirectly via the

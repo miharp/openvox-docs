@@ -17,7 +17,7 @@ title: "Language: Reserved words and acceptable names"
 [class]: ./lang_classes.html
 [type_ref]: ./type.html
 [func_ref]: ./function.html
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 
 ## Reserved words
 

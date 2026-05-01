@@ -6,7 +6,7 @@ title: "Puppet's services: Puppet apply"
 
 [man]: ./man/apply.html
 [resource type reference]: ./type.html
-[environments]: ./environments.html
+[environments]: ./environments_about.html
 [main manifest]: ./dirs_manifest.html
 [manifest_setting]: ./configuration.html#manifest
 [env_main_manifest]: ./environments_creating.html#the-main-manifest

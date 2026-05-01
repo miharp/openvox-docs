@@ -10,7 +10,7 @@ title: "Writing custom functions: Introduction"
 [stdlib]: http://forge.puppetlabs.com/puppetlabs/stdlib
 [built-in]: ./function.html
 [module]: ./modules_fundamentals.html
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 
 [func_puppet]: ./lang_write_functions_in_puppet.html
 [func_legacy]: ./functions_legacy.html

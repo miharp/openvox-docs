@@ -4,7 +4,7 @@ title: Plug-ins in Modules
 ---
 
 [modules]: ./modules_fundamentals.html
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 [modulepath]: ./dirs_modulepath.html
 [external facts]: /openfact/latest/custom_facts.html#external-facts
 [vardir]: ./dirs_vardir.html

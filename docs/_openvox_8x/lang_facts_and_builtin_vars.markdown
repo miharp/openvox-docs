@@ -4,7 +4,7 @@ title: "Language: Facts and built-in variables"
 ---
 
 [definedtype]: ./lang_defined_types.html
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 [topscope]: ./lang_scope.html#top-scope
 [core_facts]: /openfact/latest/core_facts.html
 [facter]: /openfact/latest

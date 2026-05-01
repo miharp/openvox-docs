@@ -41,25 +41,25 @@ The following rules, settings, and values have no direct equivalent in the new H
 
 The HOCON `auth.conf` file has some fundamental structural requirements:
 
-- An [`authorization`](./config_file_auth.markdown#authorization) section, which contains:
-  - A [`version`](./config_file_auth.markdown#version) setting.
-  - A [`rules`](./config_file_auth.markdown#rules) array of map values, each representing an authorization rule. Each rule must contain:
-    - A [`match-request`](./config_file_auth.markdown#match-request) section.
-      - Each `match-request` section must contain at least one [`path`](./config_file_auth.markdown#path) and [`type`](./config_file_auth.markdown#type).
-    - A numeric [`sort-order`](./config_file_auth.markdown#sort-order) value.
+- An [`authorization`](./config_file_auth.html#authorization) section, which contains:
+  - A [`version`](./config_file_auth.html#version) setting.
+  - A [`rules`](./config_file_auth.html#rules) array of map values, each representing an authorization rule. Each rule must contain:
+    - A [`match-request`](./config_file_auth.html#match-request) section.
+      - Each `match-request` section must contain at least one [`path`](./config_file_auth.html#path) and [`type`](./config_file_auth.html#type).
+    - A numeric [`sort-order`](./config_file_auth.html#sort-order) value.
       - If the value is between 1 and 399, the rule supersedes Puppet Server's default authorization rules.
       - If the value is between 601 and 998, the rule can be overridden by Puppet Server's default authorization rules.
-    - A string [`name`](./config_file_auth.markdown#name) value.
+    - A string [`name`](./config_file_auth.html#name) value.
     - At least one of the following:
-      - An [`allow` value, a `deny` value, or both](./config_file_auth.markdown#allow-allow-unauthenticated-and-deny). The `allow` or `deny` values can contain:
+      - An [`allow` value, a `deny` value, or both](./config_file_auth.html#allow-allow-unauthenticated-and-deny). The `allow` or `deny` values can contain:
         - A single string, representing the request's "name" derived from the Common Name (CN) attribute within an X.509 certificate's Subject Distinguished Name (DN). This string can be an exact name, a glob,
           or a regular expression.
         - A single map value containing an `extension` key.
         - A single map value containing a `certname` key.
         - An array of values, including string and map values.
-      - An [`allow-unauthenticated`](./config_file_auth.markdown#allow-allow-unauthenticated-and-deny) value, but if present, there cannot also be an `allow` value.
+      - An [`allow-unauthenticated`](./config_file_auth.html#allow-allow-unauthenticated-and-deny) value, but if present, there cannot also be an `allow` value.
 
-For an full example of a HOCON `auth.conf` file, see the [HOCON `auth.conf` documentation](./config_file_auth.markdown#hocon-example).
+For an full example of a HOCON `auth.conf` file, see the [HOCON `auth.conf` documentation](./config_file_auth.html#hocon-example).
 
 ### Converting a simple rule
 
@@ -92,7 +92,7 @@ authorization: {
 
 Next, let's convert each component of the deprecated rule to the new HOCON format.
 
-1. Add the path to the new rule's [`path`](./config_file_auth.markdown#match-request) setting in its `match-request` section.
+1. Add the path to the new rule's [`path`](./config_file_auth.html#match-request) setting in its `match-request` section.
 
    ```hocon
    ...
@@ -107,7 +107,7 @@ Next, let's convert each component of the deprecated rule to the new HOCON forma
    ...
    ```
 
-2. Next, add its type to the section's [`type`](./config_file_auth.markdown#match-request) setting. Because this is a literal string path, the type is `path`.
+2. Next, add its type to the section's [`type`](./config_file_auth.html#match-request) setting. Because this is a literal string path, the type is `path`.
 
    ```hocon
    ...
@@ -122,8 +122,8 @@ Next, let's convert each component of the deprecated rule to the new HOCON forma
    ...
    ```
 
-3. The legacy rule has a [`method`](./config_file_auth.markdown#method-1) setting, with an indirector value of `find` that's equivalent to the GET and POST HTTP methods. We can implement these by adding an
-   optional HOCON [`method`](./config_file_auth.markdown#match-request) setting in the rule's `match-request` section and specifying GET and POST as an array.
+3. The legacy rule has a [`method`](./config_file_auth.html#method-1) setting, with an indirector value of `find` that's equivalent to the GET and POST HTTP methods. We can implement these by adding an
+   optional HOCON [`method`](./config_file_auth.html#match-request) setting in the rule's `match-request` section and specifying GET and POST as an array.
 
    ```hocon
    ...

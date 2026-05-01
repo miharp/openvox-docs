@@ -6,7 +6,7 @@ title: "Config files: auth.conf (LEGACY)"
 [rest_authconfig]: ./configuration.html#restauthconfig
 [api]: ./http_api/http_api_index.html
 [default_file]: https://github.com/puppetlabs/puppet/blob/4.3.0/conf/auth.conf
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 [server_ca]: /openvox-server/latest/config_file_ca.html
 [server_master]: /openvox-server/latest/config_file_master.html
 [server_auth_conf]: /openvox-server/latest/config_file_auth.html

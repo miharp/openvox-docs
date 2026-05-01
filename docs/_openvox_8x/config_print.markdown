@@ -7,7 +7,7 @@ title: "Configuration: Checking values of settings"
 [config_sections]: ./config_file_main.html#config-sections
 [setting_sources]: ./config_about_settings.html
 [confdir_sys]: ./dirs_confdir.html#location
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 [confdir]: ./dirs_confdir.html
 [vardir]: ./dirs_vardir.html
 [modulepath]: ./dirs_modulepath.html

@@ -3,7 +3,7 @@ layout: default
 title: "The legacy Ruby functions API"
 ---
 
-[environments]: ./environments.html
+[environments]: ./environments_about.html
 [func_modern]: ./functions_ruby_overview.html
 [func_puppet]: ./lang_write_functions_in_puppet.html
 

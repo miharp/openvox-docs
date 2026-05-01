@@ -197,7 +197,7 @@ trigger background/GC tasks manually via POST. This release also includes severa
 - Added support for "dotted query" syntax to resource parameters. Support for this is available in both AST and PQL query langauges. ([PDB-2632](https://tickets.puppetlabs.com/browse/PDB-2632))
 
 - Added a new `ast_only` parameter to the root query endpoint that translates a PQL query to an equivalent AST query. More information is available in the
-  [root endpoint](api/query/v4/overview.markdown#url-parameters) docs. ([PDB-2528](https://tickets.puppetlabs.com/browse/PDB-2528))
+  [root endpoint](api/query/v4/overview.html#url-parameters) docs. ([PDB-2528](https://tickets.puppetlabs.com/browse/PDB-2528))
 
 - Added "quick retries" on command failures. This will retry commands (such as storing a new report or updating a catalog) immediately after a failure. The command will be retried 4 times before falling back to
   the regular retry process that involves delaying the message and reenqueuing it. This should result in faster command processing times and use less disk I/O in the most common kinds of failures.
@@ -281,7 +281,7 @@ old reports and node expiration and purging.
 - PuppetDB now has packages for Ubuntu Xenial - 16.04 and Ubuntu Wily - 15.10 ([PDB-2475](https://tickets.puppetlabs.com/browse/PDB-2475)).
 
 - Allow configuration of AciveMQ Broker's memoryLimit. For PuppetDB instances with larger amount of memory and heavy load, this can improve performance. More information in the
-  [config docs](configure.markdown#memory-usage) ([PDB-2726](https://tickets.puppetlabs.com/browse/PDB-2726)).
+  [config docs](configure.html#memory-usage) ([PDB-2726](https://tickets.puppetlabs.com/browse/PDB-2726)).
 
 - Preliminary support for HUP signal handling. Note that due to [AMQ-5263](https://issues.apache.org/jira/browse/AMQ-5263) there is a possibility of a crash when HUPed. We've observed this race condition when
   under heavy load and repeatedly HUPed. This will be fixed and more robust in a future release ([PDB-2546](https://tickets.puppetlabs.com/browse/PDB-2546)).
@@ -655,7 +655,7 @@ bug fixes.
 
 - New [`code_id`](http://docs.puppetlabs.com/puppetdb/3.2/api/query/v4/catalogs.html#query-fields) field in preparation for new filesync service. ([PDB-1810](https://tickets.puppetlabs.com/browse/PDB-1810))
 
-- Introduction of [`latest_report_status` and `latest_report_hash`](http://docs.puppetlabs.com/puppetdb/3.2/api/query/v4/nodes.markdown#query-fields) to the `nodes` entity, as projected from the a nodes latest
+- Introduction of [`latest_report_status` and `latest_report_hash`](http://docs.puppetlabs.com/puppetdb/3.2/api/query/v4/nodes.html#query-fields) to the `nodes` entity, as projected from the a nodes latest
   report. ([PDB-1820](https://tickets.puppetlabs.com/browse/PDB-1820))
 
 - Experimental: [Implicit subqueries](http://docs.puppetlabs.com/puppetdb/3.2/api/query/v4/operators.html#subquery-implicit-subqueries) now provide a way to perform subqueries on other entities within a query
@@ -1452,7 +1452,7 @@ Andrew Roetker, Erik Dalén, Jean Bond, Ken Barber, Preben Ingvaldsen, Rob Brade
 
 - An incorrect reference to "Java" has been changed to "JVM" in the [configuration](http://docs.puppetlabs.com/puppetdb/2.3/configure.html) documentation.
 
-- The relationship between "MQ depth" and "Command Queue depth" has been clarified in the [tuning and maintenance](http://docs.puppetlabs.com/puppetdb/2.3/maintain_and_tune.markdown) documentation.
+- The relationship between "MQ depth" and "Command Queue depth" has been clarified in the [tuning and maintenance](http://docs.puppetlabs.com/puppetdb/2.3/maintain_and_tune.html) documentation.
 
 - An example that uses curl with SSL to communicate with Puppet Enterprise has been added to the [curl](http://docs.puppetlabs.com/puppetdb/2.3/api/query/curl.html) documentation.
 

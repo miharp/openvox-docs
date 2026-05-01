@@ -3,7 +3,7 @@ layout: default
 title: "Subsystems: Catalog compilation"
 ---
 
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 [certname]: ./config_important_settings.html#basics
 [resource_declaration]: ./lang_resources.html
 [relationships]: ./lang_relationships.html

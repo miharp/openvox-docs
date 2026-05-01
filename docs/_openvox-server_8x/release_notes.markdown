@@ -165,7 +165,7 @@ Released 17 September 2019
 
 - You can now enable sending a list of all the Hiera keys looked up during compile to PuppetDB, via the `jruby-puppet.track-lookups` setting in `puppetserver.conf`. This is currently only used by CD4PE. [SERVER-2538](https://tickets.puppetlabs.com/browse/SERVER-2538)
 
-- Added the `/puppet-admin-api/v1/jruby-pool/thread-dump` endpoint, which returns a thread dump of running JRuby instances, if `jruby.management.enabled` has been set to `true` in the JVM running Puppet Server. See [Admin API: JRuby Pool](./admin-api/v1/jruby-pool.markdown#get-puppet-admin-apiv1jruby-poolthread-dump) for details. [SERVER-2193](https://tickets.puppetlabs.com/browse/SERVER-2193)
+- Added the `/puppet-admin-api/v1/jruby-pool/thread-dump` endpoint, which returns a thread dump of running JRuby instances, if `jruby.management.enabled` has been set to `true` in the JVM running Puppet Server. See [Admin API: JRuby Pool](./admin-api/v1/jruby-pool.html#get-puppet-admin-apiv1jruby-poolthread-dump) for details. [SERVER-2193](https://tickets.puppetlabs.com/browse/SERVER-2193)
 
 - Puppet Server now runs with JRuby 9.2.8.0. [SERVER-2388](https://tickets.puppetlabs.com/browse/SERVER-2588)
  
@@ -228,7 +228,7 @@ Released 26 March 2019
 
 ### New features
 
-- Puppet Server has a new endpoint for catalog retrieval, allowing more options than the previous endpoint. This endpoint is controlled by `tk-auth`, and by default is not generally accessible. It is an API that integrators can use to provide [functionality similar to `puppet master --compile`](https://tickets.puppetlabs.com/browse/PUP-9055). For details on the API, see the [Puppet API catalog](https://github.com/puppetlabs/puppetserver/blob/master/documentation/puppet-api/v4/catalog.markdown). This endpoint is intended for use by other Puppet services. [SERVER-2434](https://tickets.puppetlabs.com/browse/SERVER-2434) 
+- Puppet Server has a new endpoint for catalog retrieval, allowing more options than the previous endpoint. This endpoint is controlled by `tk-auth`, and by default is not generally accessible. It is an API that integrators can use to provide [functionality similar to `puppet master --compile`](https://tickets.puppetlabs.com/browse/PUP-9055). For details on the API, see the [Puppet API catalog](https://github.com/puppetlabs/puppetserver/blob/master/documentation/puppet-api/v4/catalog.html). This endpoint is intended for use by other Puppet services. [SERVER-2434](https://tickets.puppetlabs.com/browse/SERVER-2434) 
 
 ### Enhancements
 

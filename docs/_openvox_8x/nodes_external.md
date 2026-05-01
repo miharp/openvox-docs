@@ -3,7 +3,7 @@ layout: default
 title: "Writing external node classifiers"
 ---
 
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 [node definition]: ./lang_node_definitions.html
 [main manifest]: ./dirs_manifest.html
 

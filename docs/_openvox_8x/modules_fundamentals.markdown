@@ -15,7 +15,7 @@ title: "Module fundamentals"
 [classes]: ./lang_classes.html
 [defined_types]: ./lang_defined_types.html
 [enc]: ./nodes_external.html
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 [templates]: ./lang_template.html
 [forge]: http://forge.puppetlabs.com
 [file_function]: ./function.html#file

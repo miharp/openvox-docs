@@ -90,7 +90,7 @@ Each change below is marked with the corresponding release version.
 
 ### New endpoints
 
-- (2.2.0) `/pdb/query/v4/factsets` This endpoint returns a key-value hash for each certname. For more information, see the [factsets documentation](factsets.markdown#response-format).
+- (2.2.0) `/pdb/query/v4/factsets` This endpoint returns a key-value hash for each certname. For more information, see the [factsets documentation](factsets.html#response-format).
 
 - (2.2.0) `/pdb/query/v4/fact-paths` This endpoint is similar to the existing fact-names endpoint in that one expected use is GUI autocompletion. For more information, see the [documentation](fact-paths.html).
 
@@ -109,36 +109,36 @@ Each change below is marked with the corresponding release version.
 
 ### Features affecting all endpoints
 
-- (3.0) Extract is available as a top-level query operator, useful for selecting only certain fields from a response. See the [documentation on the extract operator](../../../api/query/v4/ast.markdown#extract)
+- (3.0) Extract is available as a top-level query operator, useful for selecting only certain fields from a response. See the [documentation on the extract operator](../../../api/query/v4/ast.html#extract)
   for more information.
 
 - (2.2.0) The `in` and `extract` operators have been changed to accept multiple fields, allowing more concise subquerying as explained [here](https://github.com/puppetlabs/puppetdb/pull/1053).
 
 ### /pdb/query/v4/events
 
-- (3.0) The v4 events endpoint does not require a query parameter, so `/pdb/query/v4/events` is now a valid query. See the [events endpoint documentation](../../../api/query/v4/events.markdown#pdbqueryv4events)
+- (3.0) The v4 events endpoint does not require a query parameter, so `/pdb/query/v4/events` is now a valid query. See the [events endpoint documentation](../../../api/query/v4/events.html#pdbqueryv4events)
   for more information.
 
 ### /pdb/query/v4/reports
 
 - (3.0) The response of the reports endpoint includes the new fields `noop`, `environment`, `status`, `resource_events`, `logs`, and `metrics`. For more information, see the
-  [documentation on the reports endpoint](../../../api/query/v4/reports.html). For comparison, see [an example of the new format](../../../api/query/v4/reports.markdown#examples), and
-  [an example of the old format](https://github.com/puppetlabs/puppetdb/blob/doc-2.3/documentation/api/query/v3/reports.markdown#response-format) (PuppetDB 2.3 docs).
+  [documentation on the reports endpoint](../../../api/query/v4/reports.html). For comparison, see [an example of the new format](../../../api/query/v4/reports.html#examples), and
+  [an example of the old format](https://github.com/puppetlabs/puppetdb/blob/doc-2.3/documentation/api/query/v3/reports.html#response-format) (PuppetDB 2.3 docs).
 
 - (3.0) The reports endpoint takes a `latest_report?` query to return only reports associated with the most recent puppet run for their nodes. Similar to the corresponding events query, there is no
-  corresponding field in the response. For more information, see the [documentation on the report query fields](../../../api/query/v4/reports.markdown#query-fields).
+  corresponding field in the response. For more information, see the [documentation on the report query fields](../../../api/query/v4/reports.html#query-fields).
 
 ### /pdb/query/v4/catalogs
 
 - (3.0) The v4 catalogs endpoint is queryable like the other endpoints, whereas before it could only return a catalog for a single host. The old query format (`/pdb/query/v4/catalogs/myhost`) still works as
-  before, but `/pdb/query/v4/catalogs` returns results too. For more information, see the [catalog query examples](catalogs.markdown#examples).
+  before, but `/pdb/query/v4/catalogs` returns results too. For more information, see the [catalog query examples](catalogs.html#examples).
 
 ### Operators
 
 - (2.2.0) The new `select_fact_contents` subquery operator allows for filtering the results of other endpoints based on detailed queries about structured fact values. This is exhibited on the bottom of the
-  [subquery examples documentation](../../../api/query/v4/ast.markdown#explicit-subquery-examples).
+  [subquery examples documentation](../../../api/query/v4/ast.html#explicit-subquery-examples).
 
 - (2.2.0) We have added the regexp array match operator `~>` for querying fact paths on the `fact-contents` or `fact-paths endpoints`. This is documented with the other
-  [operators](../../../api/query/v4/ast.markdown#regexp-array-match). An example of usage is given at the bottom of the [subquery examples page](../../../api/query/v4/ast.markdown#explicit-subquery-examples).
+  [operators](../../../api/query/v4/ast.html#regexp-array-match). An example of usage is given at the bottom of the [subquery examples page](../../../api/query/v4/ast.html#explicit-subquery-examples).
 
-- (3.0) We have added the `group_by` and `function` operators, as well as support for the `count` function. For more information, see the [operators documentation](../../../api/query/v4/ast.markdown#function).
+- (3.0) We have added the `group_by` and `function` operators, as well as support for the `count` function. For more information, see the [operators documentation](../../../api/query/v4/ast.html#function).

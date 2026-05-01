@@ -6,7 +6,7 @@ title: "The LDAP Node Classifier"
 [class parameters]: ./lang_classes.html#class-parameters-and-variables
 [hiera]: ./hiera_intro.html
 [custom hiera backend]: ./hiera_custom_backends.html
-[environment]: ./environments.html
+[environment]: ./environments_about.html
 [node definitions]: ./lang_node_definitions.html
 
 > **Note:** For background on Puppet's main sources of node data, see [the page on external node classifiers](./nodes_external.html).

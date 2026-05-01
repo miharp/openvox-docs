@@ -49,11 +49,11 @@ See the [`events`][events] endpoint for additional documentation, as this endpoi
 
 ### Query operators
 
-This endpoint builds on top of the [`events`][events] endpoint, and supports all of the [same operators.](./events.markdown#query-operators)
+This endpoint builds on top of the [`events`][events] endpoint, and supports all of the [same operators.](./events.html#query-operators)
 
 ### Query fields
 
-This endpoint builds on top of the [`events`][events] endpoint, and supports all of the [same fields.](./events.markdown#query-fields)
+This endpoint builds on top of the [`events`][events] endpoint, and supports all of the [same fields.](./events.html#query-fields)
 
 ### Response format
 

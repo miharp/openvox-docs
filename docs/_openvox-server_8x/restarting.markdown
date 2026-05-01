@@ -74,8 +74,8 @@ quickest, but picks up only certain types of changes. A HUP signal or service re
 
 ### Changes that require a full Server restart
 
-- Changes to JVM arguments, such as [heap size settings](./tuning_guide.markdown#jvm-heap-size), that are typically configured in your `/etc/sysconfig/puppetserver` or `/etc/default/puppetserver` file.
-- Changes to [`ca.cfg`](./configuration.markdown#service-bootstrapping) to enable or disable Puppet Server's certificate authority (CA) service.
+- Changes to JVM arguments, such as [heap size settings](./tuning_guide.html#jvm-heap-size), that are typically configured in your `/etc/sysconfig/puppetserver` or `/etc/default/puppetserver` file.
+- Changes to [`ca.cfg`](./configuration.html#service-bootstrapping) to enable or disable Puppet Server's certificate authority (CA) service.
 
 For these types of changes, you must restart the process by using the operating system's service framework, for example, by using the `systemctl` or `service` commands.
 

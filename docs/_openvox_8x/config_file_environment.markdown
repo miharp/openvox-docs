@@ -3,8 +3,8 @@ layout: default
 title: "Config files: environment.conf"
 ---
 
-[environment]: ./environments.html
-[environmentpath]: ./environments.html#about-environmentpath
+[environment]: ./environments_about.html
+[environmentpath]: ./environments_creating.html#environmentpath
 [modulepath]: /puppet/3.8/configuration.html#modulepath
 [puppet.conf]: ./config_file_main.html
 [basemodulepath]: /puppet/3.8/configuration.html#basemodulepath

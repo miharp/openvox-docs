@@ -6,7 +6,7 @@ title: "Configuration: Short list of important settings"
 [cli_settings]: ./config_about_settings.html#settings-can-be-set-on-the-command-line
 [trusted_and_facts]: ./lang_facts_and_builtin_vars.html
 [config_reference]: ./configuration.html
-[environments]: ./environments.html
+[environments]: ./environments_about.html
 [multi_master]: /guides/scaling_multiple_masters.html
 [enc]: ./nodes_external.html
 [meta_noop]: ./metaparameter.html#noop
