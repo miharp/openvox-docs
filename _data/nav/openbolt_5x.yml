@@ -1,0 +1,117 @@
+---
+- text: Overview
+  items:
+  - text: Welcome to OpenBolt
+    link: index.html
+  - text: Getting started
+    link: getting_started_with_bolt.html
+  - text: Versioning
+    link: bolt_versioning.html
+  - text: Known issues
+    link: bolt_known_issues.html
+  - text: Troubleshooting
+    link: troubleshooting.html
+  - text: Upgrading to Bolt 3
+    link: upgrading_to_bolt_3.html
+  - text: Glossary
+    link: glossary.html
+- text: Installation
+  items:
+  - text: Installing Bolt
+    link: bolt_installing.html
+  - text: Running Bolt in Docker
+    link: running_bolt_in_docker.html
+  - text: VS Code and Bolt
+    link: vscode_and_bolt.html
+- text: Configuration
+  items:
+  - text: Configuring Bolt
+    link: configuring_bolt.html
+  - text: Projects
+    link: projects.html
+  - text: Inventory files
+    link: inventory_files.html
+  - text: Inventory reference
+    link: bolt_inventory_reference.html
+  - text: Hiera
+    link: hiera.html
+  - text: Supported plugins
+    link: supported_plugins.html
+- text: Commands and scripts
+  items:
+  - text: Running Bolt commands
+    link: running_bolt_commands.html
+  - text: Running scripts
+    link: bolt_running_scripts.html
+  - text: Running Bolt over a network
+    link: running_bolt_network.html
+- text: Tasks
+  items:
+  - text: Introduction to tasks
+    link: tasks.html
+  - text: Running tasks
+    link: bolt_running_tasks.html
+  - text: Writing tasks
+    link: writing_tasks.html
+  - text: Inspecting tasks
+    link: inspecting_tasks.html
+  - text: Task helpers
+    link: task_helpers.html
+- text: Plans
+  items:
+  - text: Introduction to plans
+    link: plans.html
+  - text: Running plans
+    link: bolt_running_plans.html
+  - text: Writing plans
+    link: writing_plans.html
+  - text: Writing YAML plans
+    link: writing_yaml_plans.html
+  - text: Creating a script plan
+    link: creating_a_script_plan.html
+  - text: Inspecting plans
+    link: inspecting_plans.html
+  - text: Debugging plans
+    link: debugging_plans.html
+  - text: Testing plans
+    link: testing_plans.html
+  - text: Applying manifest blocks
+    link: applying_manifest_blocks.html
+- text: Modules
+  items:
+  - text: Modules
+    link: modules.html
+  - text: Module structure
+    link: module_structure.html
+  - text: Installing modules
+    link: bolt_installing_modules.html
+- text: Plugins
+  items:
+  - text: Using plugins
+    link: using_plugins.html
+  - text: Writing plugins
+    link: writing_plugins.html
+- text: Reference
+  items:
+  - text: Bolt spec reference
+    link: boltspec_reference.html
+  - text: JSON output reference
+    link: json_output_reference.html
+  - text: Connecting to PuppetDB
+    link: bolt_connect_puppetdb.html
+  - text: Choria transport
+    link: choria-transport.html
+  - text: Automating Windows targets
+    link: automating_windows_targets.html
+  - text: Analytics
+    link: analytics.html
+  - text: Experimental features
+    link: experimental_features.html
+  - text: Logs
+    link: logs.html
+  - text: TIG stack
+    link: tig_stack.html
+  - text: Developer updates
+    link: developer_updates.html
+  - text: Examples
+    link: bolt_examples.html
