@@ -43,7 +43,7 @@ module PuppetReferences
         content = source.read
         title = extract_title(content) || 'OpenBolt'
         header_data = { title: title, canonical: "#{@latest}/index.html" }
-        body = strip_leading_h1(content)
+        body = rewrite_md_links(strip_leading_h1(content))
         (OUTPUT_DIR + 'index.md').open('w') { |f| f.write(make_header(header_data) + body) }
       end
 
@@ -57,7 +57,7 @@ module PuppetReferences
           title: title,
           canonical: "#{@latest}/#{shortname}.html",
         }
-        body = strip_leading_h1(content)
+        body = rewrite_md_links(strip_leading_h1(content))
         dest = OUTPUT_DIR + file.basename
         dest.open('w') { |f| f.write(make_header(header_data) + body) }
       end
@@ -87,6 +87,25 @@ module PuppetReferences
       # would appear twice if left in the body.
       def strip_leading_h1(content)
         content.sub(/\A#[^\n]*\n+/, '')
+      end
+
+      # Upstream links reference other docs as .md; rewrite to .html so they
+      # resolve once Jekyll has processed the collection. Handles both markdown
+      # links [text](file.md) and inline HTML href="file.md". Absolute URLs
+      # (http/https) are left alone. Capture groups are saved to local variables
+      # before calling .sub() — that call resets Regexp.last_match, so reading
+      # group 2 after it would silently drop anchors (#section).
+      def rewrite_md_links(content)
+        result = content.gsub(%r{\]\(((?!https?://)[^)#]*\.md)(#[^)]*)?\)}) do
+          path = Regexp.last_match(1)
+          anchor = Regexp.last_match(2)
+          "](#{path.sub(/\.md$/, '.html')}#{anchor})"
+        end
+        result.gsub(%r{href="((?!https?://)[^"#]*\.md)(#[^"]*)?"}i) do
+          path = Regexp.last_match(1)
+          anchor = Regexp.last_match(2)
+          "href=\"#{path.sub(/\.md$/, '.html')}#{anchor}\""
+        end
       end
 
       def humanize(filename)
