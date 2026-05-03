@@ -46,7 +46,7 @@ module PuppetReferences
         links = names.map do |name|
           "* [#{name}](./#{name}.md)" unless skip_names.include?(name)
         end
-        content = make_header(header_data, 'OpenVox', $version_commit) + "## List of resource types\n\n" + links.join("\n") + "\n\n" + PREAMBLE # rubocop:disable Style/GlobalVars
+        content = make_header(header_data, 'OpenVox', PuppetReferences.version_commit) + "## List of resource types\n\n" + links.join("\n") + "\n\n" + PREAMBLE
         filename = @output_dir_individual + 'overview.md'
         filename.open('w') { |f| f.write(content) }
       end
@@ -68,7 +68,7 @@ module PuppetReferences
           text_for_type(name, typedocs[name])
         end.join("\n\n---------\n\n")
 
-        content = make_header(header_data, 'OpenVox', $version_commit) + "\n\n" + PREAMBLE + all_type_docs + "\n\n" # rubocop:disable Style/GlobalVars
+        content = make_header(header_data, 'OpenVox', PuppetReferences.version_commit) + "\n\n" + PREAMBLE + all_type_docs + "\n\n"
         filename = @output_dir_unified + "#{@base_filename}.md"
         filename.open('w') { |f| f.write(content) }
       end
@@ -83,7 +83,7 @@ module PuppetReferences
         puts "Type ref: Building #{name}"
         header_data = { title: "Resource Type: #{name}",
                         canonical: "#{@latest}/types/#{name}.html", }
-        content = make_header(header_data, 'OpenVox', $version_commit) + "\n\n" + text_for_type(name, data) + "\n\n" # rubocop:disable Style/GlobalVars
+        content = make_header(header_data, 'OpenVox', PuppetReferences.version_commit) + "\n\n" + text_for_type(name, data) + "\n\n"
         filename = @output_dir_individual + "#{name}.md"
         filename.open('w') { |f| f.write(content) }
       end

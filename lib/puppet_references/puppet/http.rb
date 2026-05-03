@@ -47,7 +47,7 @@ module PuppetReferences
                 end
         header_data = { title: "Puppet HTTP API: #{title}",
                         canonical: "#{@latest}/#{shortname}.html", }
-        content = make_header(header_data, 'OpenVox', $version_commit) + file.read
+        content = make_header(header_data, 'OpenVox', PuppetReferences.version_commit) + file.read
         dest = DOCS_DIR + file.basename
         dest.open('w') { |f| f.write(content) }
       end

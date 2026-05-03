@@ -32,7 +32,7 @@ module PuppetReferences
         markdown_text, = Open3.capture3('mandoc -T markdown', stdin_data: raw_text)
         # Strip the "TITLE - Manual" header line and the dated footer line mandoc adds
         markdown_text = markdown_text.lines[1...-1].join
-        content = make_header(header_data, 'OpenFact', $version_commit) + markdown_text # rubocop:disable Style/GlobalVars
+        content = make_header(header_data, 'OpenFact', PuppetReferences.version_commit) + markdown_text
         filename = OUTPUT_DIR + 'cli.md'
         filename.open('w') { |f| f.write(content) }
         puts 'CLI documentation is done!'
@@ -43,7 +43,7 @@ module PuppetReferences
         filename = OUTPUT_DIR + 'cli.md'
         man_filepath = PuppetReferences::FACTER_DIR + 'man/man8/facter.8'
         raw_text = PuppetReferences::Util.convert_man(man_filepath)
-        content = make_header(header_data) + raw_text
+        content = make_header(header_data, 'OpenFact', PuppetReferences.version_commit) + raw_text
         filename.open('w') { |f| f.write(content) }
       end
     end
