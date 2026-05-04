@@ -6,7 +6,7 @@ title: Custom Types
 [package_type]: /puppet/latest/type.html#package
 [module]: /puppet/latest/modules_fundamentals.html
 [custom_functions]: /puppet/latest/lang_write_functions_in_puppet.html
-[custom_facts]: /facter/latest/custom_facts.html
+[custom_facts]: /openfact/latest/custom_facts.html
 [pluginsync]: /puppet/latest/configuration.html#pluginsync
 [symbol]: http://www.ruby-doc.org/core/Symbol.html
 [ruby_block]: http://www.robertsosinski.com/2008/12/21/understanding-ruby-blocks-procs-and-lambdas/

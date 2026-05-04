@@ -5,7 +5,7 @@ layout: default
 
 [func_ref]: ./function.html
 [forge]: https://forge.puppetlabs.com
-[custom]: /guides/custom_functions.html
+[custom]: ./functions_basics.html
 [stdlib]: https://forge.puppetlabs.com/puppetlabs/stdlib
 [resource]: ./lang_resources.html
 [custom_facts]: /openfact/latest/custom_facts.html

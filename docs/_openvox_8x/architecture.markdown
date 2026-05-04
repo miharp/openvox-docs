@@ -65,7 +65,7 @@ For more information, see:
 * [A walkthrough of OpenVox's HTTPS communications][https_walkthrough]
 * [The OpenVox server's HTTP API][server_http]
 * [The OpenVox server's auth.conf file][auth.conf]
-* [Background reference on SSL and HTTPS.](/background/ssl/)
+* [Background reference on SSL and HTTPS.](/docs/background/ssl/)
 
 {:.concept}
 ## The stand-alone architecture

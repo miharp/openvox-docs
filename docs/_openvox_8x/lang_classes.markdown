@@ -34,7 +34,7 @@ title: "Language: Classes"
 [declare]: #declaring-classes
 [setting_parameters]: #include-like-vs-resource-like
 [override]: #using-resource-like-declarations
-[ldap_nodes]: /guides/ldap_nodes.html
+[ldap_nodes]: ./nodes_ldap.html
 [hiera]: /openvox/latest/hiera_intro.html
 [external_data]: /openvox/latest/hiera_automatic.html
 [array_search]: /openvox/latest/hiera_merging.html

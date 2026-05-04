@@ -58,7 +58,7 @@ You can edit the [parameters](./lang_classes.html#defining-classes) of a class i
 > That's it! You have set the Apache web server's root directory to `/var/www` instead of its default `/var/www/html`. If you refresh `http://myagentnodeIP:80/` in your web browser, it shows the list of files in `/var/www`. If you click `html`, the browser will again show the contents of `/var/www/html/index.html`.
 >
 > **Note:**
-> If you have Puppet Enterprise, you can do the steps in this guide through the PE web UI, [the console]({{pe}}/console_accessing.html).
+> If you have Puppet Enterprise, you can do the steps in this guide through the PE web UI, [the console](https://help.puppet.com).
 
 
 ----------

@@ -13,7 +13,6 @@ title: "Running Puppet's commands on Windows"
 [puppet resource]: ./man/resource.html
 [puppet config]: ./man/config.html
 [puppet help]: ./man/help.html
-[puppet man]: ./man/man.html
 [puppet lookup]: ./man/lookup.html
 
 Puppet was originally designed to run on \*nix systems, so its commands generally act the way \*nix admins expect.
@@ -33,7 +32,6 @@ The following commands are designed for use on Windows:
 - [puppet config][]
 - [puppet lookup][]
 - [puppet help][]
-- [puppet man][]
 
 ## Running Puppet's commands
 

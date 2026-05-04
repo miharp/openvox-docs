@@ -19,7 +19,7 @@ title: "Subsystems: Catalog compilation"
 [plain_node]: ./indirection.html#plain-terminus
 [exec_node]: ./indirection.html#exec-terminus
 [ldap_node]: ./indirection.html#ldap-terminus
-[ldap_guide]: /guides/ldap_nodes.html
+[ldap_guide]: ./nodes_ldap.html
 [trusted_on]: ./config_important_settings.html#getting-new-features-early
 [facts_builtin]: ./lang_facts_and_builtin_vars.html
 [node definitions]: ./lang_node_definitions.html

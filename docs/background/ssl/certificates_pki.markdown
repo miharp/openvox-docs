@@ -116,7 +116,7 @@ In Puppet's default configuration, a CA will be automatically created the first 
 The Puppet CA consists of the following components:
 
 * Several HTTPS services provided by the puppet master, which accept incoming CSRs and serve the CA cert, the CRL, and signed certificates.
-    * Note that in sites with more than one puppet master server, only one should act as the CA. This is covered in [the guide to configuring multiple masters](/guides/scaling_multiple_masters.html#centralize-the-certificate-authority).
+    * Note that in sites with more than one puppet master server, only one should act as the CA. This is covered in [the guide to configuring multiple masters](/openvox-server/latest/scaling_puppet_server.html).
 * The CA's on-disk files, which include the CA certificate, the CA private key, any stored CSRs, an inventory of previously signed certificates (as well as copies of them), and the CRL.
 * Command-line tools for viewing pending CSRs and signing, examining, and revoking certificates.
 * Additional HTTPS services that allow certificates to be signed and revoked. (Since these can be dangerous, they are configured to be inaccessible by default.)

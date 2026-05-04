@@ -22,7 +22,7 @@ title: "Language: Basics"
 [variables]: ./lang_variables.html
 [ordering]: ./lang_relationships.html#ordering
 [notification]: ./lang_relationships.html#refreshing-and-notification
-[declared]: /references/glossary.html#declare
+[declared]: ./lang_classes.html
 [string_newline]: ./lang_data_string.html#line-breaks
 [node]: ./lang_node_definitions.html
 [hiera]: /openvox/latest/hiera_intro.html

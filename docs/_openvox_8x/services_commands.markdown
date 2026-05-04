@@ -14,7 +14,6 @@ title: "Puppet's commands"
 [master_man]: ./man/master.html
 [apply]: ./services_apply.html
 [apply_man]: ./man/apply.html
-[cert_man]: ./man/cert.html
 [puppet forge]: https://forge.puppetlabs.com
 [module fundamentals]: ./modules_fundamentals.html
 [installing modules]: ./modules_installing.html
@@ -28,8 +27,7 @@ title: "Puppet's commands"
 [config_man]: ./man/config.html
 [parser_man]: ./man/parser.html
 [help_man]: ./man/help.html
-[man_man]: ./man/man.html
-[all_manpages]: ./man/
+[all_manpages]: ./man/overview.html
 [about_server]: /openvox-server/latest/services_master_puppetserver.html
 [server_vs_passenger]: /openvox-server/latest/puppetserver_vs_passenger.html
 [subcommands]: /openvox-server/latest/subcommands.html
@@ -65,7 +63,6 @@ For more information, see:
 * [Puppet Server][about_server]
 * [Puppet Server vs. Apache/Passenger master][server_vs_passenger]
 * [Puppet Server Subcommands][subcommands]
-* [Puppet Master's Man Page][master_man]
 
 ### Puppet apply
 
@@ -78,14 +75,6 @@ For more information, see:
 * [Puppet Apply's Man Page][apply_man]
 
 ## Administrative tools
-
-### Puppet cert
-
-Puppet cert helps manage Puppet's built-in certificate authority (CA). It runs on the same server as the Puppet master application. You can use it to sign and revoke agent certificates.
-
-For more information, see:
-
-* [Puppet Cert's Man Page][cert_man]
 
 ### Puppet module
 
@@ -135,7 +124,6 @@ Puppet help and Puppet man can display online help for Puppet's other subcommand
 For more information, see:
 
 * [Puppet Help's Man Page][help_man]
-* [Puppet Man's Man Page][man_man]
 
 ## Full list of subcommands
 

@@ -11,7 +11,7 @@ title: "Background Reference: X.509 Certificate Anatomy"
 [ssldir]: /puppet/latest/reference/dirs_ssldir.html
 [certname]: /puppet/latest/reference/configuration.html#certname
 [lang_node]: /puppet/latest/reference/lang_node_definitions.html
-[enc]: /guides/external_nodes.html
+[enc]: /openvox/latest/nodes_external.html
 [index]: ./index.html
 [ca_name]: /puppet/latest/reference/configuration.html#caname
 [wiki_x509]: http://en.wikipedia.org/wiki/X.509

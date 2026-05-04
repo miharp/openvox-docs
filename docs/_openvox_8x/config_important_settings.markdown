@@ -7,7 +7,7 @@ title: "Configuration: Short list of important settings"
 [trusted_and_facts]: ./lang_facts_and_builtin_vars.html
 [config_reference]: ./configuration.html
 [environments]: ./environments_about.html
-[multi_master]: /guides/scaling_multiple_masters.html
+[multi_master]: /openvox-server/latest/scaling_puppet_server.html
 [enc]: ./nodes_external.html
 [meta_noop]: ./metaparameter.html#noop
 [meta_schedule]: ./metaparameter.html#schedule

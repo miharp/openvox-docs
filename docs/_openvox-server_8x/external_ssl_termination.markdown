@@ -51,7 +51,7 @@ validation failures.) Puppet Server uses this to authorize requests; only reques
 
 Mandatory. Must be the [Subject DN][] of the agent's certificate, if a certificate was presented. Puppet Server uses this to authorize requests.
 
-[subject dn]: https://docs.puppet.com/background/ssl/cert_anatomy.html#the-subject-dn-cn-certname-etc
+[subject dn]: /docs/background/ssl/cert_anatomy.html#the-subject-dn-cn-certname-etc
 
 ### `X-Client-Cert`
 
@@ -66,5 +66,5 @@ characters must be encoded as `%20` and not `+` characters.
 > **Note:** Apache's `mod_proxy` converts line breaks in PEM documents to spaces for some reason, and Puppet Server can't decode the result. We're tracking this issue as
 > [SERVER-217](https://tickets.puppetlabs.com/browse/SERVER-217).
 
-[pem format]: https://docs.puppet.com/background/ssl/cert_anatomy.html#pem-file
+[pem format]: /docs/background/ssl/cert_anatomy.html#pem-file
 [trusted]: https://puppet.com/docs/puppet/latest/lang_facts_and_builtin_vars.html#trusted-facts

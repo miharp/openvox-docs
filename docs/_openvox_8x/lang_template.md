@@ -5,7 +5,7 @@ title: "Language: Using templates"
 
 [interpolate]: ./lang_data_string.html#interpolation
 [heredoc]: ./lang_data_string.html#heredocs
-[augeas]: /guides/augeas.html
+[augeas]: ./resources_augeas.html
 [concat]: https://forge.puppetlabs.com/puppetlabs/concat
 [file_line]: https://forge.puppetlabs.com/puppetlabs/stdlib
 [functions]: ./lang_functions.html

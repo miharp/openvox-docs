@@ -6,7 +6,6 @@ title: "Background Reference: What is HTTPS?"
 
 [index]: ./index.html
 [tls_ssl]: ./tls_ssl.html
-[passenger]: /guides/passenger.html
 [certificate_anatomy]: ./cert_anatomy.html
 
 > This article is [part of a series][index]. The previous article covered the basics of [the TLS/SSL protocol][tls_ssl].
@@ -51,7 +50,7 @@ In practice, though, other levels of an application will usually want access to 
 
 Thus, most SSL implementations have some means to publish connection and certificate data, so it can be used by higher layers of the protocol stack.
 
-An example of this is Apache's `mod_ssl` module. If it's [configured with the `StdEnvVars` option](http://httpd.apache.org/docs/2.2/mod/mod_ssl.html#envvars), it will publish extensive SSL and certificate information as environment variables with predictable names. These variables can then be used by Apache itself, or by any application being spawned and managed by another Apache module (e.g. `mod_cgi`, `mod_passenger`, or `mod_php`). (This is how the puppet master accesses client certificate information when [running under Passenger][passenger].)
+An example of this is Apache's `mod_ssl` module. If it's [configured with the `StdEnvVars` option](http://httpd.apache.org/docs/2.2/mod/mod_ssl.html#envvars), it will publish extensive SSL and certificate information as environment variables with predictable names. These variables can then be used by Apache itself, or by any application being spawned and managed by another Apache module (e.g. `mod_cgi`, `mod_passenger`, or `mod_php`).
 
 SSL Termination and Proxying
 -----
