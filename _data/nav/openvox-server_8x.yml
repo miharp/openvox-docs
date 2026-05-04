@@ -9,8 +9,16 @@
   link: deprecated_features.html
 - text: Compatibility with Puppet agent
   link: compatibility_with_puppet_agent.html
-- text: Installing Puppet Server
-  link: install_from_packages.html
+- text: Installing and upgrading
+  items:
+  - text: Before you begin
+    link: install_pre.html
+  - text: Install OpenVox Server
+    link: install_from_packages.html
+  - text: What gets installed and where
+    link: install_what_and_where.html
+  - text: Upgrading OpenVox Server
+    link: upgrade_minor.html
 - text: Configuring Puppet Server
   items:
   - text: Configuring Puppet Server
