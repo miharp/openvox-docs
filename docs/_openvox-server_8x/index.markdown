@@ -9,7 +9,7 @@ Puppet Server is the next-generation application for managing Puppet agents.
 > **Note:** For information about configuring and tuning settings specific to [Puppet Enterprise](https://puppet.com/docs/pe/), see
 > [its documentation](https://puppet.com/docs/pe/latest/configuring/config_puppetserver.html).
 
-- [**About Puppet Server**](./services_master_puppetserver.html)
+- [**About OpenVox Server**](./services_puppetserver.html)
   - [Release notes](./release_notes.html)
   - [Deprecated features](./deprecated_features.html)
   - [Notable differences vs. the Apache/Passenger stack](./puppetserver_vs_passenger.html)

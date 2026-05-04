@@ -1,8 +1,8 @@
 ---
 - text: Index
   link: index.html
-- text: About Puppet Server
-  link: services_master_puppetserver.html
+- text: About OpenVox Server
+  link: services_puppetserver.html
 - text: Release notes
   link: release_notes.html
 - text: Deprecated features
