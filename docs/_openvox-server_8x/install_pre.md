@@ -56,7 +56,14 @@ Before installing OpenVox Server:
    name resolves correctly on the network, or plan to set the `server` setting in
    `puppet.conf` on each agent explicitly.
 
-6. Install and validate OpenVox Server before rolling out agents.
+6. Synchronize clocks.
+
+   OpenVox uses SSL certificates with time-based validity. If the clocks on the
+   server and agent nodes differ by more than a few minutes, certificate validation
+   will fail and agents will be unable to connect. Make sure NTP or a similar time
+   synchronization service is running on all nodes before deploying.
+
+7. Install and validate OpenVox Server before rolling out agents.
 
    In an agent-server deployment, the server must be running and reachable before
    agents can check in. See the [architecture overview][architecture] for background
