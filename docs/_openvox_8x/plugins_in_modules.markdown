@@ -23,6 +23,8 @@ Some plug-ins are used by OpenVox Server, which can load them directly from modu
 
 To enable this, OpenVox agent automatically downloads plug-ins from the server at the start of each agent run. Those plug-ins are then available during the run.
 
+> **Note:** Pluginsync only happens on agent runs. Puppet apply instead loads plug-ins, including custom facts, directly from the modulepath of the environment it's applying, so no sync phase is needed. See [Standalone workflows with Puppet apply](services_apply_standalone.html).
+
 OpenVox agent syncs plug-in files from _every_ module in its environment's modulepath, regardless of whether that node uses any classes from a given module, as well as any translations available for each module regardless of the agent's or primary server's locale.
 
 In other words, even if you don't declare any classes from the `stdlib` module, nodes will still use `stdlib`'s custom facts. Also, even if your agent's locale is set to en-US, if the module has translations for other locales, the agent will download all of those translations.
