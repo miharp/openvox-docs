@@ -24,6 +24,8 @@ The major version bump comes from the underlying components:
 
 See [Component versions in recent releases](component_versions.html) for the exact versions in each release.
 
+OpenSSL 3.5 adds the post-quantum algorithms ML-KEM, ML-DSA, and SLH-DSA. Agent-to-server TLS between OpenVox components is not affected, but if an external CA, a TLS-terminating proxy, or a hardware security module sits in the path, check that it accepts the cipher suites and key types the new OpenSSL negotiates.
+
 OpenVox 9 no longer ships its own curl. Scripts that call `/opt/puppetlabs/puppet/bin/curl`, or that put `/opt/puppetlabs/puppet/bin` ahead of the system directories in `PATH` to pick it up, need the system `curl` instead.
 
 ## Before you upgrade
@@ -159,10 +161,12 @@ These settings are gone in OpenVox 9. Remove them from `puppet.conf` and from an
 
 ## Test, then upgrade
 
-1. Run your module unit tests on Ruby 4.0 and fix any failures.
-2. Validate your manifests with `puppet parser validate`.
-3. Stand up an OpenVox 9 server in a test environment, point test agents at it, and compare `puppet agent --test --noop` output against OpenVox 8 for unexpected changes.
-4. Switch each host to the OpenVox 9 repository. The `openvox8-release` package configures only the 8.x repository, so a host still using it stays on 8.x no matter what you upgrade. Install the `openvox9-release` package for the platform from [apt.voxpupuli.org](https://apt.voxpupuli.org) or [yum.voxpupuli.org](https://yum.voxpupuli.org).
+1. Run your module unit tests on Ruby 4.0 and fix any failures. [Unit testing](/ecosystem/latest/devkit/unit_testing.html) in the DevKit guide covers the test setup.
+2. In each module's `metadata.json`, raise the upper bound of the `openvox` entry under `requirements` so that it admits 9.x, for example `>= 8.19.0 < 10.0.0`. The Vox Pupuli test tooling builds its test matrix from this entry, so a module that still declares `< 9.0.0` is never tested on OpenVox 9.
+   Do not widen a `puppet` entry to cover 9.x: that entry describes Puppet, whose last release with open packages was 8.10, and Vox Pupuli modules have [dropped it](https://github.com/voxpupuli/community-triage/issues/59). Remove it, or cap it at `<= 8.10.0` if a tool you use still needs it to exist.
+3. Validate your manifests with `puppet parser validate`.
+4. Stand up an OpenVox 9 server in a test environment, point test agents at it, and compare `puppet agent --test --noop` output against OpenVox 8 for unexpected changes.
+5. Switch each host to the OpenVox 9 repository. The `openvox8-release` package configures only the 8.x repository, so a host still using it stays on 8.x no matter what you upgrade. Install the `openvox9-release` package for the platform from [apt.voxpupuli.org](https://apt.voxpupuli.org) or [yum.voxpupuli.org](https://yum.voxpupuli.org).
    On Debian and Ubuntu, remove `openvox8-release` first: both packages ship `/etc/apt/preferences.d/openvox-release.pref`, and `dpkg` refuses to install the second one over it.
 
    ```bash
@@ -179,4 +183,4 @@ These settings are gone in OpenVox 9. Remove them from `puppet.conf` and from an
    ```
 
    If you wrote the repository definition yourself, for example to use a mirror, change `openvox8` to `openvox9` in it instead.
-5. Upgrade production in the usual order: `openvox-server`, then `openvoxdb` and `openvoxdb-termini`, then agents. OpenVox 8 agents can keep checking in to an upgraded OpenVox 9 server while you roll out agent upgrades. [Upgrading OpenVox 9](upgrade_minor.html) has the package commands.
+6. Upgrade production in the usual order: `openvox-server`, then `openvoxdb` and `openvoxdb-termini`, then agents. OpenVox 8 agents can keep checking in to an upgraded OpenVox 9 server while you roll out agent upgrades. [Upgrading OpenVox 9](upgrade_minor.html) has the package commands.
