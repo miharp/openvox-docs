@@ -116,6 +116,18 @@ Error: Neither `server` nor `ca_server` is specified.
 puppet config set server openvox.example.com --section main
 ```
 
+In 9.0.0-rc1 the check looks only at `server`. An agent that finds its servers through [`server_list`](configuration.html#server_list) or DNS SRV records, and has no `server` entry, fails with the same error ([openvox#658](https://github.com/OpenVoxProject/openvox/issues/658)).
+For a root run, setting `ca_server` or `report_server` does not satisfy the check either. This is easy to miss, because OpenVox 8 ignored `server` whenever `server_list` was set and many failover configurations left it out.
+
+The fix ([openvox#659](https://github.com/OpenVoxProject/openvox/pull/659)) is merged and will be in the next 9.x release. Until you run a release that includes it, keep a `server` entry next to `server_list`. Use one of the hosts from the list.
+`server_list` still decides where the agent connects, and the agent does not fall back to `server` when the hosts in the list are unreachable, so the extra entry only satisfies the check.
+
+```ini
+[main]
+server = compiler1.example.com
+server_list = compiler1.example.com,compiler2.example.com
+```
+
 ## Removed settings
 
 These settings are gone in OpenVox 9. Remove them from `puppet.conf` and from any scripts or tooling that reference them before you upgrade. OpenVox 8 warned about each of them; OpenVox 9 ignores a leftover setting without any message, so nothing after the upgrade tells you it is still there.
