@@ -55,7 +55,8 @@ The upgrade neither migrates nor removes the old directory, and the gems' comman
 
 ```console
 $ /opt/puppetlabs/puppet/bin/r10k version
-.../rubygems.rb:265:in 'Gem.find_spec_for_exe': can't find gem r10k (>= 0.a) with executable r10k (Gem::GemNotFoundException)
+.../rubygems.rb:265:in 'Gem.find_spec_for_exe':
+  can't find gem r10k (>= 0.a) with executable r10k (Gem::GemNotFoundException)
 ```
 
 Before upgrading, list what you added so you can put it back afterwards:
@@ -103,7 +104,9 @@ Report submission from agents is unchanged; only the server-side default for pro
 OpenVox 8 agents fell back to contacting a host named `puppet` when no server was configured. OpenVox 9 removes this fallback. As of 9.0.0-rc1 an agent run with no `server` setting fails, whether it runs as root or not:
 
 ```text
-Error: OpenVox does not default to `server=puppet` as of version 9.0. Please update your configuration appropriately by providing a specific server of your choice.
+Error: OpenVox does not default to `server=puppet` as of version 9.0.
+Please update your configuration appropriately
+by providing a specific server of your choice.
 ```
 
 A non-root run fails the same way but with different text: a warning that OpenVox no longer defaults to `server=puppet` when running as a non-privileged user, followed by:
@@ -163,6 +166,7 @@ These settings are gone in OpenVox 9. Remove them from `puppet.conf` and from an
 
 1. Run your module unit tests on Ruby 4.0 and fix any failures. [Unit testing](/ecosystem/latest/devkit/unit_testing.html) in the DevKit guide covers the test setup.
 2. In each module's `metadata.json`, raise the upper bound of the `openvox` entry under `requirements` so that it admits 9.x, for example `>= 8.19.0 < 10.0.0`. The Vox Pupuli test tooling builds its test matrix from this entry, so a module that still declares `< 9.0.0` is never tested on OpenVox 9.
+
    Do not widen a `puppet` entry to cover 9.x: that entry describes Puppet, whose last release with open packages was 8.10, and Vox Pupuli modules have [dropped it](https://github.com/voxpupuli/community-triage/issues/59). Remove it, or cap it at `<= 8.10.0` if a tool you use still needs it to exist.
 3. Validate your manifests with `puppet parser validate`.
 4. Stand up an OpenVox 9 server in a test environment, point test agents at it, and compare `puppet agent --test --noop` output against OpenVox 8 for unexpected changes.
