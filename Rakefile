@@ -10,6 +10,8 @@ require 'rake/clean'
 
 require 'rubocop/rake_task'
 
+require_relative 'lib/openvox_docs/versioned_docs'
+
 RuboCop::RakeTask.new do |task|
   task.plugins << 'rubocop-rake'
 end
@@ -37,31 +39,39 @@ task :references do
   puts 'bundle exec rake references:openfact [VERSION=<GIT TAG OR COMMIT> COLLECTION=<DIR> INSTALLPATH=<RELATIVE OR ABSOLUTE PATH>]'
   puts 'bundle exec rake references:openbolt [VERSION=<GIT TAG OR COMMIT> COLLECTION=<DIR> INSTALLPATH=<RELATIVE OR ABSOLUTE PATH>]'
   puts '  VERSION can be omitted, uses latest non-prerelease tag; a series like 8.x uses the latest non-prerelease tag in that series; anything else builds that exact ref (e.g. a 9.x prerelease)'
-  puts '  COLLECTION can be omitted, defaults to the current stable dir per product (e.g. _openvox_latest); set it to build a frozen version (e.g. _openvox_9x)'
+  puts '  COLLECTION can be omitted, defaults to the collection of the product\'s latest version (e.g. _openvox_8x); set it to build another version (e.g. _openvox_9x)'
   puts '  INSTALLPATH can be omitted, defaults to references_output/'
   puts 'bundle exec rake references:all [INSTALLPATH=<RELATIVE OR ABSOLUTE PATH>]'
   puts '  Builds every pinned product/version from _data/products.yml into its collection'
 end
 
 namespace :references do
+  # The collection behind `/<product>/latest/`. The `_<product>_latest`
+  # symlinks are created by the Jekyll build, so they may not exist yet.
+  latest_collection = lambda do |product_id|
+    ENV.fetch('COLLECTION') do
+      OpenvoxDocs::VersionedDocs.latest_version(OpenvoxDocs::VersionedDocs.load_products(Dir.pwd)[product_id])['collection']
+    end
+  end
+
   task openvox: 'references:check' do
     require 'puppet_references'
-    PuppetReferences.build_puppet_references(ENV.fetch('VERSION', nil), collection: ENV.fetch('COLLECTION', '_openvox_latest'))
+    PuppetReferences.build_puppet_references(ENV.fetch('VERSION', nil), collection: latest_collection.call('openvox'))
   end
 
   task openfact: 'references:check' do
     require 'puppet_references'
-    PuppetReferences.build_facter_references(ENV.fetch('VERSION', nil), collection: ENV.fetch('COLLECTION', '_openfact_latest'))
+    PuppetReferences.build_facter_references(ENV.fetch('VERSION', nil), collection: latest_collection.call('openfact'))
   end
 
   task openbolt: 'references:check' do
     require 'puppet_references'
-    PuppetReferences.build_openbolt_references(ENV.fetch('VERSION', nil), collection: ENV.fetch('COLLECTION', '_openbolt_latest'))
+    PuppetReferences.build_openbolt_references(ENV.fetch('VERSION', nil), collection: latest_collection.call('openbolt'))
   end
 
   desc 'Build every pinned product/version from _data/products.yml into its collection'
   task :all do
-    versions = YAML.load_file('_data/products.yml')
+    versions = OpenvoxDocs::VersionedDocs.load_products(Dir.pwd)
     installpath = ENV.fetch('INSTALLPATH', nil)
 
     # Each (product, version) builds in its own subprocess. A fresh process avoids
@@ -174,15 +184,7 @@ namespace :test do
     # Each collection's `latest` is a symlink to its current stable version, so
     # scoping to `<collection>/latest` checks every page exactly once and follows
     # the current version automatically as new ones are added.
-    collections = %w[
-      openvox
-      openvox-server
-      openvoxdb
-      openbolt
-      openfact
-      ecosystem
-      openvox-containers
-    ]
+    collections = OpenvoxDocs::VersionedDocs.load_products(Dir.pwd).keys
 
     # The OpenBolt generated reference pages 404 site-wide until an openbolt
     # release > 5.5.0 ships the front-matter fix (issue #202). CI builds the
@@ -220,17 +222,29 @@ namespace :test do
        '`versions` must be ordered newest-first (both are relied on by ' \
        '_includes/version-banner.html and the version selector)'
   task :products_data do
-    products = YAML.load_file('_data/products.yml')
+    products = OpenvoxDocs::VersionedDocs.load_products(Dir.pwd)
     errors = []
 
     products.each do |product_id, product|
-      next if product['single_version']
-
-      ids = (product['versions'] || []).map { |v| v['id'] }
+      versions = OpenvoxDocs::VersionedDocs.versions(product)
+      ids = versions.map { |v| v['id'] }
 
       errors << "#{product_id}: duplicate version ids (#{ids.join(', ')})" if ids.uniq.length != ids.length
 
       errors << "#{product_id}: latest '#{product['latest']}' is not one of its versions (#{ids.join(', ')})" unless ids.include?(product['latest'])
+
+      # Every product's pages are in docs/_<product>/, its sidebar in _data/nav/<product>.yml,
+      # and the version directories it is assembled into are build output, not tracked.
+      errors << "#{product_id}: no docs/_#{product_id}/ directory" unless Dir.exist?("docs/_#{product_id}")
+      errors << "#{product_id}: no _data/nav/#{product_id}.yml" if Dir.glob("_data/nav/#{product_id}.{yml,yaml}").empty?
+      Dir.glob("docs/_#{product_id}_versions/*").each do |dir|
+        errors << "#{dir}: '#{File.basename(dir)}' is not a version of #{product_id}" unless ids.include?(File.basename(dir))
+      end
+      assembled = OpenvoxDocs::VersionedDocs.assembled_dirs(product_id => product).map { |dir| "docs/#{dir}" }
+      tracked = `git ls-files -- #{assembled.join(' ')}`.split("\n")
+      errors << "#{product_id}: #{tracked.size} tracked file(s) in build output, e.g. #{tracked.first}" if tracked.any?
+
+      next if product['single_version']
 
       majors = ids.map { |id| id[/\A\d+/] }
       if majors.any?(&:nil?)
@@ -245,6 +259,117 @@ namespace :test do
       exit 1
     end
 
-    puts '_data/products.yml: latest references and version ordering OK'
+    puts '_data/products.yml: versions, latest references, and docs layout OK'
+  end
+end
+
+# Maintenance tasks for the versioned documentation. See "Documentation
+# versions" in MAINTAINING.md.
+namespace :docs do
+  versioned = OpenvoxDocs::VersionedDocs
+
+  product_for = lambda do |product_id|
+    versioned.load_products(Dir.pwd)[product_id] or abort "#{product_id}: not a product in _data/products.yml"
+  end
+
+  # Files an older version keeps its own copy of, relative to its directory.
+  own_pages = lambda do |product_id, version|
+    dir = versioned.version_dir('docs', product_id, version)
+    return [] unless Dir.exist?(dir)
+
+    Dir.glob('**/*', base: dir).select { |rel| File.file?(File.join(dir, rel)) }.sort
+  end
+
+  desc 'Before changing pages for the newest version only, keep the current copy for every older version ' \
+       "that doesn't have its own: rake 'docs:preserve[openvox,page.md,...]'. With no pages, keeps every " \
+       'page that some older version already has its own copy of (the pages that differ per version).'
+  task :preserve, [:product] do |_task, args|
+    product_id = args[:product]
+    product = product_for.call(product_id)
+    older = versioned.versions(product).drop(1).reject { |version| version['frozen'] }
+    abort "#{product_id} has no older, unfrozen version to keep pages for" if older.empty?
+
+    pages = args.extras
+    named = pages.any?
+    pages = older.flat_map { |version| own_pages.call(product_id, version) }.uniq.sort unless named
+    abort "no older version of #{product_id} has its own pages yet; name the pages to keep" if pages.empty?
+
+    kept = 0
+    pages.each do |page|
+      src = File.join('docs', "_#{product_id}", page)
+      unless File.file?(src)
+        abort "#{src} does not exist" if named
+        next
+      end
+
+      older.each do |version|
+        dest = File.join(versioned.version_dir('docs', product_id, version), page)
+        next if File.exist?(dest) || !versioned.published?(src, versioned.major(version))
+
+        FileUtils.mkdir_p(File.dirname(dest))
+        FileUtils.cp(src, dest)
+        sh 'git', 'add', dest
+        kept += 1
+      end
+    end
+    puts "Kept #{kept} page(s) for older versions. Now edit the pages in docs/_#{product_id}/."
+  end
+
+  desc "Snapshot a version that is no longer maintained: rake 'docs:freeze[openvox,8x]'"
+  task :freeze, [:product, :version] do |_task, args|
+    product_id = args[:product]
+    product = product_for.call(product_id)
+    version = versioned.versions(product).find { |v| v['id'] == args[:version] }
+    abort "#{product_id}: no version #{args[:version]}" unless version
+    abort "#{product_id} #{version['id']} is already frozen" if version['frozen']
+
+    # Copy every shared page this version publishes into its own directory.
+    own_dir = versioned.version_dir('docs', product_id, version)
+    files = versioned.page_sets('docs', product_id, product)[version]
+    files.each do |rel, src|
+      dest = File.join(own_dir, rel)
+      next if File.exist?(dest)
+
+      FileUtils.mkdir_p(File.dirname(dest))
+      FileUtils.cp(src, dest)
+    end
+
+    # Write out the version's sidebar so later nav changes don't reach it.
+    shared_nav = Dir.glob("_data/nav/#{product_id}.{yml,yaml}").first or abort "no _data/nav/#{product_id}.yml"
+    navs = { product_id => YAML.load_file(shared_nav) }
+    versioned.build_navs(navs, 'docs', product_id, product)
+    nav_file = "_data/nav/#{versioned.label(version)}.yml"
+    File.write(nav_file, navs[versioned.label(version)].to_yaml(line_width: -1))
+
+    # Mark it frozen in products.yml.
+    data = File.read('_data/products.yml')
+    block = data[/^#{Regexp.escape(product_id)}:\n(?:[ #].*\n|\n)*/] or abort 'product not found in products.yml'
+    entry = /^(\s*)- id: #{Regexp.escape(version['id'])}\n/
+    frozen = data.sub(block, block.sub(entry) { "#{Regexp.last_match(0)}#{Regexp.last_match(1)}  frozen: true\n" })
+    abort "couldn't find '- id: #{version['id']}' under #{product_id} in _data/products.yml; add `frozen: true` by hand" if frozen == data
+    File.write('_data/products.yml', frozen)
+
+    sh 'git', 'add', own_dir, nav_file, '_data/products.yml'
+    puts "#{product_id} #{version['id']} is frozen. Also pin its `ref:` to its final tag if it has one."
+  end
+
+  desc 'List each older version\'s own pages, flagging any that match the shared page again'
+  task :status do
+    versioned.load_products(Dir.pwd).each do |product_id, product|
+      versioned.versions(product).drop(1).each do |version|
+        dir = versioned.version_dir('docs', product_id, version)
+        pages = own_pages.call(product_id, version)
+        puts "#{product_id} #{version['id']}#{' (frozen)' if version['frozen']}: #{pages.size} own files"
+        next if version['frozen']
+
+        pages.each do |rel|
+          shared = File.join('docs', "_#{product_id}", rel)
+          note = if !File.exist?(shared) then 'only in this version'
+                 elsif FileUtils.identical?(shared, File.join(dir, rel)) then 'SAME AS SHARED, can be deleted'
+                 end
+          puts "  #{rel}#{" (#{note})" if note}"
+        end
+      end
+    end
   end
 end

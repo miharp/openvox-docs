@@ -19,10 +19,9 @@ jobs:
       - name: List tracked Markdown files
         id: tracked-markdown
         shell: bash
-        # Lint git-tracked files only. This lints the canonical versioned dirs
-        # once and skips the `_latest` symlinks (git stores them as single
-        # symlink entries, so a filesystem glob would double-lint their targets).
-        # It also excludes generated reference docs, which are gitignored.
+        # Lint git-tracked files only. This lints each page's source once and
+        # skips what the build generates: the assembled version directories,
+        # the `_latest` symlinks, and the reference docs, all gitignored.
         run: |
           {
             echo 'files<<EOF'

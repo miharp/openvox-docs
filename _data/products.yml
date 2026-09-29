@@ -1,28 +1,32 @@
 # Single source of truth for products and their documentation versions.
 #
-# Read by:
-#   - the `references:all` build loop: `references`, plus per-version `ref` and
-#     `collection` (which upstream tag builds into which collection dir).
-#   - the version selector UI (forthcoming): `label`, `latest`, `single_version`,
-#     and per-version `id`, `label`, `base`.
+# The build derives everything else from this file (lib/openvox_docs/versioned_docs.rb):
+# the Jekyll collections and their defaults, the `docs/_<product>_latest`
+# symlinks, the sidebar's nav map, the product bar's active state, the version
+# selector, and the outdated-version banner. `rake references:all` reads each
+# version's `ref` to build the generated reference pages.
+#
+# Each product's pages live in docs/_<product>/ (the newest version) and
+# docs/_<product>_versions/<id>/ (an older version's copies of the pages that
+# differ). The build assembles each version's collection from them. See
+# MAINTAINING.md for the editing rules.
 #
 # Keyed by product id; insertion order is the display order. Each product has:
 #   - label:          display name for the UI (e.g. "OpenVox").
-#   - latest:         the version `id` that the `/<product>/latest/` alias points
-#                     at. `latest` is an ALIAS, never its own build row — reference
-#                     builds always target a real version dir (e.g. `_openvox_8x`),
-#                     and the `_<product>_latest` symlink serves it under `/latest/`.
+#   - latest:         the version `id` that `/<product>/latest/` serves. Changing
+#                     it is how a new major is promoted at GA.
 #   - references:     the rake task that (re)generates this product's reference
-#                     pages. Omit for authored-only products — their versions never
-#                     build generated references.
-#   - single_version: (optional) true when the product has no numbered collection,
-#                     only a real `_<product>_latest` dir (e.g. OpenVox Containers);
-#                     the selector can hide the picker for these.
+#                     pages. Omit for authored-only products.
+#   - single_version: (optional) true when the product has one version whose
+#                     collection is `_<product>_latest` itself (e.g. OpenVox
+#                     Containers); no symlink or version picker is made for it.
 #   - versions:       list of version entries, newest first, each with:
-#       - id:         short version id (e.g. "8x"); the `latest` key references one.
-#       - label:      display label for the UI (e.g. "8.x").
-#       - collection: the Jekyll collection directory (e.g. `_openvox_8x`).
-#       - base:       the published URL base (e.g. `/openvox/8.x/`).
+#       - id:         short version id (e.g. "8x"). The label ("8.x"), collection
+#                     (`_openvox_8x`), and URL base (`/openvox/8.x/`) are derived
+#                     from it; set `label`, `collection`, or `base` to override.
+#       - frozen:     true once the version is no longer maintained: it is
+#                     assembled from its own directory alone, which
+#                     `rake docs:freeze` fills with a full snapshot.
 #       - ref:        (products with a `references:` task only) what to build the
 #                     reference pages from. Either:
 #                       - a series, e.g. "8.x": resolved at build time to the
@@ -44,14 +48,8 @@ openvox:
   references: references:openvox
   versions:
     - id: 9x
-      label: "9.x"
-      collection: _openvox_9x
-      base: /openvox/9.x/
       ref: "9.0.0-rc1"
     - id: 8x
-      label: "8.x"
-      collection: _openvox_8x
-      base: /openvox/8.x/
       ref: "8.x"
 
 openfact:
@@ -60,14 +58,8 @@ openfact:
   references: references:openfact
   versions:
     - id: 6x
-      label: "6.x"
-      collection: _openfact_6x
-      base: /openfact/6.x/
       ref: "6.0.0"
     - id: 5x
-      label: "5.x"
-      collection: _openfact_5x
-      base: /openfact/5.x/
       ref: "5.x"
 
 openbolt:
@@ -76,9 +68,6 @@ openbolt:
   references: references:openbolt
   versions:
     - id: 5x
-      label: "5.x"
-      collection: _openbolt_5x
-      base: /openbolt/5.x/
       ref: "5.x"
 
 openvox-server:
@@ -86,42 +75,26 @@ openvox-server:
   latest: 8x
   versions:
     - id: 9x
-      label: "9.x"
-      collection: _openvox-server_9x
-      base: /openvox-server/9.x/
     - id: 8x
-      label: "8.x"
-      collection: _openvox-server_8x
-      base: /openvox-server/8.x/
 
 openvoxdb:
   label: OpenVoxDB
   latest: 8x
   versions:
     - id: 9x
-      label: "9.x"
-      collection: _openvoxdb_9x
-      base: /openvoxdb/9.x/
     - id: 8x
-      label: "8.x"
-      collection: _openvoxdb_8x
-      base: /openvoxdb/8.x/
 
 ecosystem:
   label: Ecosystem
   latest: 8x
   versions:
     - id: 8x
-      label: "8.x"
-      collection: _ecosystem_8x
-      base: /ecosystem/8.x/
 
 openvox-containers:
   label: OpenVox Containers
   latest: latest
-  single_version: true  # real `_latest` dir, no numbered collection (see header)
+  single_version: true  # no numbered collection, so no version picker (see header)
   versions:
     - id: latest
-      label: latest
       collection: _openvox-containers_latest
       base: /openvox-containers/latest/

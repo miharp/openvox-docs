@@ -21,8 +21,12 @@ on:
       - '_data/**/*'
       - '_includes/**/*'
       - '_layouts/**/*'
+      - '_plugins/**/*'
       - 'docs/**/*'
       - 'assets/**/*'
+      # Build code: the version assembly hook and the reference generators.
+      - 'lib/**/*'
+      - 'Rakefile'
 
   # Upstream release workflows send this after tagging so the generated
   # reference pages (built from the series refs in _data/products.yml) and the

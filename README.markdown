@@ -45,16 +45,18 @@ your changes locally before opening a pull request.
 
 ### Adding a new page
 
-Create a new Markdown file under the `docs/` directory, and then edit the
-YAML table of contents under `_data/nav/` to add a link to your new page.
+Create a new Markdown file in the product's directory under `docs/` (such as
+`docs/_openvox/`), and then add a link to it in the product's nav file under
+`_data/nav/`. The page appears in every version of the product; see
+[CONTRIBUTING.md](CONTRIBUTING.md#editing-versioned-pages) for version-specific
+pages.
 
 ### Adding a new project
 
-Create a new subdirectory under `docs/` along with a new YAML table of contents
-under `_data/nav/`. Then edit `_config.yml` to register the new directory:
-
-- Add an entry to the `collections:` map to enable output.
-- Add an entry to the `defaults:` map to set the table of contents.
+Add the project to `_data/products.yml`, create its pages under `docs/` and a
+nav file under `_data/nav/`, and add it to the product bar in
+`_data/navigation.yml`. The build registers its collections from
+`_data/products.yml`; see [MAINTAINING.md](MAINTAINING.md).
 
 Consider updating `index.md` to add an entry pointing to your new content.
 See the [home layout reference][home-layout] for details.

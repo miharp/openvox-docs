@@ -27,7 +27,7 @@ jobs:
         run: bundle env
       - name: Run rake rubocop
         run: bundle exec rake rubocop
-      - name: Validate products.yml
+      - name: Validate products.yml and the docs layout
         run: bundle exec rake test:products_data
       - name: Validate code
         run: bundle exec jekyll build
