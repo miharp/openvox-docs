@@ -34,3 +34,8 @@ source/.jekyll-cache/
 .ruby-version
 Gemfile.lock
 _site
+
+# Version collections and _latest symlinks are created at build time from
+# docs/_<product>/ and docs/_<product>_versions/ (lib/openvox_docs/versioned_docs.rb)
+docs/_*_[0-9]*x/
+docs/_*_latest

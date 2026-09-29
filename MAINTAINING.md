@@ -3,143 +3,99 @@
 Maintainer procedures for this site. For day-to-day content contribution and local
 preview, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Adding a new major version (cutover)
+## Documentation versions
 
-The site uses a **copy-on-major-release** model. Each major version of a product
-lives in its own collection (e.g. `docs/_openvox_8x/`), and `_<product>_latest` is a
-symlink to the current stable one. When a product ships a new major, you copy the
-collection, register it, pin its references, and — once the new major is the stable
-release — promote it to `latest` and freeze the old one. Products version
-independently (OpenVox, OpenFact, and OpenBolt have generated references; OpenVox
-Server, OpenVoxDB, Ecosystem, and OpenVox Containers are authored-only).
+Each product's versions are listed in `_data/products.yml`, and the build derives
+everything else from that file (`lib/openvox_docs/versioned_docs.rb`, run by
+`_plugins/versioned_docs.rb`):
 
-The example below adds **OpenVox 9** alongside OpenVox 8; substitute product/version
-as needed.
+- the Jekyll collections and their front matter defaults
+- the `docs/_<product>_latest` symlink, pointing at the `latest:` version
+- the sidebar's nav map and the product bar's active state
+- the version selector and the outdated-version banner
 
-### How versions are wired (background)
+Nothing about versions or products is configured in `_config.yml`.
 
-- **Collections** — `docs/_<product>_<major>/`, declared in `_config.yml` under both
-  `collections:` (permalink) and `defaults:` (which nav to use). `_<product>_latest`
-  is a **symlink** to the current stable collection dir, so `/<product>/latest/`
-  serves the same files as `/<product>/<major>.x/`.
-- **`_data/products.yml`** — the version registry. Per product: a `label`, which
-  version `latest` aliases, and (for products with generated references) the
-  `references:` rake task. Per version: `id`, `label`, `collection`, `base` URL, and
-  — for generated products — the upstream `ref:` to build from: a series (`"8.x"`,
-  resolved at build time to the newest stable tag in that series) for the current
-  stable version, or an exact tag for a prerelease or a frozen older major.
-- **Navigation** — `_data/nav/<key>.yml` (sidebar trees), `_data/nav_map.yml`
-  (which collections map to a nav key), `_data/navigation.yml` (top product bar).
-- **Version selector** — reads `products.yml`; it appears automatically once a
-  product has 2+ versions (so it stays hidden until the first cutover).
-- **Reference docs** — generated (not committed) by `rake references:all` from each
-  version's `ref:`. The new version builds from its prerelease pin; the old version
-  keeps tracking its series until it is frozen at GA.
+### Where pages live
 
-> `_config.yml` collections can't be generated from `products.yml` (Jekyll reads the
-> config before `_data`), so they are hand-maintained — keep the two in sync.
+Every product's pages are written once, and each version's collection directory
+is assembled at build time:
 
-### Phase 1 — stand up the new version (preview)
+```text
+docs/_openvox/                  the newest version's pages, shared by every version
+docs/_openvox_versions/8x/      8.x's own copies of pages that differ, and pages only 8.x has
+docs/_openvox_8x/               assembled by the build: shared pages + 8.x's own pages
+_data/nav/openvox.yml           one sidebar for every version
+```
 
-Do this when the new major has a tag to build against (a prerelease/RC is fine), but
-is **not yet** the stable release. `latest` stays on the current major.
+This works like branches in a code repository: `docs/_openvox/` is the main
+branch and describes the newest version, and each older version keeps a copy of
+only the pages that changed after it. So a new major needs no copying, and a fix
+to a shared page reaches every version in one commit.
 
-1. **Copy the collection and its nav file, and stage them** so the sweep in step 2
-   sees all the authored content:
+Other details:
 
-   ```console
-   cp -r docs/_openvox_8x docs/_openvox_9x
-   cp _data/nav/openvox_8x.yml _data/nav/openvox_9x.yml
-   git add docs/_openvox_9x _data/nav/openvox_9x.yml
-   ```
+- The assembled directories are gitignored, like the generated reference pages
+  that `rake references:*` writes into them. Assembled files are read-only so that
+  an editor warns anyone who opens one instead of its source.
+- A shared page with `since: 10` in its front matter is left out of older versions.
+- `page.major` is the version's major number, for `OpenVox {{ page.major }}.x` in
+  shared prose and `{% if page.major >= 10 %}` for a sentence or two.
+- In the nav file, `{major}` in link text is replaced for each version, and links
+  to pages a version doesn't have are removed from its sidebar. A version with its
+  own `_data/nav/<product>_<id>.yml` (frozen versions) uses that instead.
+- `rake docs:status` lists each older version's own pages and flags any that are
+  identical to the shared page again, so they can be deleted.
+- `rake test:products_data` (run in CI) checks the layout: every product has a
+  `docs/_<product>/` directory and a nav file, every `_versions/<id>` directory
+  matches a version, and no file in an assembled directory is tracked.
 
-   Generated reference pages are gitignored within the collection, so `git add`
-   stages only the authored content — and `git grep` below then skips the generated
-   pages automatically (they self-update from the new tag at build time).
+### Starting a new major (preview)
 
-2. **Sweep the copied authored content for version-specific strings** and review each
-   in context (page titles, prose, compatibility notes, "upgrading from N" pages, and
-   the **nav file's** section headings and link text). Target the **major you're
-   leaving behind** (here, `8`):
+Do this when the new major has a tag to build against (a prerelease is fine).
+`latest` stays on the current major.
 
-   ```console
-   git grep -nE 'OpenVox 8|8\.x' -- docs/_openvox_9x _data/nav/openvox_9x.yml
-   ```
-
-   Don't forget the nav file — its headings (e.g. "OpenVox 8 Platform") and link
-   text ("Upgrading OpenVox 8") are authored strings that won't update on their own.
-
-   This is a review, **not** a blind find/replace. The hits fall into two kinds:
-   straightforward current-version labels (page titles, "OpenVox 8 uses…") that bump
-   to the new major, and version-*specific* content (e.g. "8.x still supports hiera 4
-   for backward compat", the release-notes list of 8.x releases, "upgrading from 8"
-   paths) that needs rewriting or judgment for the new major — not a mechanical bump.
-   Targeting the specific old major (rather than a generic `[0-9]+\.x`) keeps out
-   noise like Puppet / hiera / function-API versions in code examples.
-
-3. **Register the collection** in `_config.yml`:
-
-   ```yaml
-   # under collections:
-   openvox_9x:
-     output: true
-     permalink: '/openvox/9.x/:path:output_ext'
-
-   # under defaults:
-   - scope:
-       path: ''
-       type: openvox_9x
-     values:
-       nav: openvox_9x
-   ```
-
-4. **Wire up navigation.** The nav file (`_data/nav/openvox_9x.yml`) was already
-   copied and swept in steps 1–2; adjust it further as the 9.x structure diverges
-   (its links are relative, so they resolve under `/openvox/9.x/...` automatically).
-   Then add a **new** entry to `_data/nav_map.yml` whose `nav_key` matches the `nav:`
-   default from step 3 (do *not* add the collection to the existing 8.x entry —
-   `nav: openvox_9x` only resolves against a `nav_key: openvox_9x`):
-
-   ```yaml
-   - nav_key: openvox_9x
-     collections: openvox_9x
-     base: /openvox/9.x/
-   ```
-
-   Finally, add the new collection to OpenVox's entry in `_data/navigation.yml` (the
-   top product bar) so the "OpenVox" link is marked active on the new version's pages
-   too:
-
-   ```yaml
-   - title: OpenVox
-     url: /openvox/latest/
-     collections: [openvox_latest, openvox_9x, openvox_8x]   # add openvox_9x
-   ```
-
-5. **Add the version to `_data/products.yml`** (newest first), keeping `latest: 8x`
-   for now. The new version pins an exact prerelease tag (a series never resolves
-   to a prerelease); the old version keeps its `"8.x"` series ref so it still picks
-   up 8.x point releases:
+1. Add the version to the top of the product's `versions:` list in
+   `_data/products.yml`. For a product with generated references, pin the
+   prerelease tag:
 
    ```yaml
    openvox:
-     label: OpenVox
-     latest: 8x
-     references: references:openvox
+     latest: 9x
      versions:
+       - id: 10x
+         ref: "10.0.0-rc1"
        - id: 9x
-         label: "9.x"
-         collection: _openvox_9x
-         base: /openvox/9.x/
-         ref: "9.0.0-rc1"   # the prerelease/RC tag to build from
-       - id: 8x
-         label: "8.x"
-         collection: _openvox_8x
-         base: /openvox/8.x/
-         ref: "8.x"
+         ref: "9.x"
    ```
 
-6. **Generate references and build locally to verify:**
+2. Keep the current copy of the pages that differ per version (release notes,
+   known issues, supported platforms, and so on) for the version that was newest
+   until now:
+
+   ```console
+   bundle exec rake 'docs:preserve[openvox]'
+   ```
+
+   With no page names, this keeps every page that some older version already has
+   its own copy of, which is the set that has needed a per-version copy before.
+   Name pages to keep others: `rake 'docs:preserve[openvox,reporting_about.md]'`.
+
+3. Rewrite the pages in `docs/_openvox/` for the new major. Look for version
+   numbers written into shared pages and the nav:
+
+   ```console
+   git grep -nE 'OpenVox 9\b|9\.x' -- docs/_openvox _data/nav/openvox.yml
+   ```
+
+   Replace plain version labels with `{{ page.major }}` (or `{major}` in the nav)
+   so they stay correct for every version. A statement that is only true for one
+   major needs `docs:preserve` for that page first.
+
+4. Generate the new series' component-version tables, for example
+   `bundle exec rake references:agent_versions SERIES=10.`.
+
+5. Build and check `/openvox/10.x/`, `/openvox/9.x/`, and `/openvox/latest/`:
 
    ```console
    bundle exec rake references:all INSTALLPATH=docs
@@ -147,79 +103,41 @@ is **not yet** the stable release. `latest` stays on the current major.
    bundle exec rake test:links
    ```
 
-   Confirm `/openvox/8.x/`, `/openvox/9.x/`, and `/openvox/latest/` all render, and
-   that the version selector now shows both `9.x` and `8.x (latest)`.
+### Promoting a major to latest (GA)
 
-Open a PR with these changes. On merge, CI regenerates both versions from their
-`ref:`s and publishes.
+1. In `_data/products.yml`, set the product's `latest:` to the new version and
+   switch its `ref:` from the prerelease tag to its series (`"10.x"`).
+2. **No-redirect check:** the site has no redirects. A page the new major removed
+   now 404s at `/openvox/latest/<page>` for existing bookmarks. `rake docs:status`
+   marks those pages as "only in this version" in the older versions. Decide how
+   to handle each before promoting.
+3. Build and check that `/openvox/latest/` serves the new major and that older
+   versions show the outdated-version banner.
 
-### Phase 2 — promote the new version to `latest` (GA)
+To roll back, revert the `products.yml` change.
 
-Do this when the new major becomes the stable release.
+### Retiring a major (end of life)
 
-1. **Port content drift from the old version.** The Phase 1 copy is frozen at the
-   moment it was made: edits merged to the old collection afterward are absent from
-   the new one, and nothing surfaces them — they merge without conflict and the new
-   collection's pages are simply older. Find the copy point (the commit that added
-   the new collection) and list every old-collection change since:
+When a version stops receiving documentation updates, snapshot it:
 
-   ```console
-   git log $(git log --diff-filter=A --format=%H -1 -- docs/_openvox_9x/index.md)..master \
-     -- docs/_openvox_8x _data/nav/openvox_8x.yml
-   ```
+```console
+bundle exec rake 'docs:freeze[openvox,8x]'
+```
 
-   Port each relevant change onto the new collection — a path-rewritten apply
-   usually works as-is:
+This copies every shared page the version uses into its own directory, writes its
+sidebar to `_data/nav/openvox_8x.yml`, and marks it `frozen: true` in
+`_data/products.yml`, so later changes to shared pages no longer reach it. Then
+pin its `ref:` to its final tag so its reference pages stay reproducible.
 
-   ```console
-   git show <commit> -- docs/_openvox_8x | sed 's|_openvox_8x|_openvox_9x|g' | git apply
-   ```
+### Adding a new product
 
-   Review ported content for version-specific prose, same as the Phase 1 sweep.
-   Re-run this check immediately before merging the promotion PR; if a docs freeze
-   is ever warranted, it only needs to cover the window between that final check
-   and the merge.
+1. Add it to `_data/products.yml` with one version.
+2. Create its pages in `docs/_<product>/` and its sidebar in
+   `_data/nav/<product>.yml`.
+3. Add it to the product bar in `_data/navigation.yml`, and link it from
+   `index.md`.
 
-2. **Repoint the `latest` symlink:**
-
-   ```console
-   ln -sfn _openvox_9x docs/_openvox_latest
-   ```
-
-3. **Point the `latest` collection's navigation at the new version.** The
-   `/<product>/latest/` pages belong to the `openvox_latest` collection, so their nav
-   has to move from 8.x to 9.x:
-   - In `_config.yml`, change the `openvox_latest` defaults scope from
-     `nav: openvox_8x` to `nav: openvox_9x`.
-   - In `_data/nav_map.yml`, move `openvox_latest` into the 9.x entry's `collections`
-     and update the `base:` fields so the frozen 8.x entry points at its own URL and
-     the 9.x entry owns `/latest/`:
-
-     ```yaml
-     - nav_key: openvox_8x
-       collections: openvox_8x
-       base: /openvox/8.x/
-     - nav_key: openvox_9x
-       collections: openvox_9x|openvox_latest
-       base: /openvox/latest/
-     ```
-
-4. **In `_data/products.yml`:** set the OpenVox `latest:` to `9x` (a targeted
-   per-product edit — don't sweep every product's `latest:`), switch 9.x from its
-   prerelease pin to the `"9.x"` series ref so it tracks 9.x point releases, and
-   **freeze 8.x** by replacing its `"8.x"` series ref with its final 8.x tag (so the
-   frozen collection stays reproducible).
-
-5. **No-redirect check:** the site has no redirect mechanism. Once `latest` points at
-   9.x, any page **removed or renamed** in 9.x will 404 at `/openvox/latest/<page>`
-   for `latest` bookmarks (the content still lives at `/openvox/8.x/<page>`). Diff the
-   8.x vs 9.x page sets and decide how to handle removed pages before promoting.
-
-6. Rebuild and verify: `/openvox/latest/` now serves the 9.x content, `/openvox/8.x/`
-   stays frozen, and the version selector marks 9.x as `latest`.
-
-### Rollback
-
-To back out a cutover: repoint the `_<product>_latest` symlink to the previous
-collection, revert the `_config.yml` / `nav_map.yml` / `products.yml` / `_data/nav`
-changes, and remove the new `docs/_<product>_<major>/` directory.
+If the product will only ever have one version, set `single_version: true` and
+give the version `id: latest`, as OpenVox Containers does. Otherwise use a
+numbered id (`8x`) and the version picker appears once a second version is
+added.
